@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Ndot-55';
+    src: local('Ndot-55'), url('/fonts/Ndot-55.otf');
+    font-weight: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Lettera Mono LL';
+    src: local('Lettera Mono LL'), url('/fonts/LetteraMonoLL.otf');
+    font-weight: normal;
+    font-display: swap;
+  }
+}
+
+body {
+  @apply bg-bg font-base text-white;
+}
+
+h1 {
+  @apply text-3xl font-dot;
+}
+
+h2 {
+  @apply text-2xl font-base;
+}
+
+p {
+  @apply text-base;
+}
