@@ -1,36 +1,20 @@
 <script>
 	import { onMount } from 'svelte';
-  import { Checkbox, Modal, Loader } from '$lib/components';
+  import { Checkbox, Modal, Loader, Hr } from '$lib/components';
   import { formatDate } from '$lib/utils';
+  import { noteBgColors } from '$lib/constants';
 
   const { data } = $props();
   const { id, note } = data;
 
   const debounceTimer = 1000;
-  const noteBgColors = [
-    {
-      name: 'red',
-      class: 'bg-red'
-    },
-    {
-      name: 'black',
-      class: 'bg-black'
-    },
-    {
-      name: 'white',
-      class: 'bg-white text-black'
-    },
-    {
-      name: 'blue',
-      class: 'bg-blue'
-    }
-  ];
 
   let timers = $state([ ]);
   let textarea = $state();
   let noteStatus = $state('saved');
   let isDeletingNote = $state(false);
   let isArchivingNote = $state(false);
+  let isChangingPin = $state(false);
   // Modals
   let settingsModalOpen = $state(false);
   let changeNoteColorModalOpen = $state(false);
@@ -106,6 +90,13 @@
     isArchivingNote = false;
     window.location.href = '/note';
   }
+
+  const togglePin = async () => {
+    isChangingPin = true;
+    note.pinned = !note.pinned;
+    await saveNote();
+    isChangingPin = false;
+  }
 </script>
 
 <!-- Main note elements -->
@@ -141,11 +132,7 @@
     <!-- Checked list note items -->
     {#if note.items.filter(el => el.checked).length > 0}
       <!-- Separator -->
-      <div class="flex flex-row items-center gap-4">
-        <span class="w-full border-b border-gray"></span>
-        Checked
-        <span class="w-full border-b border-gray"></span>
-      </div>
+      <Hr text="Checked" />
       {#each note.items.filter(el => el.checked).reverse() as item, i (item.id)}
         <div class="flex flex-row gap-2 items-center" >
           <Checkbox bind:checked={item.checked} on:change={saveNote} class="shrink-0" />
@@ -213,11 +200,11 @@
 <Modal bind:open={archiveNoteModalOpen}>
   <h2 class="mb-1">Archive note</h2>
   <p>Are you sure you want to archive this note?</p>
-  <div class="flex flex-row gap-2 w-full mt-2">
-    <button class="w-full p-2 rounded bg-black transition-all" disabled={isArchivingNote} onclick={() => {archiveNoteModalOpen = false;settingsModalOpen = true;}}>
+  <div class="grid grid-cols-2 gap-2 w-full mt-2">
+    <button class="w-full p-2 rounded bg-black" disabled={isArchivingNote} onclick={() => {archiveNoteModalOpen = false;settingsModalOpen = true;}}>
       Cancel
     </button>
-    <button class="w-full p-2 rounded bg-black transition-all" disabled={isArchivingNote} onclick={archiveNote}>
+    <button class="w-full p-2 rounded bg-black" disabled={isArchivingNote} onclick={archiveNote}>
       {#if isArchivingNote}
         <Loader />
       {:else}
@@ -231,11 +218,11 @@
 <Modal bind:open={deleteNoteModalOpen}>
   <h2 class="mb-1">Delete note</h2>
   <p>Are you sure you want to delete this note? This operation is irreversible!</p>
-  <div class="flex flex-row gap-2 w-full mt-2">
-    <button class="w-full p-2 rounded bg-black transition-all" disabled={isDeletingNote} onclick={() => {deleteNoteModalOpen = false;settingsModalOpen = true;}}>
+  <div class="grid grid-cols-2 gap-2 w-full mt-2">
+    <button class="w-full p-2 rounded bg-black" disabled={isDeletingNote} onclick={() => {deleteNoteModalOpen = false;settingsModalOpen = true;}}>
       Cancel
     </button>
-    <button class="w-full p-2 rounded bg-black transition-all" disabled={isDeletingNote} onclick={deleteNote}>
+    <button class="w-full p-2 rounded bg-black" disabled={isDeletingNote} onclick={deleteNote}>
       {#if isDeletingNote}
         <Loader />
       {:else}
@@ -274,6 +261,24 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0-3-3m3 3 3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
       </svg>
       Archive
+    </button>
+
+    <!-- Pin/Unpin note -->
+    <button class="w-full text-start flex flex-row items-center gap-2 hover:bg-black p-2 rounded" onclick={togglePin}>
+      {#if isChangingPin}
+        <Loader />
+      {:else}
+        {#if note.pinned}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle-fill" viewBox="0 0 16 16">
+            <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146"/>
+          </svg>
+        {:else}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-angle" viewBox="0 0 16 16">
+            <path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a6 6 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707s.512-1.22.707-1.414l3.182-3.182-2.828-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a6 6 0 0 1 1.013.16l3.134-3.133a3 3 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146m.122 2.112v-.002zm0-.002v.002a.5.5 0 0 1-.122.51L6.293 6.878a.5.5 0 0 1-.511.12H5.78l-.014-.004a5 5 0 0 0-.288-.076 5 5 0 0 0-.765-.116c-.422-.028-.836.008-1.175.15l5.51 5.509c.141-.34.177-.753.149-1.175a5 5 0 0 0-.192-1.054l-.004-.013v-.001a.5.5 0 0 1 .12-.512l3.536-3.535a.5.5 0 0 1 .532-.115l.096.022c.087.017.208.034.344.034q.172.002.343-.04L9.927 2.028q-.042.172-.04.343a1.8 1.8 0 0 0 .062.46z"/>
+          </svg>
+        {/if}
+      {/if}
+      {note.pinned ? 'Unpin' : 'Pin'}
     </button>
   </div>
 </Modal>

@@ -5,15 +5,20 @@ export const handle = async ({ event, resolve }) => {
 	const { url, cookies, locals } = event;
 
 	const token = cookies.get('token') || false;
-	if (token) {
-		const user = await auth(token);
-		if (!user.error) {
-			locals.user = user;
+	try {
+		if (token) {
+			const user = await auth(token);
+
+			if (user) {
+				locals.user = user;
+			} else {
+				cookies.delete('token', { path: '/' });
+			}
 		} else {
-			cookies.delete('token', { path: '/' });
-			throw redirect(303, '/log-in');
+			locals.user = false;
 		}
-	} else {
+	} catch (error) {
+		console.log(error);
 		locals.user = false;
 	}
 

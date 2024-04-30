@@ -26,6 +26,7 @@ export const actions = {
 			owner: user.username,
 			color: 'black',
 			archived: false,
+			pinned: false,
 			lastModified: new Date()
 		});
 
@@ -49,6 +50,7 @@ export const actions = {
 			owner: user.username,
 			color: 'black',
 			archived: false,
+			pinned: false,
 			lastModified: new Date()
 		});
 
