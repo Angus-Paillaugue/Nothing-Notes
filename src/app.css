@@ -19,7 +19,7 @@
 }
 
 body {
-  @apply bg-bg font-base text-white;
+  @apply bg-black font-base text-white;
 }
 
 h1 {

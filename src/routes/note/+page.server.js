@@ -1,6 +1,8 @@
 import { notesRef } from '$lib/server/db';
 import { redirect } from '@sveltejs/kit';
 
+export const ssr = false;
+
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals }) {
 	const { user } = locals;
@@ -22,6 +24,8 @@ export const actions = {
 			content: '',
 			title: '',
 			owner: user.username,
+			color: 'black',
+			archived: false,
 			lastModified: new Date()
 		});
 
@@ -43,6 +47,8 @@ export const actions = {
 			],
 			title: '',
 			owner: user.username,
+			color: 'black',
+			archived: false,
 			lastModified: new Date()
 		});
 

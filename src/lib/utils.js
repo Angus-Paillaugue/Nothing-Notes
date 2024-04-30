@@ -5,10 +5,11 @@
  * @param {string} [locales='en'] - The locale to use for formatting. Defaults to 'en'.
  * @returns {string} The formatted date.
  */
-export function formatDate(date, dateStyle = 'medium', locales = 'fr') {
+export function formatDate(
+	date,
+	opts = { dateStyle: 'medium', timeStyle: 'short', locales: 'en' }
+) {
 	// Safari is mad about dashes in the date
-	const dateFormatter = new Intl.DateTimeFormat(locales, {
-		dateStyle
-	});
+	const dateFormatter = new Intl.DateTimeFormat(opts.locales, opts);
 	return dateFormatter.format(date);
 }
