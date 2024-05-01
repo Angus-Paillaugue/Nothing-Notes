@@ -106,7 +106,7 @@
 
   {#if note.type === 'text'}
     <!-- Main text note textarea -->
-    <textarea name="content" bind:value={note.content} bind:this={textarea} onkeyup={() => debounce(1)}  oninput={() => {textarea.style.height = 'auto';textarea.style.height = (textarea.scrollHeight) + "px"}} class="bg-black text-sm tracking-normal w-full rounded resize-none placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot overflow-y-hidden" placeholder='Content' rows='5'></textarea>
+    <textarea name="content" bind:value={note.content} bind:this={textarea} onkeyup={() => debounce(1)} class="bg-black text-sm tracking-normal w-full rounded resize-none placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot grow" placeholder='Content'></textarea>
   {:else}
     <!-- List note unchecked items -->
     {#each note.items.filter(el => !el.checked) as item, i (item.id)}

@@ -18,6 +18,10 @@
   }
 }
 
+html {
+  @apply transition-all relative
+}
+
 body {
   @apply bg-black font-base text-white;
 }

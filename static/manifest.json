@@ -1,0 +1,34 @@
+{
+	"name": "Nothing Notes",
+	"short_name": "Notes",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "/logo/logo_512.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"background_color": "#000000",
+	"display": "standalone",
+	"scope": "/",
+	"theme_color": "#FFFFFF",
+	"shortcuts": [
+		{
+			"name": "Home",
+			"short_name": "Home",
+			"description": "Home page",
+			"url": "/",
+			"icons": [{ "src": "/logo/logo_192.png", "sizes": "192x192" }]
+		},
+		{
+			"name": "Log-in",
+			"short_name": "Log-in",
+			"description": "Log-in to your account",
+			"url": "/log-in",
+			"icons": [{ "src": "/logo/logo_192.png", "sizes": "192x192" }]
+		}
+	],
+	"description": "The 'Nothing Notes' app"
+}

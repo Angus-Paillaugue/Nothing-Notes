@@ -22,6 +22,10 @@ export const handle = async ({ event, resolve }) => {
 		locals.user = false;
 	}
 
+	if (url.pathname === '/' && locals.user) {
+		throw redirect(303, '/note');
+	}
+
 	if (url.pathname.startsWith('/note') && !locals.user) {
 		cookies.delete('token', { path: '/' });
 		throw redirect(303, '/log-in');
