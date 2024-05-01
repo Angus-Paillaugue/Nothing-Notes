@@ -1,0 +1,117 @@
+{
+	"homePage": {
+		"hero": {
+			"subtitle": "Une application de prise de notes minimaliste qui vous aide à vous concentrer sur ce qui compte.",
+			"cta": "Commencer"
+		},
+		"features": {
+			"items": {
+				"0": {
+					"title": "Créer des notes",
+					"description": "Notez facilement vos pensées, vos idées et vos rappels."
+				},
+				"1": {
+					"title": "Organiser les idées",
+					"description": "Gardez vos notes organisées et faciles à trouver."
+				},
+				"2": {
+					"title": "Synchronisez partout",
+					"description": "Accédez à vos notes depuis n’importe quel appareil, n’importe où."
+				}
+			}
+		}
+	},
+	"logIn": {
+		"title": "Se connecter",
+		"form": {
+			"email": "E-mail",
+			"password": "Mot de passe",
+			"submit": "Se connecter",
+			"cta": "Vous n'avez pas de compte ? En créer un",
+			"errors": {
+				"incorrectPassword": "Mot de passe incorrect !",
+				"userNotFound": "Aucun compte avec cette email !"
+			}
+		}
+	},
+	"signUp": {
+		"title": "S'inscrire",
+		"form": {
+			"email": "E-mail",
+			"username": "Nom d'utilisateur",
+			"password": "Mot de passe",
+			"submit": "S'inscrire",
+			"cta": "Vous avez déjà un compte? Se connecter",
+			"errors": {
+				"incorrectPassword": "Mot de passe incorrect !",
+				"accountAlreadyExists": "Déjà un compte associé à cet e-mail !",
+				"usernameTake": "Déjà un compte avec ce nom d'utilisateur !",
+				"invalidUsernameFormat": "Les noms d'utilisateur ne peuvent être composés que de lettres et de chiffres !"
+			}
+		}
+	},
+	"notes": {
+		"title": "Notes",
+		"pinned": "Épinglé",
+    "noNotes": "Vous n'avez pas de notes pour le moment. Cliquez sur le bouton ci-dessous pour en créer une !",
+		"modals": {
+			"archivedNotes": {
+				"title": "Notes archivées",
+				"restore": "Restaurer"
+			},
+			"newNote": {
+				"title": "Nouvelle note",
+				"noteTypes": {
+					"text": "Texte",
+					"list": "Liste"
+				}
+			}
+		}
+	},
+	"note": {
+		"addItem": "Ajouter un élément",
+    "statuses": {
+      "saved": "La note est sauvegardée",
+      "saving": "En cours de sauvegarde",
+      "error": "Une erreur s'est produite !"
+    },
+		"modals": {
+			"settings": {
+				"title": "Paramètres",
+				"delete": "Supprimer",
+				"archive": "Archiver",
+				"pin": "Épingler",
+				"unpin": "Désépingler"
+			},
+			"archive": {
+				"title": "Archiver",
+				"message": "Etes-vous sûr de vouloir archiver cette note ?",
+				"confirm": "Archivez-la",
+				"cancel": "Annuler"
+			},
+			"delete": {
+				"title": "Supprimer",
+				"message": "Etes-vous sûr de vouloir supprimer cette note ?",
+				"confirm": "Supprime-la",
+				"cancel": "Annuler"
+			},
+			"noteColor": {
+				"title": "Couleur de la note"
+			}
+		}
+	},
+	"navBar": {
+		"modals": {
+			"account": {
+				"title": "Compte",
+				"logOut": "Se déconnecter"
+			},
+			"logOutConfirm": {
+				"title": "Se déconnecter",
+				"message": "Etes-vous sûr de vouloir vous déconnecter de votre compte ?",
+				"confirm": "Oui, se déconnectez",
+				"cancel": "Non, annuler"
+			}
+		}
+	}
+}

@@ -3,6 +3,7 @@
   import { Checkbox, Modal, Loader, Hr, Button, Icon } from '$lib/components';
   import { formatDate } from '$lib/utils';
   import { noteBgColors } from '$lib/constants';
+  import { _, locale } from 'svelte-i18n';
 
   const { data } = $props();
   const { id, note } = data;
@@ -45,6 +46,7 @@
 
     if (res.ok) {
       noteStatus = 'saved';
+      note.lastModified = new Date();
     } else {
       console.log(res);
       noteStatus = 'error';
@@ -122,7 +124,7 @@
     <!-- Add line to list note -->
     <button onclick={addItemToList} class="flex flex-row gap-2 p-2 rounded hover:bg-gray transition-all">
       <Icon name="plus" />
-      Add an element
+      {$_("note.addItem")}
     </button>
 
     <!-- Checked list note items -->
@@ -150,7 +152,7 @@
 
     <!-- Last saved tile and date -->
     <div class="grow flex flex-row h-full items-center justify-center">
-      <p class="text-base font-dot">{formatDate(note.lastModified)}</p>
+      <p class="text-base font-dot">{formatDate(note.lastModified, { locale:$locale })}</p>
     </div>
 
     <!-- Open settings button -->
@@ -160,9 +162,9 @@
 
     <!-- Save status -->
     <div class="p-2 rounded-full group relative {!['saving', 'saved'].includes(noteStatus) && 'bg-red'}">
-      <div class="absolute bottom-full right-0 mb-2 whitespace-nowrap opacity-0 group-hover:opacity-100 group-hover:visible invisible z-30 transition-all">
+      <div class="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible z-30 transition-all max-w-[200px] w-wull">
         <div class="relative p-2 rounded bg-gray">
-          Note is {noteStatus}
+          {$_(`note.statuses.${noteStatus}`)}
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="size-6 absolute top-[calc(100%-0.5rem)] right-2 fill-gray" viewBox="0 0 16 16">
             <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
           </svg>
@@ -180,41 +182,41 @@
 </div>
 
 <!-- Archive note modal -->
-<Modal bind:open={archiveNoteModalOpen} title="Archive note">
-  <p>Are you sure you want to archive this note?</p>
+<Modal bind:open={archiveNoteModalOpen} title={$_("note.modals.archive.title")}>
+  <p>{$_("note.modals.archive.message")}</p>
   <div class="grid grid-cols-2 gap-2 w-full mt-2">
     <Button center disabled={isArchivingNote} onclick={() => {archiveNoteModalOpen = false;settingsModalOpen = true;}}>
-      Cancel
+      {$_("note.modals.archive.cancel")}
     </Button>
-    <Button center sabled={isArchivingNote} onclick={archiveNote}>
+    <Button center disabled={isArchivingNote} onclick={archiveNote}>
       {#if isArchivingNote}
         <Loader />
       {:else}
-        Archive it
+        {$_("note.modals.archive.confirm")}
       {/if}
     </Button>
   </div>
 </Modal>
 
-<!-- Archive note modal -->
-<Modal bind:open={deleteNoteModalOpen} title="Delete note">
-  <p>Are you sure you want to delete this note? This operation is irreversible!</p>
+<!-- Delete note modal -->
+<Modal bind:open={deleteNoteModalOpen} title={$_("note.modals.delete.title")}>
+  <p>{$_("note.modals.delete.message")}</p>
   <div class="grid grid-cols-2 gap-2 w-full mt-2">
     <Button center disabled={isDeletingNote} onclick={() => {deleteNoteModalOpen = false;settingsModalOpen = true;}}>
-      Cancel
+      {$_("note.modals.delete.cancel")}
     </Button>
     <Button center disabled={isDeletingNote} onclick={deleteNote}>
       {#if isDeletingNote}
         <Loader />
       {:else}
-        Delete it
+        {$_("note.modals.delete.confirm")}
       {/if}
     </Button>
   </div>
 </Modal>
 
 <!-- Change note color modal -->
-<Modal bind:open={changeNoteColorModalOpen} title="Note color">
+<Modal bind:open={changeNoteColorModalOpen} title={$_("note.modals.noteColor.title")}>
   <div class="flex flex-row gap-4 w-full mt-2">
     <button class="rounded-full size-10 ring-4 bg-black {note.color === 'black' ? 'ring-white' : 'ring-gray'}" onclick={() => {changeNoteColor('black')}}></button>
     <button class="rounded-full size-10 ring-4 bg-red {note.color === 'red' ? 'ring-white' : 'ring-gray'}" onclick={() => {changeNoteColor('red')}}></button>
@@ -224,18 +226,18 @@
 </Modal>
 
 <!-- Settings modal -->
-<Modal bind:open={settingsModalOpen}>
+<Modal bind:open={settingsModalOpen} title={$_("note.modals.settings.title")}>
   <div class="flex flex-col w-full gap-2">
     <!-- delete note button -->
     <Button onclick={() => {settingsModalOpen = false;deleteNoteModalOpen = true;}}>
       <Icon name="trash" class="size-5" />
-      Delete
+      {$_("note.modals.settings.delete")}
     </Button>
 
     <!-- Archive note button -->
     <Button onclick={() => {settingsModalOpen = false;archiveNoteModalOpen = true;}}>
       <Icon name="archive-add" />
-      Archive
+      {$_("note.modals.settings.archive")}
     </Button>
 
     <!-- Pin/Unpin note -->
@@ -249,7 +251,7 @@
           <Icon name="pin" />
         {/if}
       {/if}
-      {note.pinned ? 'Unpin' : 'Pin'}
+      {note.pinned ? $_("note.modals.settings.unpin") : $_("note.modals.settings.pin")}
     </Button>
   </div>
 </Modal>

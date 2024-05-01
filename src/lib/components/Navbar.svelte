@@ -1,13 +1,20 @@
 <script>
 	import { page } from '$app/stores';
 	import { Modal, Button, Icon } from '$lib/components';
+	import { afterNavigate } from '$app/navigation';
+	import { _ } from 'svelte-i18n';
 
 	let accountModalOpen = $state(false);
 	let logOutModalOpen = $state(false);
+
+	afterNavigate(() => {
+		accountModalOpen = false;
+		logOutModalOpen = false;
+	});
 </script>
 
 {#if $page.url.pathname.startsWith('/note')}
-	<nav>
+	<nav class="bg-black z-40">
 		<div
 			class="flex flex-row py-2 h-14 items-center justify-between {$page.params.id
 				? 'px-2'
@@ -42,7 +49,7 @@
 	</nav>
 {:else}
   <div class="h-14"></div>
-	<nav class="flex flex-row py-2 h-14 items-center justify-center text-center px-2 fixed top-0 left-0 right-0">
+	<nav class="flex flex-row py-2 h-14 items-center justify-center text-center px-2 fixed top-0 left-0 right-0 bg-black z-40">
     <a href="/">
       <h1>Nothing Notes</h1>
     </a>
@@ -50,7 +57,7 @@
 {/if}
 
 <!-- Account modal -->
-<Modal bind:open={accountModalOpen} title="Account">
+<Modal bind:open={accountModalOpen} title={$_("navBar.modals.account.title")}>
 	<div class="flex flex-col gap-2">
 		<Button
 			onclick={() => {
@@ -59,14 +66,14 @@
 			}}
 		>
 			<Icon name="log-out" />
-			Log-out
+			{$_("navBar.modals.account.logOut")}
 		</Button>
 	</div>
 </Modal>
 
 <!-- Log-out confirm modal -->
-<Modal bind:open={logOutModalOpen} title="Log-out">
-	<p>Are you sure you want to log-out of your account ?</p>
+<Modal bind:open={logOutModalOpen} title={$_("navBar.modals.logOutConfirm.title")}>
+	<p>{$_("navBar.modals.logOutConfirm.message")}</p>
 	<div class="grid grid-cols-2 gap-2 w-full mt-2">
 		<Button
 			center
@@ -75,8 +82,8 @@
 				accountModalOpen = true;
 			}}
 		>
-			No, Cancel
+			{$_("navBar.modals.logOutConfirm.cancel")}
 		</Button>
-		<Button center href="/log-out">Yes, Log-out</Button>
+		<Button center href="/log-out">{$_("navBar.modals.logOutConfirm.confirm")}</Button>
 	</div>
 </Modal>

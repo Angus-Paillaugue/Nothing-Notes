@@ -1,6 +1,7 @@
 <script>
   import { Modal, Hr, NoteCard, Loader, Button, Icon } from '$lib/components';
   import { noteBorderColors } from '$lib/constants';
+  import { _ } from 'svelte-i18n';
   // import { longPress } from './longPress';
 
   const { data } = $props();
@@ -29,13 +30,17 @@
 </script>
 
 <svelte:head>
-  <title>Nothing notes</title>
+  <title>{$_("notes.title")}</title>
 </svelte:head>
+
+{#if notes.length === 0}
+  <h2>{$_("notes.noNotes")}</h2>
+{/if}
 
 {#if notes.filter(el => el.pinned && !el.archived).length > 0}
   <Hr>
     <Icon name="pin" class="size-4" />
-    Pinned
+    {$_("notes.pinned")}
   </Hr>
   <div class="grid gap-4 w-full px-2" style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
     {#each notes.filter(el => el.pinned && !el.archived) as note (note.id)}
@@ -64,7 +69,7 @@
   </button>
 
   <!-- Archived notes modal -->
-  <Modal bind:open={archivedNotesModalOpen} title="Archived notes">
+  <Modal bind:open={archivedNotesModalOpen} title={$_("notes.modals.archivedNotes.title")}>
     <div class="flex flex-col gap-6">
       {#each notes.filter(note => note.archived) as note (note.id)}
         <div class="flex flex-col">
@@ -75,7 +80,7 @@
             {:else}
               <Icon name="back" class="size-5" />
             {/if}
-            Restore
+            {$_("notes.modals.archivedNotes.restore")}
           </button>
         </div>
       {/each}
@@ -84,18 +89,18 @@
 {/if}
 
 <!-- New note modal -->
-<Modal bind:open={newNoteModalOpen} title="New note">
+<Modal bind:open={newNoteModalOpen} title={$_("notes.modals.newNote.title")}>
   <div class="flex flex-col gap-2">
     <form method="POST" action="?/createTextualNote">
       <Button type="submit" class="w-full">
         <Icon name="paragraph" />
-        Text
+        {$_("notes.modals.newNote.noteTypes.text")}
       </Button>
     </form>
     <form method="POST" action="?/createListNote">
       <Button type="submit" class="w-full">
         <Icon name="list" />
-        List
+        {$_("notes.modals.newNote.noteTypes.list")}
       </Button>
     </form>
   </div>

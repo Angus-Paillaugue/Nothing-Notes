@@ -1,0 +1,118 @@
+{
+	"homePage": {
+		"hero": {
+			"subtitle": "A minimalist note-taking app that helps you focus on what matters.",
+			"cta": "Get Started"
+		},
+		"features": {
+			"items": {
+				"0": {
+					"title": "Create Notes",
+					"description": "Jot down your thoughts, ideas, and reminders with ease."
+				},
+				"1": {
+					"title": "Organize Ideas",
+					"description": "Keep your notes organized and easy to find."
+				},
+				"2": {
+					"title": "Sync Everywhere",
+					"description": "Access your notes from any device, anywhere."
+				}
+			}
+		}
+	},
+	"logIn": {
+		"title": "Log In",
+		"form": {
+			"email": "Email",
+			"password": "Password",
+			"submit": "Log In",
+			"cta": "Don't have an account? Sign up",
+			"errors": {
+				"incorrectPassword": "Incorrect password !",
+				"userNotFound": "No account with this e-mail !"
+			}
+		}
+	},
+	"signUp": {
+		"title": "Sign Up",
+		"form": {
+			"email": "Email",
+			"username": "Username",
+			"password": "Password",
+			"submit": "Sign Up",
+			"cta": "Already have an account? Log in",
+			"errors": {
+				"incorrectPassword": "Incorrect password !",
+				"accountAlreadyExists": "Already an account associated with this e-mail !",
+				"usernameTake": "Already an account with this username !",
+				"invalidUsernameFormat": "Usernames can only be composed of letters and numbers !"
+			}
+		}
+	},
+	"notes": {
+		"title": "Notes",
+		"pinned": "Pinned",
+		"noNotes": "You have no notes at the moment. Click the big red button below to create one!",
+		"modals": {
+			"archivedNotes": {
+				"title": "Archived Notes",
+				"restore": "Restore"
+			},
+			"newNote": {
+				"title": "New Note",
+				"noteTypes": {
+					"text": "Text",
+					"list": "List"
+				}
+			}
+		}
+	},
+	"note": {
+		"addItem": "Add item",
+		"status": "Note is {status}",
+		"statuses": {
+			"saved": "Note is saved",
+			"saving": "Saving",
+			"error": "An error occurred !"
+		},
+		"modals": {
+			"settings": {
+				"title": "Note Settings",
+				"delete": "Delete",
+				"archive": "Archive",
+				"pin": "Pin",
+				"unpin": "Unpin"
+			},
+			"archive": {
+				"title": "Archive Note",
+				"message": "Are you sure you want to archive this note ?",
+				"confirm": "Archive it",
+				"cancel": "Cancel"
+			},
+			"delete": {
+				"title": "Delete Note",
+				"message": "Are you sure you want to delete this note ?",
+				"confirm": "Delete it",
+				"cancel": "Cancel"
+			},
+			"noteColor": {
+				"title": "Note Color"
+			}
+		}
+	},
+	"navBar": {
+		"modals": {
+			"account": {
+				"title": "Account",
+				"logOut": "Log Out"
+			},
+			"logOutConfirm": {
+				"title": "Log Out",
+				"message": "Are you sure you want to log out of your account ?",
+				"confirm": "Yes, Log Out",
+				"cancel": "No, Cancel"
+			}
+		}
+	}
+}

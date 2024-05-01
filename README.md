@@ -1,5 +1,8 @@
 # TODO
 
-Add flip transitions to checklists
-Make icons match
-Make a home page
+ - [ ] Add flip transitions to checklists
+ - [x] Make icons match
+ - [x] Make a home page
+ - [x] Add internationalization (just english and french)
+ - [ ] Add categories to the notes
+ - [ ] Add duplicate button

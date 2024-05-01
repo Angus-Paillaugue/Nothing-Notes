@@ -3,6 +3,8 @@
   import { Navbar } from "$lib/components/";
 </script>
 
-<Navbar />
+<div class="max-w-screen-lg mx-auto relative">
+  <Navbar />
 
-<slot />
+  <slot />
+</div>

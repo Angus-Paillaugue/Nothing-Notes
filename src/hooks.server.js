@@ -1,8 +1,12 @@
 import { auth } from '$lib/server/auth';
 import { redirect } from '@sveltejs/kit';
+import { locale } from 'svelte-i18n';
 
 export const handle = async ({ event, resolve }) => {
-	const { url, cookies, locals } = event;
+	const { url, cookies, locals, request } = event;
+
+	const lang = request.headers.get('accept-language')?.split(',')[0];
+	if (lang) locale.set(lang);
 
 	const token = cookies.get('token') || false;
 	try {
