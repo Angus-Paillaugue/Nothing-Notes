@@ -35,3 +35,12 @@ export const noteBgColors = [
 		class: 'bg-blue'
 	}
 ];
+
+export const STATUS = {
+	REDIRECT: 303,
+	OK: 200,
+	SERVER_ERROR: 500,
+	NOT_FOUND: 404,
+	UNAUTHORIZED: 401,
+	CLIENT_ERROR: 400
+};

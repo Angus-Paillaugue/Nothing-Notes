@@ -1,5 +1,4 @@
 <script>
-	import { fade, fly } from 'svelte/transition';
 	import { Drawer } from 'vaul-svelte';
 
 	let { open = $bindable(), children, title } = $props();

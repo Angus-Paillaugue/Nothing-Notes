@@ -5,5 +5,5 @@
 - [x] Make a home page
 - [x] Add internationalization (just english and french)
 - [ ] Add categories to the notes
-- [ ] Add duplicate button
-- [ ] Make redirect and error statuses constants throughout the app (with the help of `$lib/constants.js`)
+- [x] Add duplicate button
+- [x] Make redirect and error statuses constants throughout the app (with the help of `$lib/constants.js`)

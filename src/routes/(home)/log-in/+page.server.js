@@ -4,6 +4,7 @@ import { fail } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { AUTH_TOKEN_SECRET } from '$env/static/private';
+import { STATUS } from '$lib/constants';
 
 export const actions = {
 	default: async ({ cookies, request }) => {
@@ -11,7 +12,7 @@ export const actions = {
 		const { email, password } = formData;
 
 		const userExists = await usersRef.findOne({ email });
-		if (!userExists) return fail(422, { error: 'logIn.form.errors.userNotFound' });
+		if (!userExists) return fail(STATUS.CLIENT_ERROR, { error: 'logIn.form.errors.userNotFound' });
 		const compare = await bcrypt.compare(password, userExists.password);
 		if (compare) {
 			cookies.set('token', generateAccessToken(email), {
@@ -19,9 +20,9 @@ export const actions = {
 				maxAge: 60 * 60 * 24 * 10,
 				secure: false
 			});
-			throw redirect(303, '/note');
+			throw redirect(STATUS.REDIRECT, '/note');
 		}
-		return fail(422, { error: 'logIn.form.errors.incorrectPassword' });
+		return fail(STATUS.CLIENT_ERROR, { error: 'logIn.form.errors.incorrectPassword' });
 	}
 };
 

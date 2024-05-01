@@ -1,5 +1,6 @@
 import { notesRef } from '$lib/server/db';
 import { redirect } from '@sveltejs/kit';
+import { STATUS } from '$lib/constants';
 
 export const ssr = false;
 
@@ -34,7 +35,7 @@ export const actions = {
 			lastModified: new Date()
 		});
 
-		throw redirect(303, `/note/${uuid}`);
+		throw redirect(STATUS.REDIRECT, `/note/${uuid}`);
 	},
 	async createListNote({ locals }) {
 		const { user } = locals;
@@ -58,6 +59,6 @@ export const actions = {
 			lastModified: new Date()
 		});
 
-		throw redirect(303, `/note/${uuid}`);
+		throw redirect(STATUS.REDIRECT, `/note/${uuid}`);
 	}
 };

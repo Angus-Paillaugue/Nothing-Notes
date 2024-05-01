@@ -1,5 +1,6 @@
 import { notesRef } from '$lib/server/db';
 import { auth } from '$lib/server/auth';
+import { STATUS } from '$lib/constants';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {
@@ -8,8 +9,8 @@ export async function POST({ request, cookies }) {
 
 	try {
 		const user = await auth(token);
-		if (!id) return new Response('Missing ID', { status: 400 });
-		if (!user) return new Response('Unauthorized', { status: 401 });
+		if (!id) return new Response('Missing ID', { status: STATUS.CLIENT_ERROR });
+		if (!user) return new Response('Unauthorized', { status: STATUS.CLIENT_ERROR });
 
 		let setObj = {};
 		if (items !== undefined) setObj.items = items;
@@ -24,8 +25,8 @@ export async function POST({ request, cookies }) {
 			{ upsert: true }
 		);
 	} catch (error) {
-		return new Response(`Unauthorized (${error.error})`, { status: 401 });
+		return new Response(`Unauthorized (${error.error})`, { status: STATUS.CLIENT_ERROR });
 	}
 
-	return new Response('OK');
+	return new Response('OK', { status: STATUS.OK });
 }

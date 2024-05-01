@@ -1,6 +1,7 @@
 import { auth } from '$lib/server/auth';
 import { redirect } from '@sveltejs/kit';
 import { locale } from 'svelte-i18n';
+import { STATUS } from '$lib/constants';
 
 export const handle = async ({ event, resolve }) => {
 	const { url, cookies, locals, request } = event;
@@ -27,16 +28,16 @@ export const handle = async ({ event, resolve }) => {
 	}
 
 	if (url.pathname === '/' && locals.user) {
-		throw redirect(303, '/note');
+		throw redirect(STATUS.REDIRECT, '/note');
 	}
 
 	if (url.pathname.startsWith('/note') && !locals.user) {
 		cookies.delete('token', { path: '/' });
-		throw redirect(303, '/log-in');
+		throw redirect(STATUS.REDIRECT, '/log-in');
 	}
 
 	if ((url.pathname.startsWith('/log-in') || url.pathname.startsWith('/sign-up')) && locals.user) {
-		throw redirect(303, '/note');
+		throw redirect(STATUS.REDIRECT, '/note');
 	}
 
 	return resolve(event);

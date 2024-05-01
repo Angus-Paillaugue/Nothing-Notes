@@ -1,5 +1,6 @@
 import { notesRef } from '$lib/server/db';
 import { error, redirect, fail } from '@sveltejs/kit';
+import { STATUS } from '$lib/constants';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, locals }) {
@@ -19,7 +20,7 @@ export const actions = {
 		const { id } = params;
 		const note = await notesRef.findOne({ id }, { projection: { _id: 0 } });
 		if (!note)
-			return fail(422, {
+			return fail(STATUS.SERVER_ERROR, {
 				error: 'note.duplicate.error',
 				action: 'duplicateNote'
 			});
@@ -28,7 +29,7 @@ export const actions = {
 
 		await notesRef.insertOne(note);
 
-		throw redirect(303, `/note/${note.id}`);
+		throw redirect(STATUS.REDIRECT, `/note/${note.id}`);
 	},
 	deleteNote: async ({ params }) => {
 		const { id } = params;
@@ -36,12 +37,12 @@ export const actions = {
 		try {
 			await notesRef.deleteOne({ id });
 		} catch (error) {
-			return fail(422, {
+			return fail(STATUS.SERVER_ERROR, {
 				error: 'note.modals.delete.error',
 				action: 'deleteNote'
 			});
 		}
 
-		throw redirect(303, '/note');
+		throw redirect(STATUS.REDIRECT, '/note');
 	}
 };

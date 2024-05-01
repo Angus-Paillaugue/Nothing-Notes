@@ -1,16 +1,17 @@
 import { notesRef } from '$lib/server/db';
 import { auth } from '$lib/server/auth';
+import { STATUS } from '$lib/constants';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {
 	const { id, content, title, color, archived, pinned } = await request.json();
 	const token = cookies.get('token');
 
-	if (!id) return new Response('Missing ID', { status: 400 });
+	if (!id) return new Response('Missing ID', { status: STATUS.CLIENT_ERROR });
 
 	try {
 		const user = await auth(token);
-		if (!user) return new Response('Unauthorized', { status: 401 });
+		if (!user) return new Response('Unauthorized', { status: STATUS.CLIENT_ERROR });
 
 		let setObj = {};
 		if (content !== undefined) setObj.content = content;
@@ -25,8 +26,8 @@ export async function POST({ request, cookies }) {
 			{ upsert: true }
 		);
 	} catch (error) {
-		return new Response(`Unauthorized (${error.error})`, { status: 401 });
+		return new Response(`Unauthorized (${error.error})`, { status: STATUS.CLIENT_ERROR });
 	}
 
-	return new Response('OK');
+	return new Response('OK', { status: STATUS.OK });
 }

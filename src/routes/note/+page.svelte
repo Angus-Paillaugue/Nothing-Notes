@@ -19,6 +19,12 @@
 		logOutModalOpen = false;
 	});
 
+	/**
+	 * Saves the given note.
+	 *
+	 * @param {object} note - The note to be saved.
+	 * @returns {Promise} A promise that resolves when the note is saved.
+	 */
 	async function saveNote(note) {
 		const res = await fetch(`/api/${note.type === 'text' ? 'saveTextNote' : 'saveListNote'}`, {
 			method: 'POST',
@@ -28,6 +34,12 @@
 		if (!res.ok) console.log(res);
 	}
 
+	/**
+	 * Unarchives a note.
+	 *
+	 * @param {Object} note - The note to be unarchived.
+	 * @returns {Promise} - A promise that resolves when the note is successfully unarchived.
+	 */
 	const unArchiveNote = async (note) => {
 		unArchivingNote = note.id;
 		note.archived = false;
@@ -61,38 +73,6 @@
 </nav>
 <!-- Spacer -->
 <div class="h-24"></div>
-
-<!-- Account modal -->
-<Modal bind:open={accountModalOpen} title={$_('navBar.modals.account.title')}>
-	<div class="flex flex-col gap-2">
-		<Button
-			onclick={() => {
-				accountModalOpen = false;
-				logOutModalOpen = true;
-			}}
-		>
-			<Icon name="log-out" />
-			{$_('navBar.modals.account.logOut')}
-		</Button>
-	</div>
-</Modal>
-
-<!-- Log-out confirm modal -->
-<Modal bind:open={logOutModalOpen} title={$_('navBar.modals.logOutConfirm.title')}>
-	<p>{$_('navBar.modals.logOutConfirm.message')}</p>
-	<div class="grid grid-cols-2 gap-2 w-full mt-2">
-		<Button
-			center
-			onclick={() => {
-				logOutModalOpen = false;
-				accountModalOpen = true;
-			}}
-		>
-			{$_('navBar.modals.logOutConfirm.cancel')}
-		</Button>
-		<Button center href="/log-out">{$_('navBar.modals.logOutConfirm.confirm')}</Button>
-	</div>
-</Modal>
 
 {#if notes.length === 0}
 	<h2>{$_('notes.noNotes')}</h2>

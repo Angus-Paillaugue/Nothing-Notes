@@ -4,6 +4,7 @@ import { fail } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { AUTH_TOKEN_SECRET } from '$env/static/private';
+import { STATUS } from '$lib/constants';
 
 export const actions = {
 	default: async ({ cookies, request }) => {
@@ -11,13 +12,15 @@ export const actions = {
 		const { username, email, password } = formData;
 
 		const emailIsAlreadyUsed = await usersRef.findOne({ email });
-		if (emailIsAlreadyUsed) return fail(422, { error: 'signUp.form.errors.accountAlreadyExists' });
+		if (emailIsAlreadyUsed)
+			return fail(STATUS.CLIENT_ERROR, { error: 'signUp.form.errors.accountAlreadyExists' });
 
 		const usernameIsAlreadyUsed = await usersRef.findOne({ username });
-		if (usernameIsAlreadyUsed) return fail(422, { error: 'signUp.form.errors.usernameTaken' });
+		if (usernameIsAlreadyUsed)
+			return fail(STATUS.CLIENT_ERROR, { error: 'signUp.form.errors.usernameTaken' });
 
 		if (!/^[a-zA-Z0-9]+$/.test(username))
-			return fail(422, { error: 'signUp.form.errors.invalidUsernameFormat' });
+			return fail(STATUS.CLIENT_ERROR, { error: 'signUp.form.errors.invalidUsernameFormat' });
 
 		const salt = await bcrypt.genSalt(10);
 		const hash = await bcrypt.hash(password, salt);
@@ -29,7 +32,7 @@ export const actions = {
 			secure: false
 		});
 
-		throw redirect(303, '/note');
+		throw redirect(STATUS.REDIRECT, '/note');
 	}
 };
 

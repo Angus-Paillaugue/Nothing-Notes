@@ -75,6 +75,7 @@
 			"saving": "En cours de sauvegarde",
 			"error": "Une erreur s'est produite !"
 		},
+		"checkedItems": "Cochées",
 		"modals": {
 			"settings": {
 				"title": "Paramètres",
@@ -88,7 +89,7 @@
 			"archive": {
 				"title": "Archiver",
 				"message": "Etes-vous sûr de vouloir archiver cette note ?",
-				"confirm": "Archivez-la",
+				"confirm": "Archiver",
 				"cancel": "Annuler"
 			},
 			"delete": {

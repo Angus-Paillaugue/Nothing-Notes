@@ -70,7 +70,7 @@
 	},
 	"note": {
 		"addItem": "Add item",
-		"status": "Note is {status}",
+		"checkedItems": "Checked",
 		"statuses": {
 			"saved": "Note is saved",
 			"saving": "Saving",

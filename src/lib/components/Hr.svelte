@@ -1,13 +1,12 @@
 <script>
-	const { children } = $props();
+	const { children, text } = $props();
 </script>
 
 <div class="flex flex-row items-center my-4">
 	<span class="w-full border-b border-gray"></span>
-	{#if children}
-		<div class="mx-4 flex flex-row gap-2 items-center">
-			{@render children()}
-		</div>
-	{/if}
+	<div class="mx-4 flex flex-row gap-2 items-center">
+		{text}
+		{@render children()}
+	</div>
 	<span class="w-full border-b border-gray"></span>
 </div>
