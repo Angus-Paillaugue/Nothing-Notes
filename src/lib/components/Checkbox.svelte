@@ -2,16 +2,17 @@
   import { scale } from "svelte/transition";
   import { createEventDispatcher } from 'svelte';
   import { twMerge } from 'tailwind-merge';
+  import { Icon } from '$lib/components';
 
   const dispatch = createEventDispatcher();
   let { checked = $bindable(false), class: className } = $props();
 </script>
 
-<div class={twMerge("relative w-6 h-6 flex flex-col items-center justify-center ", className)}>
+<div class={twMerge("relative size-6 flex flex-col items-center justify-center ", className)}>
   <input type="checkbox" class="appearance-none w-full h-full rounded-md border-2 bg-black border-white checked:border-gray peer checked:bg-black transition-all" bind:checked={checked} onchange={() => {dispatch('change', { checked });}} />
   {#if checked}
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="absolute w-4 h-4 pointer-events-none {checked ? 'text-white' : 'text-gray'}" in:scale out:scale>
-      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-    </svg>
+    <div class="absolute pointer-events-none flex flex-col items-center justify-center inset-0" in:scale out:scale>
+      <Icon name="check" class="size-4 {checked ? 'text-white' : 'text-gray'}" />
+    </div>
   {/if}
 </div>

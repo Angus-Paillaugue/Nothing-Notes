@@ -30,6 +30,7 @@
 		"bcrypt": "^5.1.1",
 		"jsonwebtoken": "^9.0.2",
 		"mongodb": "^6.5.0",
-		"tailwind-merge": "^2.3.0"
+		"tailwind-merge": "^2.3.0",
+		"vaul-svelte": "^0.3.0"
 	}
 }

@@ -1,15 +1,24 @@
 <script>
-	import { fade, fly } from "svelte/transition";
+	import { fade, fly } from 'svelte/transition';
+	import { Drawer } from 'vaul-svelte';
 
-  let { open = $bindable(), children } = $props();
+	let { open = $bindable(), children, title } = $props();
 </script>
 
-
-{#if open}
-  <!-- svelte-ignore a11y_click_events_have_key_events -->
-  <!-- svelte-ignore a11y_no_static_element_interactions -->
-  <div class="fixed inset-0 bg-black/40 z-[49]" onclick={() => {open = false;}} transition:fade></div>
-  <div class="fixed bottom-0 left-0 right-0 rounded-t-xl bg-gray p-4 max-h-[60vh] overflow-y-auto z-50" transition:fly={{ y:'100%' }}>
-    {@render children()}
-  </div>
-{/if}
+<Drawer.Root shouldScaleBackground bind:open>
+	<Drawer.Portal>
+		<Drawer.Overlay class="fixed inset-0 bg-black/40" />
+		<Drawer.Content
+			class="fixed bottom-0 left-0 right-0 flex max-h-[60%] flex-col bg-gray rounded-t-[10px] p-4"
+		>
+      <!-- IOS like bar -->
+      <div class="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-white"></div>
+      <div class="mx-auto max-w-md w-full">
+        {#if title}
+          <h2 class="mb-4">{title}</h2>
+        {/if}
+        {@render children()}
+      </div>
+		</Drawer.Content>
+	</Drawer.Portal>
+</Drawer.Root>

@@ -4,3 +4,5 @@ export { default as Checkbox } from './Checkbox.svelte';
 export { default as Loader } from './Loader.svelte';
 export { default as Hr } from './Hr.svelte';
 export { default as NoteCard } from './NoteCard.svelte';
+export { default as Button } from './Button.svelte';
+export { default as Icon } from './Icon.svelte';

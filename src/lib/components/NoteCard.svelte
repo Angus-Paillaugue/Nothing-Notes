@@ -15,7 +15,7 @@
     <ul>
       {#each note.items.slice(0, 4) as item}
         <li class="line-clamp-1 flex flex-row items-center gap-2">
-          <Checkbox checked={item.checked} class="w-4 h-4" />
+          <Checkbox checked={item.checked} class="size-4" />
           <p class="text-sm">{item.content}</p>
         </li>
       {/each}

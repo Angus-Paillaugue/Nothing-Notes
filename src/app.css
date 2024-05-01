@@ -33,3 +33,7 @@ h2 {
 p {
   @apply text-base;
 }
+
+button:not(.button) {
+  @apply transition-all active:scale-95;
+}
