@@ -8,10 +8,7 @@
  * @param {string} [options.locale='en'] - The locale.
  * @returns {string} The formatted date string.
  */
-export function formatDate(
-	date,
-	{ dateStyle= 'long', timeStyle= 'medium', locale= 'en' }
-) {
+export function formatDate(date, { dateStyle = 'long', timeStyle = 'medium', locale = 'en' }) {
 	const dateFormatter = new Intl.DateTimeFormat(locale, {
 		dateStyle: dateStyle,
 		timeStyle: timeStyle

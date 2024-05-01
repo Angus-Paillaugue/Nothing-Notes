@@ -21,7 +21,7 @@ export const actions = {
 			});
 			throw redirect(303, '/note');
 		}
-		return fail(422, { error:'logIn.form.errors.incorrectPassword' });
+		return fail(422, { error: 'logIn.form.errors.incorrectPassword' });
 	}
 };
 

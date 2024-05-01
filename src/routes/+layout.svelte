@@ -1,10 +1,7 @@
 <script>
-  import "../app.css";
-  import { Navbar } from "$lib/components/";
+	import '../app.css';
 </script>
 
 <div class="max-w-screen-lg mx-auto relative">
-  <Navbar />
-
-  <slot />
+	<slot />
 </div>

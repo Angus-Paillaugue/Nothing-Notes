@@ -11,12 +11,10 @@ export const actions = {
 		const { username, email, password } = formData;
 
 		const emailIsAlreadyUsed = await usersRef.findOne({ email });
-		if (emailIsAlreadyUsed)
-			return fail(422, { error: 'signUp.form.errors.accountAlreadyExists' });
+		if (emailIsAlreadyUsed) return fail(422, { error: 'signUp.form.errors.accountAlreadyExists' });
 
 		const usernameIsAlreadyUsed = await usersRef.findOne({ username });
-		if (usernameIsAlreadyUsed)
-			return fail(422, { error: 'signUp.form.errors.usernameTaken' });
+		if (usernameIsAlreadyUsed) return fail(422, { error: 'signUp.form.errors.usernameTaken' });
 
 		if (!/^[a-zA-Z0-9]+$/.test(username))
 			return fail(422, { error: 'signUp.form.errors.invalidUsernameFormat' });

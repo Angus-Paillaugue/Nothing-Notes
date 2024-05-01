@@ -4,7 +4,7 @@ import { auth } from '$lib/server/auth';
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {
 	const { id, content, title, color, archived, pinned } = await request.json();
-	const token = cookies.get("token");
+	const token = cookies.get('token');
 
 	if (!id) return new Response('Missing ID', { status: 400 });
 

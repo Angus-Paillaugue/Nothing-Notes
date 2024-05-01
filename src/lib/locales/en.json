@@ -81,6 +81,8 @@
 				"title": "Note Settings",
 				"delete": "Delete",
 				"archive": "Archive",
+				"duplicate": "Duplicate",
+				"refresh": "Refresh",
 				"pin": "Pin",
 				"unpin": "Unpin"
 			},
@@ -94,11 +96,15 @@
 				"title": "Delete Note",
 				"message": "Are you sure you want to delete this note ?",
 				"confirm": "Delete it",
-				"cancel": "Cancel"
+				"cancel": "Cancel",
+				"error": "An error occurred while deleting the note !"
 			},
 			"noteColor": {
 				"title": "Note Color"
 			}
+		},
+		"duplicate": {
+			"error": "An error occurred while duplicating the note !"
 		}
 	},
 	"navBar": {

@@ -53,7 +53,7 @@
 	"notes": {
 		"title": "Notes",
 		"pinned": "Épinglé",
-    "noNotes": "Vous n'avez pas de notes pour le moment. Cliquez sur le bouton ci-dessous pour en créer une !",
+		"noNotes": "Vous n'avez pas de notes pour le moment. Cliquez sur le bouton ci-dessous pour en créer une !",
 		"modals": {
 			"archivedNotes": {
 				"title": "Notes archivées",
@@ -70,16 +70,18 @@
 	},
 	"note": {
 		"addItem": "Ajouter un élément",
-    "statuses": {
-      "saved": "La note est sauvegardée",
-      "saving": "En cours de sauvegarde",
-      "error": "Une erreur s'est produite !"
-    },
+		"statuses": {
+			"saved": "La note est sauvegardée",
+			"saving": "En cours de sauvegarde",
+			"error": "Une erreur s'est produite !"
+		},
 		"modals": {
 			"settings": {
 				"title": "Paramètres",
 				"delete": "Supprimer",
 				"archive": "Archiver",
+				"duplicate": "Dupliquer",
+				"refresh": "Actualiser",
 				"pin": "Épingler",
 				"unpin": "Désépingler"
 			},

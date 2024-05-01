@@ -7,7 +7,11 @@ export const ssr = false;
 export async function load({ locals }) {
 	const { user } = locals;
 
-	const notes = await notesRef.find({ owner: user.username }).sort({ lastModified:-1 }).project({ _id:0 }).toArray();
+	const notes = await notesRef
+		.find({ owner: user.username })
+		.sort({ lastModified: -1 })
+		.project({ _id: 0 })
+		.toArray();
 
 	return { notes };
 }
