@@ -4,6 +4,7 @@
 	let { open = $bindable(), children, title } = $props();
 </script>
 
+<!-- Add shouldScaleBackground to the line below if she body should shrink when the modal is opened -->
 <Drawer.Root bind:open>
 	<Drawer.Portal>
 		<Drawer.Overlay class="fixed inset-0 bg-gray/80 z-50" />

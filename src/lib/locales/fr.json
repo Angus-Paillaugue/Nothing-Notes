@@ -98,6 +98,17 @@
 				"confirm": "Supprime-la",
 				"cancel": "Annuler"
 			},
+			"share": {
+				"title": "Partager",
+				"makeItPublicDisclaimer": "Le partage de cette note la rendra accessible à toute personne disposant du lien. Etes-vous sûr de vouloir le partager ?",
+				"makeItPrivateDisclaimer": "Cette note est publique. La rendre privée la rendrais accessible que par vous. Voulez vous l;a rendre privée ?",
+				"cancel": "Annuler",
+				"share": "Partager",
+				"makeItPublic": "Passer en public",
+				"makeItPrivate": "Passer en privé",
+				"copyLink": "Copier le lien",
+				"linkCopied": "Copié"
+			},
 			"noteColor": {
 				"title": "Couleur de la note"
 			}
@@ -116,5 +127,8 @@
 				"cancel": "Non, annuler"
 			}
 		}
+	},
+	"error": {
+		"boBack": "Retourner à l'accueil"
 	}
 }

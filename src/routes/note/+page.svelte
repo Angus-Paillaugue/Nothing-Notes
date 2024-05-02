@@ -54,7 +54,7 @@
 
 <!-- Navbar -->
 <nav
-	class="fixed top-0 left-0 right-0 z-40 bg-black flex flex-row gap-2 items-center justify-between h-14"
+	class="fixed top-0 left-0 right-0 z-40 max-w-screen-lg mx-auto bg-black flex flex-row gap-2 items-center justify-between h-14"
 >
 	<div class="p-2">
 		<div class="size-6"></div>

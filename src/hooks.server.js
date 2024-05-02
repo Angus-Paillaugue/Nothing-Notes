@@ -31,7 +31,7 @@ export const handle = async ({ event, resolve }) => {
 		throw redirect(STATUS.REDIRECT, '/note');
 	}
 
-	if (url.pathname.startsWith('/note') && !locals.user) {
+	if (url.pathname === '/note' && !locals.user) {
 		cookies.delete('token', { path: '/' });
 		throw redirect(STATUS.REDIRECT, '/log-in');
 	}

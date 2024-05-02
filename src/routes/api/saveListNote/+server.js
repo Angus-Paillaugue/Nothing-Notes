@@ -4,7 +4,7 @@ import { STATUS } from '$lib/constants';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {
-	const { id, items, title, color, archived, pinned } = await request.json();
+	const { id, items, title, color, archived, pinned, public: isPublic } = await request.json();
 	const token = cookies.get('token');
 
 	try {
@@ -18,6 +18,7 @@ export async function POST({ request, cookies }) {
 		if (color !== undefined) setObj.color = color;
 		if (archived !== undefined) setObj.archived = archived;
 		if (pinned !== undefined) setObj.pinned = pinned;
+		if (isPublic !== undefined) setObj.public = isPublic;
 
 		await notesRef.updateOne(
 			{ id, owner: user.username },

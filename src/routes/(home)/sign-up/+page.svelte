@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { Button, Loader, Error } from '$lib/components';
+	import { Button, Loader, Error, Input } from '$lib/components';
 	import { _ } from 'svelte-i18n';
 
 	const { form } = $props();
@@ -25,29 +25,13 @@
 				};
 			}}
 		>
-			<input
-				type="text"
-				placeholder={$_('signUp.form.username')}
-				value={form?.username ?? ''}
-				name="username"
-				class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-				style="border: 1px dashed white;"
-			/>
-			<input
-				type="text"
-				placeholder={$_('signUp.form.email')}
-				value={form?.email ?? ''}
-				name="email"
-				class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-				style="border: 1px dashed white;"
-			/>
-			<input
-				type="password"
-				placeholder={$_('signUp.form.password')}
+			<Input value={form?.username ?? ''} name="username" placeholder={$_('logIn.form.username')} />
+			<Input value={form?.email ?? ''} name="email" placeholder={$_('logIn.form.email')} />
+			<Input
 				value={form?.password ?? ''}
+				type="password"
 				name="password"
-				class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-				style="border: 1px dashed white;"
+				placeholder={$_('logIn.form.password')}
 			/>
 			<Button center type="submit" class="w-full bg-black mt-2">
 				{#if isSigningIn}

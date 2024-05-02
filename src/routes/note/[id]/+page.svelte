@@ -8,7 +8,7 @@
 	import { afterNavigate } from '$app/navigation';
 
 	const { data, form } = $props();
-	const { id, note } = data;
+	const { id, note, isOwner } = data;
 	noteBgColors;
 	const debounceTimer = 1000;
 
@@ -19,23 +19,20 @@
 	let isArchivingNote = $state(false);
 	let isChangingPin = $state(false);
 	let isDuplicatingNote = $state(false);
+	let isChangingVisibility = $state(false);
+	let noteCopied = $state(false);
 	// Modals
 	let settingsModalOpen = $state(false);
 	let changeNoteColorModalOpen = $state(false);
 	let archiveNoteModalOpen = $state(false);
 	let deleteNoteModalOpen = $state(false);
+	let shareModalOpen = $state(false);
 
 	onMount(() => {
-		// Set textarea's height
-		if (note.type === 'text') {
-			textarea.style.height = 'auto';
-			textarea.style.height = textarea.scrollHeight + 'px';
-		}
-
 		document.title = note.title;
 
 		// Note title focus if note is empty
-		if (note.title === '' && (note.content === '' || note.items.length === 0)) {
+		if (note.title === '' && (note.content === '' || note.items.length === 0) && isOwner) {
 			document.querySelector('input[name="title"]').focus();
 		}
 	});
@@ -51,6 +48,7 @@
 	 * Saves the note asynchronously.
 	 */
 	async function saveNote() {
+		if (!isOwner) return;
 		noteStatus = 'saving';
 		const res = await fetch(`/api/${note.type === 'text' ? 'saveTextNote' : 'saveListNote'}`, {
 			method: 'POST',
@@ -75,6 +73,7 @@
 	 * @returns {Function} - The debounced function.
 	 */
 	const debounce = (i) => {
+		if (!isOwner) return;
 		if (i >= timers.length) timers = [...timers, 0];
 
 		clearTimeout(timers[i]);
@@ -87,6 +86,7 @@
 	 * Adds an item to the list.
 	 */
 	const addItemToList = () => {
+		if (!isOwner) return;
 		note.items.push({ content: '', checked: false, id: crypto.randomUUID() });
 		saveNote();
 	};
@@ -97,6 +97,7 @@
 	 * @param {string} color - The new color for the note.
 	 */
 	const changeNoteColor = (color) => {
+		if (!isOwner) return;
 		note.color = color;
 		saveNote();
 	};
@@ -107,6 +108,7 @@
 	 * @returns {Promise<void>} A promise that resolves when the note is successfully archived.
 	 */
 	const archiveNote = async () => {
+		if (!isOwner) return;
 		isArchivingNote = true;
 		note.archived = true;
 		await saveNote();
@@ -120,183 +122,277 @@
 	 * @returns {Promise<void>} A promise that resolves when the pin status is toggled.
 	 */
 	const togglePin = async () => {
+		if (!isOwner) return;
 		isChangingPin = true;
 		note.pinned = !note.pinned;
 		await saveNote();
 		isChangingPin = false;
 	};
+
+	const changeNoteVisibility = async () => {
+		if (!isOwner) return;
+		isChangingVisibility = true;
+		note.public = !note.public;
+		await saveNote();
+
+		isChangingVisibility = false;
+	};
+
+	const copyLink = async () => {
+		if (!isOwner) return;
+		if (navigator.share) {
+			navigator.share({
+				title: note.title,
+				text: note.content,
+				url: window.location.href
+			});
+		} else {
+			navigator.clipboard.writeText(window.location.href);
+		}
+		noteCopied = true;
+		setTimeout(() => {
+			noteCopied = false;
+		}, 2000);
+	};
 </script>
 
-<!-- Navbar -->
-<nav
-	class="fixed top-0 left-0 right-0 z-40 bg-black h-14 flex flex-row gap-2 items-center justify-between"
->
-	<!-- Go back button -->
-	<button
-		onclick={() => {
-			window.history.back();
-		}}
-		class="p-2"
-	>
-		<Icon name="back" class={note.color === 'white' && 'text-gray'} />
-	</button>
-
-	<!-- Open settings button -->
-	<button
-		class="rounded-full p-2"
-		onclick={() => {
-			settingsModalOpen = true;
-		}}
-	>
-		<Icon name="Settings" class={note.color === 'white' && 'text-gray'} />
-	</button>
-</nav>
-<!-- Spacer -->
-<div class="h-24"></div>
-
-<!-- Main note elements -->
-<div class="p-2 flex flex-col gap-4 min-h-[calc(100vh-3.5rem*2)] mb-14">
-	<!-- Note title input -->
-	<input
-		type="text"
-		name="title"
-		bind:value={note.title}
-		onkeyup={() => debounce(0)}
-		class="bg-black text-2xl w-full placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-		placeholder="Title"
-	/>
-
-	{#if note.type === 'text'}
-		<!-- Main text note textarea -->
-		<textarea
-			name="content"
-			bind:value={note.content}
-			bind:this={textarea}
-			onkeyup={() => debounce(1)}
-			class="bg-black text-sm tracking-normal w-full rounded resize-none placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot grow"
-			placeholder="Content"
-		></textarea>
-	{:else}
-		<!-- List note unchecked items -->
-		{#each note.items as item, i (item.id)}
-			{#if !item.checked}
-				<div class="flex flex-row gap-2 items-center">
-					<Checkbox bind:checked={item.checked} on:change={saveNote} class="shrink-0" />
-					<input
-						type="text"
-						bind:value={item.content}
-						onkeyup={() => debounce(2 + i)}
-						class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-						placeholder="Content"
-						style="border: 1px dashed white;"
-					/>
-					<button
-						class="transition-all hover:text-red"
-						onclick={() => {
-							note.items.splice(i, 1);
-							saveNote();
-						}}
-					>
-						<Icon name="trash" />
-					</button>
-				</div>
-			{/if}
-		{/each}
-
-		<!-- Add line to list note -->
+<main class="flex flex-col h-screen max-w-screen-lg mx-auto">
+	<!-- Navbar -->
+	<nav class="bg-black h-14 flex flex-row gap-2 items-center justify-between mb-6">
+		<!-- Go back button -->
 		<button
-			onclick={addItemToList}
-			class="flex flex-row gap-2 p-2 rounded hover:bg-gray transition-all"
+			onclick={() => {
+				window.history.back();
+			}}
+			class="p-2"
 		>
-			<Icon name="plus" />
-			{$_('note.addItem')}
+			<Icon name="back" class={note.color === 'white' && 'text-gray'} />
 		</button>
 
-		<!-- Checked list note items -->
-		{#if note.items.filter((el) => el.checked).length > 0}
-			<!-- Separator -->
-			<Hr>
-				<Icon name="check" class="size-4" />
-				{$_('note.checkedItems')}
-			</Hr>
+		<!-- Open settings button -->
+		{#if isOwner}
+			<button
+				class="rounded-full p-2"
+				onclick={() => {
+					settingsModalOpen = true;
+				}}
+			>
+				<Icon name="Settings" class={note.color === 'white' && 'text-gray'} />
+			</button>
+		{:else}
+			<div></div>
+		{/if}
+	</nav>
+
+	<!-- Main note elements -->
+	<div class="p-2 flex flex-col gap-4 min-h-[calc(100vh-3.5rem-7rem] mb-14 grow">
+		<!-- Note title input -->
+		<input
+			type="text"
+			name="title"
+			bind:value={note.title}
+			onkeyup={() => debounce(0)}
+			class="bg-black text-3xl w-full placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
+			placeholder="Title"
+			readonly={!isOwner}
+		/>
+
+		{#if note.type === 'text'}
+			<!-- Main text note textarea -->
+			<textarea
+				name="content"
+				bind:value={note.content}
+				bind:this={textarea}
+				onkeyup={() => debounce(1)}
+				class="bg-black text-base tracking-normal w-full rounded resize-none placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot grow"
+				placeholder="Content"
+				readonly={!isOwner}
+			></textarea>
+		{:else}
+			<!-- List note unchecked items -->
 			{#each note.items as item, i (item.id)}
-				{#if item.checked}
+				{#if !item.checked}
 					<div class="flex flex-row gap-2 items-center">
-						<Checkbox bind:checked={item.checked} on:change={saveNote} class="shrink-0" />
+						<Checkbox
+							bind:checked={item.checked}
+							on:change={saveNote}
+							disabled={!isOwner}
+							class="shrink-0"
+						/>
 						<input
 							type="text"
 							bind:value={item.content}
-							onkeyup={() => debounce(2 + note.items.length + i)}
-							class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
+							onkeyup={() => debounce(2 + i)}
+							class="bg-black px-2 py-1 text-base tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
 							placeholder="Content"
 							style="border: 1px dashed white;"
+							readonly={!isOwner}
 						/>
-						<button
-							class="transition-all hover:text-red"
-							onclick={() => {
-								note.items.splice(i, 1);
-								saveNote();
-							}}
-						>
-							<Icon name="trash" />
-						</button>
+						{#if isOwner}
+							<button
+								class="transition-all hover:text-red"
+								onclick={() => {
+									note.items.splice(i, 1);
+									saveNote();
+								}}
+							>
+								<Icon name="trash" />
+							</button>
+						{/if}
 					</div>
 				{/if}
 			{/each}
+
+			<!-- Add line to list note -->
+			<button
+				onclick={addItemToList}
+				class="flex flex-row gap-2 p-2 rounded hover:bg-gray transition-all"
+			>
+				<Icon name="plus" />
+				{$_('note.addItem')}
+			</button>
+
+			<!-- Checked list note items -->
+			{#if note.items.filter((el) => el.checked).length > 0}
+				<!-- Separator -->
+				<Hr>
+					<Icon name="check" class="size-4" />
+					{$_('note.checkedItems')}
+				</Hr>
+				{#each note.items as item, i (item.id)}
+					{#if item.checked}
+						<div class="flex flex-row gap-2 items-center">
+							<Checkbox bind:checked={item.checked} on:change={saveNote} class="shrink-0" />
+							<input
+								type="text"
+								bind:value={item.content}
+								onkeyup={() => debounce(2 + note.items.length + i)}
+								class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
+								placeholder="Content"
+								style="border: 1px dashed white;"
+							/>
+							<button
+								class="transition-all hover:text-red"
+								onclick={() => {
+									note.items.splice(i, 1);
+									saveNote();
+								}}
+							>
+								<Icon name="trash" />
+							</button>
+						</div>
+					{/if}
+				{/each}
+			{/if}
 		{/if}
-	{/if}
+	</div>
 
 	<!-- Bottom bar -->
 	<div
-		class="mt-auto flex flex-row gap-2 items-center justify-between h-14 px-2 bg-black fixed bottom-0 left-0 right-0"
+		class="flex flex-row gap-2 items-center {isOwner
+			? 'justify-between'
+			: 'justify-center'} h-14 px-2 bg-black"
 	>
+		<!-- Note owner username -->
+		{#if !isOwner}
+			<p class="text-center font-dot">{note.owner}</p>
+		{/if}
+
 		<!-- Change note color button -->
-		<button
-			class="p-2 rounded-full {noteBgColors.find((el) => el.name === note.color)?.class ?? ''}"
-			onclick={() => {
-				changeNoteColorModalOpen = true;
-			}}
-		>
-			<Icon name="palette" class={note.color === 'white' && 'text-gray'} />
-		</button>
+		{#if isOwner}
+			<button
+				class="p-2 rounded-full {noteBgColors.find((el) => el.name === note.color)?.class ?? ''}"
+				onclick={() => {
+					changeNoteColorModalOpen = true;
+				}}
+			>
+				<Icon name="palette" class={note.color === 'white' && 'text-gray'} />
+			</button>
+		{:else}
+			<div></div>
+		{/if}
 
 		<!-- Last saved tile and date -->
-		<div class="grow flex flex-row h-full items-center justify-center">
-			<p class="text-base font-dot">{formatDate(note.lastModified, { locale: $locale })}</p>
-		</div>
+		{#if isOwner}
+			<div class="grow flex flex-row h-full items-center justify-center">
+				<p class="text-base font-dot">{formatDate(note.lastModified, { locale: $locale })}</p>
+			</div>
+		{/if}
 
 		<!-- Save status -->
-		<div
-			class="p-2 rounded-full group relative {!['saving', 'saved'].includes(noteStatus) &&
-				'bg-red'}"
-		>
+		{#if isOwner}
 			<div
-				class="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible z-30 transition-all max-w-[200px] w-max"
+				class="p-2 rounded-full group relative {!['saving', 'saved'].includes(noteStatus) &&
+					'bg-red'}"
 			>
-				<div class="relative p-2 rounded bg-gray">
-					{$_(`note.statuses.${noteStatus}`)}
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="currentColor"
-						class="size-6 absolute top-[calc(100%-0.5rem)] right-2 fill-gray"
-						viewBox="0 0 16 16"
-					>
-						<path
-							d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
-						/>
-					</svg>
+				<div
+					class="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible z-30 transition-all max-w-[200px] w-max"
+				>
+					<div class="relative p-2 rounded bg-gray">
+						{$_(`note.statuses.${noteStatus}`)}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="currentColor"
+							class="size-6 absolute top-[calc(100%-0.5rem)] right-2 fill-gray"
+							viewBox="0 0 16 16"
+						>
+							<path
+								d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+							/>
+						</svg>
+					</div>
 				</div>
+				{#if noteStatus === 'saved'}
+					<Icon name="cloud" />
+				{:else if noteStatus === 'saving'}
+					<Icon name="refresh" />
+				{:else}
+					<Icon name="warning" />
+				{/if}
 			</div>
-			{#if noteStatus === 'saved'}
-				<Icon name="cloud" />
-			{:else if noteStatus === 'saving'}
-				<Icon name="refresh" />
-			{:else}
-				<Icon name="warning" />
-			{/if}
-		</div>
+		{/if}
 	</div>
-</div>
+</main>
+
+<!-- Share note modal -->
+<Modal bind:open={shareModalOpen} title={$_('note.modals.share.title')}>
+	{#if note.public}
+		<p>{$_('note.modals.share.makeItPublicDisclaimer')}</p>
+	{:else}
+		<p>{$_('note.modals.share.makeItPrivateDisclaimer')}</p>
+	{/if}
+	{#if note.public}
+		<Button center onclick={copyLink} class="my-4 w-full">
+			{#if noteCopied}
+				<Icon name="check" />
+				{$_('note.modals.share.linkCopied')}
+			{:else}
+				<Icon name="clipboard" />
+				{$_('note.modals.share.copyLink')}
+			{/if}
+		</Button>
+	{/if}
+	<div class="grid grid-cols-2 gap-2 w-full mt-2">
+		<Button
+			center
+			onclick={() => {
+				shareModalOpen = false;
+				settingsModalOpen = true;
+			}}
+		>
+			{$_('note.modals.share.cancel')}
+		</Button>
+		<Button center onclick={changeNoteVisibility}>
+			{#if isChangingVisibility}
+				<Loader />
+			{:else if note.public}
+				{$_('note.modals.share.makeItPrivate')}
+			{:else}
+				{$_('note.modals.share.makeItPublic')}
+			{/if}
+		</Button>
+	</div>
+</Modal>
 
 <!-- Archive note modal -->
 <Modal bind:open={archiveNoteModalOpen} title={$_('note.modals.archive.title')}>
@@ -458,6 +554,17 @@
 				</Button>
 			</form>
 		{/if}
+
+		<!-- Share note -->
+		<Button
+			onclick={() => {
+				shareModalOpen = true;
+				settingsModalOpen = false;
+			}}
+		>
+			<Icon name="share" />
+			{$_('note.modals.share.share')}
+		</Button>
 
 		<!-- Pin/Unpin note -->
 		<Button onclick={togglePin}>

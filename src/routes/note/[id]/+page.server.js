@@ -7,11 +7,14 @@ export async function load({ params, locals }) {
 	const { id } = params;
 	const { user } = locals;
 
-	const note = await notesRef.findOne({ id, owner: user.username }, { projection: { _id: 0 } });
+	const note = await notesRef.findOne({ id }, { projection: { _id: 0 } });
 
-	if (!note) error(404, 'Note not found');
+	if (!note) error(404, 'noteNotFound');
 
-	return { id, note };
+	const isOwner = user?.username === note.owner;
+	if (!isOwner && !note.public) error(403, 'notePrivate');
+
+	return { id, note, isOwner };
 }
 
 /** @type {import('./$types').Actions} */

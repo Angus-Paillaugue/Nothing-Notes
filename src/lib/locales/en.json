@@ -99,6 +99,17 @@
 				"cancel": "Cancel",
 				"error": "An error occurred while deleting the note !"
 			},
+			"share": {
+				"title": "Share",
+				"makeItPublicDisclaimer": "Sharing this note will make it accessible by anyone with the link. Are you sure you want to share it ?",
+				"makeItPrivateDisclaimer": "This note is public. Making it private will make it accessible only by you. Are you sure you want to make it private ?",
+				"cancel": "Cancel",
+				"share": "Share",
+				"makeItPublic": "Make it public",
+				"makeItPrivate": "Make it private",
+				"copyLink": "Copy Link",
+				"linkCopied": "Copied"
+			},
 			"noteColor": {
 				"title": "Note Color"
 			}
@@ -119,6 +130,13 @@
 				"confirm": "Yes, Log Out",
 				"cancel": "No, Cancel"
 			}
+		}
+	},
+	"error": {
+		"goBack": "Go Back Home",
+		"messages": {
+			"notePrivate": "Note is private",
+			"noteNotFound": "Note not found"
 		}
 	}
 }
