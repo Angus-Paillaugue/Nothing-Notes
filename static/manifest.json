@@ -30,5 +30,24 @@
 			"icons": [{ "src": "/logos/logo_192.png", "sizes": "192x192" }]
 		}
 	],
-	"description": "The 'Nothing Notes' app"
+	"description": "The 'Nothing Notes' app",
+	"orientation": "portrait",
+	"screenshots": [
+		{
+			"src": "/screenshots/Notes.png",
+			"sizes": "537x1158",
+			"type": "image/png"
+		},
+		{
+			"src": "/screenshots/Note.png",
+			"sizes": "537x1158",
+			"type": "image/png"
+		},
+		{
+			"src": "/screenshots/NoteSettings.png",
+			"sizes": "537x1158",
+			"type": "image/png"
+		}
+	],
+	"display_override": "window-controls-overlay"
 }
