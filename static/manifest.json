@@ -65,9 +65,15 @@
 			"type": "image/png"
 		}
 	],
-	"display_override": "window-controls-overlay",
+	"display_override": ["window-controls-overlay", "standalone", "browser"],
 	"categories": ["utilities"],
 	"edge_side_panel": {
 		"preferred_width": 420
-	}
+	},
+	"launch_handler": {
+		"client_mode": ["navigate-existing", "auto"]
+	},
+	"dir": "auto",
+	"lang": "en",
+	"prefer_related_applications": false
 }
