@@ -166,7 +166,7 @@
 			}}
 			class="p-2"
 		>
-			<Icon name="back" class={note.color === 'white' && 'text-gray'} />
+			<Icon name="back" />
 		</button>
 
 		<!-- Open settings button -->
@@ -177,7 +177,7 @@
 					settingsModalOpen = true;
 				}}
 			>
-				<Icon name="Settings" class={note.color === 'white' && 'text-gray'} />
+				<Icon name="Settings" />
 			</button>
 		{:else}
 			<div></div>
@@ -193,7 +193,7 @@
 			bind:value={note.title}
 			onkeyup={() => debounce(0)}
 			class="bg-black text-3xl w-full placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-			placeholder="Title"
+			placeholder={$_('note.placeholders.title')}
 			readonly={!isOwner}
 		/>
 

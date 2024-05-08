@@ -2,7 +2,11 @@
 	"homePage": {
 		"hero": {
 			"subtitle": "A minimalist note-taking app that helps you focus on what matters.",
-			"cta": "Get Started"
+			"cta": {
+				"title": "Get Started",
+				"logIn": "Log In",
+				"signUp": "Sign Up"
+			}
 		},
 		"features": {
 			"items": {
@@ -71,6 +75,9 @@
 	"note": {
 		"addItem": "Add item",
 		"checkedItems": "Checked",
+		"placeholders": {
+			"title": "Title"
+		},
 		"statuses": {
 			"saved": "Note is saved",
 			"saving": "Saving",

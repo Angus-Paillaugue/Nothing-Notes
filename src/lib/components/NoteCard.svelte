@@ -2,6 +2,7 @@
 	import { Checkbox } from '$lib/components';
 	import { twMerge } from 'tailwind-merge';
 	import { noteBorderColors } from '$lib/constants';
+	import { _ } from 'svelte-i18n';
 
 	const { note, inactive = false, class: className } = $props();
 </script>
@@ -14,8 +15,8 @@
 		className
 	)}
 >
-	<h2>{note.title}</h2>
-	{#if note.type === 'list'}
+	<h2>{note.title || $_('note.placeholders.title')}</h2>
+	{#if note.type === 'list' && note.items.length > 0}
 		<ul>
 			{#each note.items.slice(0, 4) as item}
 				<li class="line-clamp-1 flex flex-row items-center gap-2">
@@ -24,7 +25,7 @@
 				</li>
 			{/each}
 		</ul>
-	{:else}
+	{:else if note.content}
 		<p class="line-clamp-5 text-sm">{note.content}</p>
 	{/if}
 </a>

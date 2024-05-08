@@ -2,7 +2,11 @@
 	"homePage": {
 		"hero": {
 			"subtitle": "Une application de prise de notes minimaliste qui vous aide à vous concentrer sur ce qui compte.",
-			"cta": "Commencer"
+			"cta": {
+				"title": "Commencer",
+				"logIn": "Se  Connecter",
+				"signUp": "Créer un compte"
+			}
 		},
 		"features": {
 			"items": {
@@ -74,6 +78,9 @@
 			"saved": "La note est sauvegardée",
 			"saving": "En cours de sauvegarde",
 			"error": "Une erreur s'est produite !"
+		},
+		"placeholders": {
+			"title": "Titre"
 		},
 		"checkedItems": "Cochées",
 		"modals": {

@@ -1,7 +1,11 @@
 import { MongoClient } from 'mongodb';
-import { MONGODB_CONNEXION_STRING } from '$env/static/private';
+import { MONGODB_PROD_CONNEXION_STRING, MONGODB_DEV_CONNEXION_STRING } from '$env/static/private';
+const { MODE } = import.meta.env;
 
-const client = new MongoClient(MONGODB_CONNEXION_STRING);
+const mongodbUri =
+	MODE === 'development' ? MONGODB_PROD_CONNEXION_STRING : MONGODB_DEV_CONNEXION_STRING;
+
+const client = new MongoClient(mongodbUri);
 await client.connect();
 
 const database = client.db('notes');
