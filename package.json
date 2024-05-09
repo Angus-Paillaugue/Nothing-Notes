@@ -4,10 +4,12 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "vite build && npm run postbuild",
 		"preview": "vite preview",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"postbuild": "node ./scripts/generate-sitemap.js",
+		"depcheck": "npx depcheck --detailed"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -29,8 +31,12 @@
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^5.3.0",
 		"bcrypt": "^5.1.1",
+		"directory-tree": "^3.5.1",
 		"jsonwebtoken": "^9.0.2",
 		"mongodb": "^6.5.0",
+		"sortablejs": "^1.15.2",
+		"svelte-dnd-action": "^0.9.45",
+		"svelte-dnd-list": "^0.1.8",
 		"svelte-i18n": "^4.0.0",
 		"tailwind-merge": "^2.3.0",
 		"vaul-svelte": "^0.3.0"

@@ -1,16 +1,16 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Checkbox, Modal, Loader, Hr, Button, Icon, Error } from '$lib/components';
+	import { Checkbox, Modal, Loader, Hr, Button, Icon, Error, ListInput } from '$lib/components';
 	import { formatDate } from '$lib/utils';
 	import { noteBgColors } from '$lib/constants';
 	import { _, locale } from 'svelte-i18n';
 	import { enhance } from '$app/forms';
 	import { afterNavigate } from '$app/navigation';
+	import { seo } from '$lib/stores';
 
 	const { data, form } = $props();
 	const { id, note, isOwner } = data;
-	noteBgColors;
-	const debounceTimer = 1000;
+	const debounceTimer = 500;
 
 	let timers = $state([]);
 	let textarea = $state();
@@ -21,6 +21,7 @@
 	let isDuplicatingNote = $state(false);
 	let isChangingVisibility = $state(false);
 	let noteCopied = $state(false);
+	let windowHeight = $state();
 	// Modals
 	let settingsModalOpen = $state(false);
 	let changeNoteColorModalOpen = $state(false);
@@ -28,13 +29,25 @@
 	let deleteNoteModalOpen = $state(false);
 	let shareModalOpen = $state(false);
 
+	$seo.description = 'pageDescriptions.note';
+
 	onMount(() => {
-		document.title = note.title;
+		$seo.title = note.title;
 
 		// Note title focus if note is empty
 		if (note.title === '' && (note.content === '' || note.items.length === 0) && isOwner) {
 			document.querySelector('input[name="title"]').focus();
 		}
+
+		windowHeight = window.innerHeight;
+    visualViewport.addEventListener('resize', (event) => {
+  		const h = event.target.height;
+			windowHeight = h;
+		});
+		window.addEventListener('resize', (event) => {
+			const h = event.target.innerHeight;
+			windowHeight = h;
+		});
 	});
 
 	afterNavigate(() => {
@@ -63,7 +76,7 @@
 			noteStatus = 'error';
 		}
 
-		document.title = note.title;
+		$seo.title = note.title;
 	}
 
 	/**
@@ -138,12 +151,15 @@
 		isChangingVisibility = false;
 	};
 
+	/**
+	 * Copies the link to the current page.
+	 * @returns {Promise<void>}
+	 */
 	const copyLink = async () => {
 		if (!isOwner) return;
-		if (navigator.share) {
+		if ("share" in navigator) {
 			navigator.share({
 				title: note.title,
-				text: note.content,
 				url: window.location.href
 			});
 		} else {
@@ -156,18 +172,16 @@
 	};
 </script>
 
-<main class="flex flex-col h-screen max-w-screen-lg mx-auto">
+<main class="flex flex-col max-w-screen-lg mx-auto" style="height: {windowHeight}px;">
 	<!-- Navbar -->
 	<nav class="bg-black h-14 flex flex-row gap-2 items-center justify-between mb-6">
 		<!-- Go back button -->
-		<button
-			onclick={() => {
-				window.history.back();
-			}}
+		<a
+			href="/note"
 			class="p-2"
 		>
 			<Icon name="back" />
-		</button>
+		</a>
 
 		<!-- Open settings button -->
 		{#if isOwner}
@@ -185,7 +199,7 @@
 	</nav>
 
 	<!-- Main note elements -->
-	<div class="p-2 flex flex-col gap-4 min-h-[calc(100vh-3.5rem-7rem] mb-14 grow">
+	<div class="p-2 flex flex-col gap-4 grow">
 		<!-- Note title input -->
 		<input
 			type="text"
@@ -197,6 +211,7 @@
 			readonly={!isOwner}
 		/>
 
+		<!-- Text note content -->
 		{#if note.type === 'text'}
 			<!-- Main text note textarea -->
 			<textarea
@@ -205,85 +220,74 @@
 				bind:this={textarea}
 				onkeyup={() => debounce(1)}
 				class="bg-black text-base tracking-normal w-full rounded resize-none placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot grow"
-				placeholder="Content"
+				placeholder={$_('note.placeholders.content')}
 				readonly={!isOwner}
 			></textarea>
 		{:else}
 			<!-- List note unchecked items -->
-			{#each note.items as item, i (item.id)}
-				{#if !item.checked}
-					<div class="flex flex-row gap-2 items-center">
-						<Checkbox
-							bind:checked={item.checked}
-							on:change={saveNote}
-							disabled={!isOwner}
-							class="shrink-0"
-						/>
-						<input
-							type="text"
-							bind:value={item.content}
-							onkeyup={() => debounce(2 + i)}
-							class="bg-black px-2 py-1 text-base tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-							placeholder="Content"
-							style="border: 1px dashed white;"
-							readonly={!isOwner}
-						/>
-						{#if isOwner}
-							<button
-								class="transition-all hover:text-red"
-								onclick={() => {
-									note.items.splice(i, 1);
-									saveNote();
-								}}
-							>
-								<Icon name="trash" />
-							</button>
-						{/if}
-					</div>
-				{/if}
-			{/each}
-
-			<!-- Add line to list note -->
-			<button
-				onclick={addItemToList}
-				class="flex flex-row gap-2 p-2 rounded hover:bg-gray transition-all"
-			>
-				<Icon name="plus" />
-				{$_('note.addItem')}
-			</button>
-
-			<!-- Checked list note items -->
-			{#if note.items.filter((el) => el.checked).length > 0}
-				<!-- Separator -->
-				<Hr>
-					<Icon name="check" class="size-4" />
-					{$_('note.checkedItems')}
-				</Hr>
+			<div class="grow flex flex-col gap-4 overflow-y-auto">
 				{#each note.items as item, i (item.id)}
-					{#if item.checked}
+					{#if !item.checked}
 						<div class="flex flex-row gap-2 items-center">
-							<Checkbox bind:checked={item.checked} on:change={saveNote} class="shrink-0" />
-							<input
-								type="text"
-								bind:value={item.content}
-								onkeyup={() => debounce(2 + note.items.length + i)}
-								class="bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
-								placeholder="Content"
-								style="border: 1px dashed white;"
+							<Checkbox
+								bind:checked={item.checked}
+								on:change={saveNote}
+								disabled={!isOwner}
+								class="shrink-0"
 							/>
-							<button
-								class="transition-all hover:text-red"
-								onclick={() => {
-									note.items.splice(i, 1);
-									saveNote();
-								}}
-							>
-								<Icon name="trash" />
-							</button>
+							<ListInput placeholder='note.placeholders.content' readonly={!isOwner} bind:value={item.content} onkeyup={() => debounce(2 + i)} />
+							{#if isOwner}
+								<button
+									class="transition-all hover:text-red shrink-0"
+									onclick={() => {
+										note.items.splice(i, 1);
+										saveNote();
+									}}
+								>
+									<Icon name="trash" />
+								</button>
+							{/if}
 						</div>
 					{/if}
 				{/each}
-			{/if}
+
+				<!-- Add line to list note -->
+				<button
+					onclick={addItemToList}
+					class="flex flex-row gap-2 p-2 rounded hover:bg-gray transition-all"
+				>
+					<Icon name="plus" />
+					{$_('note.addItem')}
+				</button>
+
+				<!-- Checked list note items -->
+				{#if note.items.filter((el) => el.checked).length > 0}
+					<!-- Separator -->
+					<Hr>
+						<Icon name="check" class="size-4" />
+						{$_('note.checkedItems')}
+					</Hr>
+					{#each note.items as item, i (item.id)}
+						{#if item.checked}
+							<div class="flex flex-row gap-2 items-center">
+								<Checkbox bind:checked={item.checked} on:change={saveNote} disabled={!isOwner} class="shrink-0" />
+								<ListInput placeholder='note.placeholders.content' readonly={!isOwner} bind:value={item.content} onkeyup={() => debounce(2 + note.items.length + i)} />
+								{#if isOwner}
+									<button
+										class="transition-all hover:text-red shrink-0"
+										onclick={() => {
+											note.items.splice(i, 1);
+											saveNote();
+										}}
+									>
+										<Icon name="trash" />
+									</button>
+								{/if}
+							</div>
+						{/if}
+					{/each}
+				{/if}
+			</div>
 		{/if}
 	</div>
 
@@ -363,12 +367,17 @@
 	{/if}
 	{#if note.public}
 		<Button center onclick={copyLink} class="my-4 w-full">
-			{#if noteCopied}
-				<Icon name="check" />
-				{$_('note.modals.share.linkCopied')}
+			{#if "share" in navigator}
+				<Icon name="share" />
+				{$_('note.modals.share.title')}
 			{:else}
-				<Icon name="clipboard" />
-				{$_('note.modals.share.copyLink')}
+				{#if noteCopied}
+					<Icon name="check" />
+					{$_('note.modals.share.linkCopied')}
+				{:else}
+					<Icon name="clipboard" />
+					{$_('note.modals.share.copyLink')}
+				{/if}
 			{/if}
 		</Button>
 	{/if}

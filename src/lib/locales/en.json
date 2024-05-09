@@ -1,149 +1,170 @@
 {
-	"homePage": {
-		"hero": {
-			"subtitle": "A minimalist note-taking app that helps you focus on what matters.",
-			"cta": {
-				"title": "Get Started",
-				"logIn": "Log In",
-				"signUp": "Sign Up"
-			}
-		},
-		"features": {
-			"items": {
-				"0": {
-					"title": "Create Notes",
-					"description": "Jot down your thoughts, ideas, and reminders with ease."
-				},
-				"1": {
-					"title": "Organize Ideas",
-					"description": "Keep your notes organized and easy to find."
-				},
-				"2": {
-					"title": "Sync Everywhere",
-					"description": "Access your notes from any device, anywhere."
-				}
-			}
-		}
-	},
-	"logIn": {
-		"title": "Log In",
-		"form": {
-			"email": "Email",
-			"password": "Password",
-			"submit": "Log In",
-			"cta": "Don't have an account? Sign up",
-			"errors": {
-				"incorrectPassword": "Incorrect password !",
-				"userNotFound": "No account with this e-mail !"
-			}
-		}
-	},
-	"signUp": {
-		"title": "Sign Up",
-		"form": {
-			"email": "Email",
-			"username": "Username",
-			"password": "Password",
-			"submit": "Sign Up",
-			"cta": "Already have an account? Log in",
-			"errors": {
-				"incorrectPassword": "Incorrect password !",
-				"accountAlreadyExists": "Already an account associated with this e-mail !",
-				"usernameTake": "Already an account with this username !",
-				"invalidUsernameFormat": "Usernames can only be composed of letters and numbers !"
-			}
-		}
-	},
-	"notes": {
-		"title": "Notes",
-		"pinned": "Pinned",
-		"noNotes": "You have no notes at the moment. Click the big red button below to create one!",
-		"modals": {
-			"archivedNotes": {
-				"title": "Archived Notes",
-				"restore": "Restore"
-			},
-			"newNote": {
-				"title": "New Note",
-				"noteTypes": {
-					"text": "Text",
-					"list": "List"
-				}
-			}
-		}
-	},
-	"note": {
-		"addItem": "Add item",
-		"checkedItems": "Checked",
-		"placeholders": {
-			"title": "Title"
-		},
-		"statuses": {
-			"saved": "Note is saved",
-			"saving": "Saving",
-			"error": "An error occurred !"
-		},
-		"modals": {
-			"settings": {
-				"title": "Note Settings",
-				"delete": "Delete",
-				"archive": "Archive",
-				"duplicate": "Duplicate",
-				"refresh": "Refresh",
-				"pin": "Pin",
-				"unpin": "Unpin"
-			},
-			"archive": {
-				"title": "Archive Note",
-				"message": "Are you sure you want to archive this note ?",
-				"confirm": "Archive it",
-				"cancel": "Cancel"
-			},
-			"delete": {
-				"title": "Delete Note",
-				"message": "Are you sure you want to delete this note ?",
-				"confirm": "Delete it",
-				"cancel": "Cancel",
-				"error": "An error occurred while deleting the note !"
-			},
-			"share": {
-				"title": "Share",
-				"makeItPublicDisclaimer": "Sharing this note will make it accessible by anyone with the link. Are you sure you want to share it ?",
-				"makeItPrivateDisclaimer": "This note is public. Making it private will make it accessible only by you. Are you sure you want to make it private ?",
-				"cancel": "Cancel",
-				"share": "Share",
-				"makeItPublic": "Make it public",
-				"makeItPrivate": "Make it private",
-				"copyLink": "Copy Link",
-				"linkCopied": "Copied"
-			},
-			"noteColor": {
-				"title": "Note Color"
-			}
-		},
-		"duplicate": {
-			"error": "An error occurred while duplicating the note !"
-		}
-	},
-	"navBar": {
-		"modals": {
-			"account": {
-				"title": "Account",
-				"logOut": "Log Out"
-			},
-			"logOutConfirm": {
-				"title": "Log Out",
-				"message": "Are you sure you want to log out of your account ?",
-				"confirm": "Yes, Log Out",
-				"cancel": "No, Cancel"
-			}
-		}
-	},
-	"error": {
-		"goBack": "Go Back Home",
-		"messages": {
-			"notePrivate": "Note is private",
-			"noteNotFound": "Note not found"
-		}
-	}
+ "pageTitles":{
+  "home": "Nothing Notes",
+  "logIn": "Log In",
+  "signUp": "Sign Up",
+  "notes": "Notes"
+ },
+  "pageDescriptions": {
+    "home": "A minimalist note-taking app that helps you focus on what matters.",
+    "logIn": "Log in to your Nothing Notes account.",
+    "signUp": "Sign up for a Nothing Notes account.",
+    "notes": "Your notes, organized and accessible from anywhere.",
+    "note": "A note in your Nothing Notes account.",
+    "error": "An error occurred."
+  },
+  "homePage": {
+    "hero": {
+      "subtitle": "A minimalist note-taking app that helps you focus on what matters.",
+      "cta": {
+        "title": "Get Started",
+        "logIn": "Log In",
+        "signUp": "Sign Up"
+      }
+    },
+    "features": {
+      "items": {
+        "0": {
+          "title": "Create Notes",
+          "description": "Jot down your thoughts, ideas, and reminders with ease."
+        },
+        "1": {
+          "title": "Organize Ideas",
+          "description": "Keep your notes organized and easy to find."
+        },
+        "2": {
+          "title": "Sync Everywhere",
+          "description": "Access your notes from any device, anywhere."
+        }
+      }
+    }
+  },
+  "logIn": {
+    "title": "Log In",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log In",
+      "cta": "Don't have an account? Sign up",
+      "errors": {
+        "incorrectPassword": "Incorrect password !",
+        "userNotFound": "No account with this e-mail !"
+      },
+      "username": "Username"
+    }
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "form": {
+      "email": "Email",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Sign Up",
+      "cta": "Already have an account? Log in",
+      "errors": {
+        "incorrectPassword": "Incorrect password !",
+        "accountAlreadyExists": "Already an account associated with this e-mail !",
+        "usernameTake": "Already an account with this username !",
+        "invalidUsernameFormat": "Usernames can only be composed of letters and numbers !"
+      }
+    }
+  },
+  "notes": {
+    "title": "Notes",
+    "pinned": "Pinned",
+    "noNotes": "You have no notes at the moment. Click the big red button below to create one!",
+    "modals": {
+      "archivedNotes": {
+        "title": "Archived Notes",
+        "restore": "Restore"
+      },
+      "newNote": {
+        "title": "New Note",
+        "noteTypes": {
+          "text": "Text",
+          "list": "List"
+        }
+      }
+    }
+  },
+  "note": {
+    "addItem": "Add item",
+    "checkedItems": "Checked",
+    "placeholders": {
+      "title": "Title",
+      "content": "Content"
+    },
+    "statuses": {
+      "saved": "Note is saved",
+      "saving": "Saving",
+      "error": "An error occurred !"
+    },
+    "modals": {
+      "settings": {
+        "title": "Note Settings",
+        "delete": "Delete",
+        "archive": "Archive",
+        "duplicate": "Duplicate",
+        "refresh": "Refresh",
+        "pin": "Pin",
+        "unpin": "Unpin"
+      },
+      "archive": {
+        "title": "Archive Note",
+        "message": "Are you sure you want to archive this note ?",
+        "confirm": "Archive it",
+        "cancel": "Cancel"
+      },
+      "delete": {
+        "title": "Delete Note",
+        "message": "Are you sure you want to delete this note ?",
+        "confirm": "Delete it",
+        "cancel": "Cancel",
+        "error": "An error occurred while deleting the note !"
+      },
+      "share": {
+        "title": "Share",
+        "makeItPublicDisclaimer": "Sharing this note will make it accessible by anyone with the link. Are you sure you want to share it ?",
+        "makeItPrivateDisclaimer": "This note is public. Making it private will make it accessible only by you. Are you sure you want to make it private ?",
+        "cancel": "Cancel",
+        "share": "Share",
+        "makeItPublic": "Make it public",
+        "makeItPrivate": "Make it private",
+        "copyLink": "Copy Link",
+        "linkCopied": "Copied"
+      },
+      "noteColor": {
+        "title": "Note Color"
+      }
+    },
+    "duplicate": {
+      "error": "An error occurred while duplicating the note !"
+    }
+  },
+  "navBar": {
+    "modals": {
+      "account": {
+        "title": "Account",
+        "logOut": "Log Out"
+      },
+      "logOutConfirm": {
+        "title": "Log Out",
+        "message": "Are you sure you want to log out of your account ?",
+        "confirm": "Yes, Log Out",
+        "cancel": "No, Cancel"
+      }
+    }
+  },
+  "error": {
+    "goBack": "Go Back Home",
+    "messages": {
+      "notePrivate": "Note is private",
+      "noteNotFound": "Note not found"
+    }
+  },
+  "and-note-items-length-greater-than-0": "& note.items.length > 0}",
+  "and": "&",
+  "if-note-type-list": "{#if note.type === 'list'",
+  "el-name-note-color-class-ring-0-classname-greater-than": "el.name === note.color)?.class ?? 'ring-0', className )} >",
+  "dir": "ltr"
 }

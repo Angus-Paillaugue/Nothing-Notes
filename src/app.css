@@ -41,3 +41,7 @@ p {
 button:not(.button) {
 	@apply transition-all active:scale-95;
 }
+
+[data-dnd-zone] {
+	@apply gap-4;
+}

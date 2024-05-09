@@ -1,0 +1,8 @@
+User-agent: Googlebot
+Disallow: /note
+Disallow: /note/*
+
+User-agent: *
+Allow: /
+
+Sitemap: https://notes.paillaugue.fr/sitemap.xml

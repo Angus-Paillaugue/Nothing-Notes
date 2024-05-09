@@ -2,14 +2,15 @@
 	import { enhance } from '$app/forms';
 	import { Button, Loader, Error, Input } from '$lib/components';
 	import { _ } from 'svelte-i18n';
+	import { seo } from '$lib/stores';
 
 	const { form } = $props();
-	let isSigningIn = $state(false);
-</script>
 
-<svelte:head>
-	<title>{$_('signUp.title')}</title>
-</svelte:head>
+	let isSigningIn = $state(false);
+
+	$seo.title = 'pageTitles.signUp';
+	$seo.description = 'pageDescriptions.error';
+</script>
 
 <section class="flex flex-col items-center justify-center h-[calc(100vh-3.5rem)] p-2">
 	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">

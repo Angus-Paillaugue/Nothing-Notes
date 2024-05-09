@@ -2,6 +2,11 @@ import { auth } from '$lib/server/auth';
 import { redirect } from '@sveltejs/kit';
 import { locale } from 'svelte-i18n';
 import { STATUS } from '$lib/constants';
+import { urlStartsWith } from '$lib/utils';
+
+const protectedUrls = [
+	'/note',
+];
 
 export const handle = async ({ event, resolve }) => {
 	const { url, cookies, locals, request } = event;
@@ -40,5 +45,11 @@ export const handle = async ({ event, resolve }) => {
 		throw redirect(STATUS.REDIRECT, '/note');
 	}
 
-	return resolve(event);
+	const response = await resolve(event);
+	response.headers.set(
+		'X-Robots-Tag',
+		urlStartsWith(url.pathname, protectedUrls) ? 'noindex, nofollow' : 'index, follow'
+	);
+
+	return response;
 };

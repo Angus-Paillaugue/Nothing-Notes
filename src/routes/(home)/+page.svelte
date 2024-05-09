@@ -1,13 +1,13 @@
 <script>
-	import { Button, Icon, Modal, Hr } from '$lib/components';
+	import { Button, Icon, Modal } from '$lib/components';
 	import { _ } from 'svelte-i18n';
+	import { seo } from '$lib/stores';
+
 
 	let getStartedModalOpen = $state(false);
+	$seo.title = "pageTitles.home";
+	$seo.description = 'pageDescriptions.home';
 </script>
-
-<svelte:head>
-	<title>Nothing Notes</title>
-</svelte:head>
 
 <section class="h-screen w-full flex flex-col items-center justify-center gap-4 px-2">
 	<h1 class="text-4xl">Nothing Notes</h1>

@@ -2,11 +2,11 @@
 	import { page } from '$app/stores';
 	import { _ } from 'svelte-i18n';
 	import { Button } from '$lib/components';
-</script>
+	import { seo } from '$lib/stores';
 
-<svelte:head>
-	<title>{$page.status} : {$page.error.message}</title>
-</svelte:head>
+	$seo.title = $page.status + " : " + $page.error.message;
+	$seo.description = 'pageDescriptions.error';
+</script>
 
 <section class="h-screen flex flex-col items-center justify-center gap-4">
 	<span class="text-8xl font-dot">{$page.status}</span>

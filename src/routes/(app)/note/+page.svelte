@@ -3,6 +3,7 @@
 	import { noteBorderColors } from '$lib/constants';
 	import { _ } from 'svelte-i18n';
 	import { afterNavigate } from '$app/navigation';
+	import { seo } from '$lib/stores';
 	// import { longPress } from './longPress';
 
 	const { data } = $props();
@@ -13,6 +14,9 @@
 	let unArchivingNote = $state(undefined);
 	let accountModalOpen = $state(false);
 	let logOutModalOpen = $state(false);
+
+	$seo.title = 'pageTitles.notes';
+	$seo.description = 'pageDescriptions.notes';
 
 	afterNavigate(() => {
 		accountModalOpen = false;
@@ -96,7 +100,7 @@
 {/if}
 
 <div
-	class="grid gap-4 w-full px-2"
+	class="grid gap-4 w-full px-2 pb-[6.5rem]"
 	style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"
 >
 	{#each notes.filter((el) => !el.archived && !el.pinned) as note (note.id)}
@@ -104,6 +108,7 @@
 	{/each}
 </div>
 
+<!-- Big red button -->
 <div class="fixed bottom-4 left-1/2 -translate-x-1/2">
 	<button
 		onclick={() => {
@@ -115,6 +120,7 @@
 	</button>
 </div>
 
+<!-- Archived notes -->
 {#if notes.filter((note) => note.archived).length > 0}
 	<button
 		class="fixed bottom-4 right-4 rounded-full bg-gray p-2"
