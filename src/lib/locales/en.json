@@ -1,10 +1,10 @@
 {
- "pageTitles":{
-  "home": "Nothing Notes",
-  "logIn": "Log In",
-  "signUp": "Sign Up",
-  "notes": "Notes"
- },
+  "pageTitles": {
+    "home": "Nothing Notes",
+    "logIn": "Log In",
+    "signUp": "Sign Up",
+    "notes": "Notes"
+  },
   "pageDescriptions": {
     "home": "A minimalist note-taking app that helps you focus on what matters.",
     "logIn": "Log in to your Nothing Notes account.",
@@ -145,7 +145,8 @@
     "modals": {
       "account": {
         "title": "Account",
-        "logOut": "Log Out"
+        "logOut": "Log Out",
+        "deleteAccount": "Delete account"
       },
       "logOutConfirm": {
         "title": "Log Out",
@@ -162,9 +163,16 @@
       "noteNotFound": "Note not found"
     }
   },
-  "and-note-items-length-greater-than-0": "& note.items.length > 0}",
-  "and": "&",
-  "if-note-type-list": "{#if note.type === 'list'",
-  "el-name-note-color-class-ring-0-classname-greater-than": "el.name === note.color)?.class ?? 'ring-0', className )} >",
-  "dir": "ltr"
+  "dir": "ltr",
+  "deleteAccount": {
+    "title": "Delete account",
+    "message": "Are you sure you want to delete your account ? This operation is irreversible and all your notes will be lost.",
+    "confirm": "Yes, delete",
+    "cancel": "No, cancel",
+    "notLoggedIn": {
+      "message": "You need to be logged-in in order to delete your account",
+      "title": "Not logged-in",
+      "logIn": "Log-in"
+    }
+  }
 }

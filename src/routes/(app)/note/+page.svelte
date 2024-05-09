@@ -75,6 +75,7 @@
 		<Icon name="account" />
 	</button>
 </nav>
+
 <!-- Spacer -->
 <div class="h-24"></div>
 
@@ -178,6 +179,12 @@
 <!-- Account modal -->
 <Modal bind:open={accountModalOpen} title={$_('navBar.modals.account.title')}>
 	<div class="flex flex-col gap-2">
+		<Button
+			href="/delete-account"
+		>
+			<Icon name="backspace" />
+			{$_('navBar.modals.account.deleteAccount')}
+		</Button>
 		<Button
 			onclick={() => {
 				accountModalOpen = false;
