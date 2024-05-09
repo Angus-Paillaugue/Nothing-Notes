@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "fr.paillaugue.notes.twa",
+        "sha256_cert_fingerprints": ["7B:B0:27:64:A0:F7:7D:AD:BF:0F:A3:44:CD:54:4D:53:4A:4F:B5:9D:5F:FE:9B:EF:8D:80:7F:24:B9:9F:85:74"]
+      }
+    }]
