@@ -174,5 +174,45 @@
       "title": "Not logged-in",
       "logIn": "Log-in"
     }
-  }
+  },
+  "privacy-policy": {
+		"title": "Privacy Policy",
+    "description":"The Nothing Notes Privacy Policy",
+		"introduction": {
+			"title": "Introduction",
+			"p1": "Welcome to our Privacy Policy. This policy describes how we collect, use, and protect the information you provide when you use our note-taking app."
+		},
+		"collectedInformation": {
+			"title": "Information We Collect",
+			"p1": "When you register for our app, we collect the following information:",
+			"l1": {
+				"v1": "Email address",
+				"v2": "Username",
+				"v3": "Password"
+			},
+			"p2": "We do not collect any other personal information."
+		},
+		"howInformationIsUsed": {
+			"title": "How We Use Your Information",
+			"p1": "We use the information you provide to:",
+			"l1": {
+				"v1": "Authenticate your account",
+				"v2": "Provide access to our note-taking services",
+				"v3": "Communicate with you about updates or changes to our services"
+			}
+		},
+		"informationSharing": {
+			"title": "Information Sharing",
+			"p1": "We do not share your personal information with any third parties."
+		},
+		"dataSecurity": {
+			"title": "Data Security",
+			"p1": "We take appropriate measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction."
+		},
+		"contactUs": {
+			"title": "Contact Us",
+			"p1": "If you have any questions or concerns about our Privacy Policy, please contact us at"
+		},
+    "lastUpdated": "Last updated: {date}"
+	}
 }

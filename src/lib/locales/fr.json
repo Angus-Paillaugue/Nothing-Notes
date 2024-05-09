@@ -165,5 +165,45 @@
       "message": "Vous devez être connecté pour supprimer votre compte",
       "title": "Pas connecté"
     }
+  },
+  "privacy-policy": {
+    "title": "Politique de confidentialité",
+    "lastUpdated": "Dernière modification: {date}",
+    "description": "Politique de confidentialité de Nothing Notes",
+    "introduction": {
+      "title": "Introduction",
+      "p1": "Bienvenue dans notre politique de confidentialité. Cette politique décrit comment nous collectons, utilisons et protégeons les informations que vous fournissez lorsque vous utilisez notre application de prise de notes."
+    },
+    "dataSecurity": {
+      "title": "Sécurité des données",
+      "p1": "Nous prenons les mesures appropriées pour protéger vos informations personnelles contre tout accès, modification, divulgation ou destruction non autorisés."
+    },
+    "collectedInformation": {
+      "title": "Informations que nous collectons",
+      "p1": "Lorsque vous vous inscrivez à notre application, nous collectons les informations suivantes :",
+      "l1": {
+        "v1": "Adresse e-mail",
+        "v2": "Nom d'utilisateur",
+        "v3": "Mot de passe"
+      },
+      "p2": "Nous ne collectons aucune autre information personnelle."
+    },
+    "howInformationIsUsed": {
+      "title": "Comment nous utilisons vos informations",
+      "l1": {
+        "v3": "Communiquer avec vous sur les mises à jour ou les modifications de nos services",
+        "v2": "Donner accès à nos services de prise de notes",
+        "v1": "Authentifiez votre compte"
+      },
+      "p1": "Nous utilisons les informations que vous fournissez pour :"
+    },
+    "contactUs": {
+      "title":"Nous contacter",
+      "p1": "Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter à"
+    },
+    "informationSharing": {
+      "title": "Partage d'information",
+      "p1": "Nous ne partageons pas vos informations personnelles avec des tiers."
+    }
   }
 }
