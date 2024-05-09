@@ -12,7 +12,7 @@
 	$seo.description = 'pageDescriptions.logIn';
 </script>
 
-<section class="flex flex-col items-center justify-center h-[calc(100vh-3.5rem)] p-2">
+<section class="flex flex-col items-center justify-center grow p-2">
 	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">
 		<h1>{$_('logIn.title')}</h1>
 		<form

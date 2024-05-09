@@ -34,6 +34,6 @@
 	<meta property="twitter:description" content={$_($seo.description)} />
 </svelte:head>
 
-<div class="max-w-screen-lg mx-auto relative">
+<div class="max-w-screen-lg mx-auto relative min-h-screen flex flex-col">
 	<slot />
 </div>

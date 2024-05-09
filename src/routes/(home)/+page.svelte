@@ -3,7 +3,6 @@
 	import { _ } from 'svelte-i18n';
 	import { seo } from '$lib/stores';
 
-
 	let getStartedModalOpen = $state(false);
 	$seo.title = "pageTitles.home";
 	$seo.description = 'pageDescriptions.home';
