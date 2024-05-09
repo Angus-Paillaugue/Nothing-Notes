@@ -6,8 +6,7 @@ import { usersRef, notesRef } from '$lib/server/db';
 export async function load({ locals }) {
 	const { user } = locals;
 
-	if (!user)
-		throw redirect(STATUS.REDIRECT, '/login');
+	return { user };
 }
 
 /** @type {import('./$types').Actions} */

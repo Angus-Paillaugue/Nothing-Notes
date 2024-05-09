@@ -156,10 +156,14 @@
     "boBack": "Retourner à l'accueil"
   },
   "dir": "ltr",
-  "deleteAccount":{
+  "deleteAccount": {
     "title": "Supprimer le compte",
     "message": "Etes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.",
     "confirm": "Oui, Supprimer",
-    "cancel": "Non, Annuler"
+    "cancel": "Non, Annuler",
+    "notLoggedIn": {
+      "message": "Vous devez être connecté pour supprimer votre compte",
+      "title": "Pas connecté"
+    }
   }
 }

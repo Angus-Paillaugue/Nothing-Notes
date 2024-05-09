@@ -1,6 +1,9 @@
 <script>
     import { _ } from 'svelte-i18n';
-    import { Button, Icon } from '$lib/components';
+    import { Button } from '$lib/components';
+
+    const { data } = $props();
+    const { user } = data;
 </script>
 
 <!-- Navbar -->
@@ -20,13 +23,19 @@
 
 <section class="flex flex-col items-center justify-center p-2 mt-36">
     <div class="max-w-sm w-full border rounded p-2 flex flex-col gap-4" style="border: 1px dashed white;">
-        <h1>{$_("deleteAccount.title")}</h1>
-        <p>{$_("deleteAccount.message")}</p>
-        <div class="grid grid-cols-2 w-full gap-4">
-            <Button center onclick={() => {window.history.back()}} class="w-full">{$_("deleteAccount.cancel")}</Button>
-            <form action="?/deleteAccount" method="POST">
-                <Button center type="submit" class="w-full">{$_("deleteAccount.confirm")}</Button>
-            </form>
-        </div>
+        {#if !user}
+            <h1>{$_("deleteAccount.notLoggedIn.title")}</h1>
+            <p>{$_("deleteAccount.notLoggedIn.message")}</p>
+            <Button center href="/log-in" class="w-full">{$_("deleteAccount.notLoggedIn.logIn")}</Button>
+        {:else}
+            <h1>{$_("deleteAccount.title")}</h1>
+            <p>{$_("deleteAccount.message")}</p>
+            <div class="grid grid-cols-2 w-full gap-4">
+                <Button center onclick={() => {window.history.back()}} class="w-full">{$_("deleteAccount.cancel")}</Button>
+                <form action="?/deleteAccount" method="POST">
+                    <Button center type="submit" class="w-full">{$_("deleteAccount.confirm")}</Button>
+                </form>
+            </div>
+        {/if}
     </div>
 </section>
