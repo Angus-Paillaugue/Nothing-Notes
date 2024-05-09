@@ -14,7 +14,7 @@ export async function load({ locals }) {
 		.project({ _id: 0 })
 		.toArray();
 
-		return { notes };
+	return { notes };
 }
 
 /** @type {import('./$types').Actions} */

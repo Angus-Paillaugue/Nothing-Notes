@@ -12,5 +12,6 @@ const database = client.db('notes');
 
 const notesRef = database.collection('notes');
 const usersRef = database.collection('users');
+const resetPasswordRef = database.collection('reset-password');
 
-export { notesRef, usersRef };
+export { notesRef, usersRef, resetPasswordRef };

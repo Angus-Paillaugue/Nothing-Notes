@@ -11,12 +11,12 @@ export async function load({ locals }) {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-  deleteAccount: async ({ locals }) => {
-    const { user } = locals;
+	deleteAccount: async ({ locals }) => {
+		const { user } = locals;
 
-    await notesRef.deleteMany({ owner: user.username });
-    await usersRef.deleteOne({ username: user.username });
+		await notesRef.deleteMany({ owner: user.username });
+		await usersRef.deleteOne({ username: user.username });
 
-    throw redirect(STATUS.REDIRECT, '/log-out');
-  }
+		throw redirect(STATUS.REDIRECT, '/log-out');
+	}
 };

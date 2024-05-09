@@ -4,7 +4,7 @@
 	import { seo } from '$lib/stores';
 
 	let getStartedModalOpen = $state(false);
-	$seo.title = "pageTitles.home";
+	$seo.title = 'pageTitles.home';
 	$seo.description = 'pageDescriptions.home';
 </script>
 
@@ -12,7 +12,11 @@
 	<h1 class="text-4xl">Nothing Notes</h1>
 	<p class="text-center">{$_('homePage.hero.subtitle')}</p>
 
-	<Button onclick={() => {getStartedModalOpen = true;}}>{$_('homePage.hero.cta.title')}</Button>
+	<Button
+		onclick={() => {
+			getStartedModalOpen = true;
+		}}>{$_('homePage.hero.cta.title')}</Button
+	>
 </section>
 
 <section class="flex flex-col items-center justify-center py-14 px-2">
@@ -35,7 +39,7 @@
 	</div>
 </section>
 
-<Modal bind:open={getStartedModalOpen} title={$_('homePage.hero.cta.title')} >
+<Modal bind:open={getStartedModalOpen} title={$_('homePage.hero.cta.title')}>
 	<Button center href="/log-in">{$_('homePage.hero.cta.logIn')}</Button>
 	<Button center href="/sign-up" class="mt-2">{$_('homePage.hero.cta.signUp')}</Button>
 </Modal>

@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { Button, Loader, Error, Input } from '$lib/components';
+	import { Button, Error, Input } from '$lib/components';
 	import { _ } from 'svelte-i18n';
 	import { seo } from '$lib/stores';
 
@@ -34,12 +34,8 @@
 				name="password"
 				placeholder={$_('logIn.form.password')}
 			/>
-			<Button center type="submit" class="w-full bg-black mt-2">
-				{#if isSigningIn}
-					<Loader />
-				{:else}
-					{$_('signUp.form.submit')}
-				{/if}
+			<Button center loading={isSigningIn} type="submit" class="w-full bg-black mt-2">
+				{$_('signUp.form.submit')}
 			</Button>
 		</form>
 		{#if form?.error}

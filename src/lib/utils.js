@@ -31,3 +31,14 @@ export function urlStartsWith(url, path) {
 
 	return url.startsWith(path) || url.startsWith(path + '/');
 }
+
+/**
+ * Checks if the given email is valid.
+ *
+ * @param {string} email - The email to be validated.
+ * @returns {boolean} - True if the email is valid, false otherwise.
+ */
+export function isEmailValid(email) {
+	const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g;
+	return emailRegex.test(email);
+}

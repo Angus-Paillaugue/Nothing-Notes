@@ -4,9 +4,7 @@ import { locale } from 'svelte-i18n';
 import { STATUS } from '$lib/constants';
 import { urlStartsWith } from '$lib/utils';
 
-const protectedUrls = [
-	'/note',
-];
+const protectedUrls = ['/note'];
 
 export const handle = async ({ event, resolve }) => {
 	const { url, cookies, locals, request } = event;
