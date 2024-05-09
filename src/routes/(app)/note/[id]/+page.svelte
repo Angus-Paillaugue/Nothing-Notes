@@ -172,7 +172,7 @@
 	};
 </script>
 
-<main class="flex flex-col max-w-screen-lg mx-auto" style="height: {windowHeight}px;">
+<main class="flex flex-col" style="height: {windowHeight}px;">
 	<!-- Navbar -->
 	<nav class="bg-black h-14 flex flex-row gap-2 items-center justify-between mb-6">
 		<!-- Go back button -->

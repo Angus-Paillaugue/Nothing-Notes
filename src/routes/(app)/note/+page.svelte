@@ -79,7 +79,7 @@
 <!-- Spacer -->
 <div class="h-24"></div>
 
-{#if notes.length === 0}
+{#if notes.filter((el) => !el.archived).length === 0}
 	<h2>{$_('notes.noNotes')}</h2>
 {/if}
 
@@ -134,7 +134,7 @@
 
 	<!-- Archived notes modal -->
 	<Modal bind:open={archivedNotesModalOpen} title={$_('notes.modals.archivedNotes.title')}>
-		<div class="flex flex-col gap-6">
+		<div class="flex flex-col gap-6 p-1">
 			{#each notes.filter((note) => note.archived) as note (note.id)}
 				<div class="flex flex-col">
 					<NoteCard {note} inactive={true} class="rounded-b-none" />
