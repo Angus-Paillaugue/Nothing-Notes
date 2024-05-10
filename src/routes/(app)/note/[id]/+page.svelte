@@ -21,7 +21,6 @@
 	let isDuplicatingNote = $state(false);
 	let isChangingVisibility = $state(false);
 	let noteCopied = $state(false);
-	let windowHeight = $state();
 	// Modals
 	let settingsModalOpen = $state(false);
 	let changeNoteColorModalOpen = $state(false);
@@ -38,16 +37,6 @@
 		if (note.title === '' && (note.content === '' || note.items.length === 0) && isOwner) {
 			document.querySelector('input[name="title"]').focus();
 		}
-
-		windowHeight = window.innerHeight;
-		visualViewport.addEventListener('resize', (event) => {
-			const h = event.target.height;
-			windowHeight = h;
-		});
-		window.addEventListener('resize', (event) => {
-			const h = event.target.innerHeight;
-			windowHeight = h;
-		});
 
 		// Swipe
 		if (!isOwner) return;
@@ -147,7 +136,9 @@
 		const id = crypto.randomUUID()
 		note.items.push({ content: '', checked: false, id });
 		await saveNote();
-		listenToSwipe(document.querySelector(`[data-id="${id}"]`));
+		const newItem = document.querySelector(`[data-id="${id}"]`);
+		listenToSwipe(newItem);
+		newItem.querySelector('input').focus();
 	};
 
 	/**
@@ -189,10 +180,10 @@
 	};
 
 	/**
-		 * Changes the visibility of the note.
-		 * @returns {Promise<void>}
-		 */
-		const changeNoteVisibility = async () => {
+	 * Changes the visibility of the note.
+	 * @returns {Promise<void>}
+	 */
+	const changeNoteVisibility = async () => {
 		if (!isOwner) return;
 		isChangingVisibility = true;
 		note.public = !note.public;
@@ -222,7 +213,7 @@
 	};
 </script>
 
-<main class="flex flex-col" style="height: {windowHeight}px;">
+<main class="flex flex-col" style="height: 100vh;">
 	<!-- Navbar -->
 	<nav class="bg-black h-14 flex flex-row gap-2 items-center justify-between mb-6">
 		<!-- Go back button -->
@@ -246,7 +237,7 @@
 	</nav>
 
 	<!-- Main note elements -->
-	<div class="p-2 flex flex-col gap-4 grow">
+	<div class="p-2 flex flex-col gap-4 grow overflow-y-auto">
 		<!-- Note title input -->
 		<input
 			type="text"
@@ -288,6 +279,17 @@
 								bind:value={item.content}
 								onkeyup={() => debounce(2 + i)}
 							/>
+							{#if isOwner}
+									<button
+										class="transition-all hover:text-red shrink-0 hidden md:block"
+										onclick={() => {
+											note.items.splice(i, 1);
+											saveNote();
+										}}
+									>
+										<Icon name="trash" />
+									</button>
+								{/if}
 						</div>
 					{/if}
 				{/each}
@@ -323,6 +325,17 @@
 									bind:value={item.content}
 									onkeyup={() => debounce(2 + note.items.length + i)}
 								/>
+								{#if isOwner}
+									<button
+										class="transition-all hover:text-red shrink-0 hidden md:block"
+										onclick={() => {
+											note.items.splice(i, 1);
+											saveNote();
+										}}
+									>
+										<Icon name="trash" />
+									</button>
+								{/if}
 							</div>
 						{/if}
 					{/each}
