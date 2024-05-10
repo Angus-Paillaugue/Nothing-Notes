@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { Button, Loader, Error, Input } from '$lib/components';
+	import { Button, Error, Input } from '$lib/components';
 	import { _ } from 'svelte-i18n';
 	import { seo } from '$lib/stores';
 
@@ -33,17 +33,14 @@
 				name="password"
 				placeholder={$_('logIn.form.password')}
 			/>
-			<Button center type="submit" class="w-full bg-black mt-2">
-				{#if isLoggingIn}
-					<Loader />
-				{:else}
-					{$_('logIn.form.submit')}
-				{/if}
+			<Button center loading={isLoggingIn} type="submit" class="w-full bg-black mt-2">
+				{$_('logIn.form.submit')}
 			</Button>
 		</form>
 		{#if form?.error}
 			<Error message={form.error} />
 		{/if}
+		<a href="/forgot-password" class="text-sm">{$_('logIn.form.forgotPassword')}</a>
 		<a href="/sign-up" class="text-sm">{$_('logIn.form.cta')}</a>
 	</div>
 </section>

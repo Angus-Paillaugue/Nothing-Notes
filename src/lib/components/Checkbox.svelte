@@ -19,11 +19,11 @@
 	/>
 	{#if checked}
 		<div
-			class="absolute pointer-events-none flex flex-col items-center justify-center inset-0"
+			class="absolute pointer-events-none flex flex-col items-center justify-center inset-0 p-[2px]"
 			in:scale
 			out:scale
 		>
-			<Icon name="check" class="size-4 {checked ? 'text-white' : 'text-gray'}" />
+			<Icon name="check" stroke-width={2} class="size-4 {checked ? 'text-white' : 'text-gray'}" />
 		</div>
 	{/if}
 </div>

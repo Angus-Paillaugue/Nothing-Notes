@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Checkbox, Modal, Loader, Hr, Button, Icon, Error, ListInput } from '$lib/components';
+	import { Checkbox, Modal, Hr, Button, Icon, Error, ListInput } from '$lib/components';
 	import { formatDate } from '$lib/utils';
 	import { noteBgColors } from '$lib/constants';
 	import { _, locale } from 'svelte-i18n';
@@ -40,15 +40,59 @@
 		}
 
 		windowHeight = window.innerHeight;
-    visualViewport.addEventListener('resize', (event) => {
-  		const h = event.target.height;
+		visualViewport.addEventListener('resize', (event) => {
+			const h = event.target.height;
 			windowHeight = h;
 		});
 		window.addEventListener('resize', (event) => {
 			const h = event.target.innerHeight;
 			windowHeight = h;
 		});
+
+		// Swipe
+		if (!isOwner) return;
+		const elements = document.getElementsByClassName('swipable');
+
+		for (const el of elements) {
+			listenToSwipe(el)
+		}
 	});
+
+	function listenToSwipe(el) {
+		const MOVE_THRESHOLD = window.innerWidth / 5 * 3;
+		let initialX;
+		let moveX = 0;
+
+		el.addEventListener('touchstart', (e) => {
+			initialX = e.touches[0].pageX;
+			el.style.transition = 'none';
+		});
+
+		el.addEventListener('touchmove', (e) => {
+			let currentX = e.touches[0].pageX;
+			moveX = currentX - initialX;
+
+			// Only allow left swipe if not already swiped to the left
+			if (moveX < 0 || parseFloat(el.style.transform) < 0) {
+				el.style.transform = `translateX(${moveX}px)`;
+			}
+		});
+
+		el.addEventListener('touchend', () => {
+			el.style.transition = 'transform 0.3s ease';
+
+			if (moveX < -MOVE_THRESHOLD) {
+				// Delete the item from the note
+				note.items = note.items.filter((item) => item.id !== el.dataset.id);
+				saveNote();
+			} else {
+				// Swipes back to the initial position and hides the delete button
+				el.style.transform = `translateX(0px)`;
+			}
+		});
+	}
+
+
 
 	afterNavigate(() => {
 		settingsModalOpen = false;
@@ -98,10 +142,12 @@
 	/**
 	 * Adds an item to the list.
 	 */
-	const addItemToList = () => {
+	const addItemToList = async () => {
 		if (!isOwner) return;
-		note.items.push({ content: '', checked: false, id: crypto.randomUUID() });
-		saveNote();
+		const id = crypto.randomUUID()
+		note.items.push({ content: '', checked: false, id });
+		await saveNote();
+		listenToSwipe(document.querySelector(`[data-id="${id}"]`));
 	};
 
 	/**
@@ -142,7 +188,11 @@
 		isChangingPin = false;
 	};
 
-	const changeNoteVisibility = async () => {
+	/**
+		 * Changes the visibility of the note.
+		 * @returns {Promise<void>}
+		 */
+		const changeNoteVisibility = async () => {
 		if (!isOwner) return;
 		isChangingVisibility = true;
 		note.public = !note.public;
@@ -157,7 +207,7 @@
 	 */
 	const copyLink = async () => {
 		if (!isOwner) return;
-		if ("share" in navigator) {
+		if ('share' in navigator) {
 			navigator.share({
 				title: note.title,
 				url: window.location.href
@@ -172,14 +222,11 @@
 	};
 </script>
 
-<main class="flex flex-col max-w-screen-lg mx-auto" style="height: {windowHeight}px;">
+<main class="flex flex-col" style="height: {windowHeight}px;">
 	<!-- Navbar -->
 	<nav class="bg-black h-14 flex flex-row gap-2 items-center justify-between mb-6">
 		<!-- Go back button -->
-		<a
-			href="/note"
-			class="p-2"
-		>
+		<a href="/note" class="p-2">
 			<Icon name="back" />
 		</a>
 
@@ -228,25 +275,19 @@
 			<div class="grow flex flex-col gap-4 overflow-y-auto">
 				{#each note.items as item, i (item.id)}
 					{#if !item.checked}
-						<div class="flex flex-row gap-2 items-center">
+						<div class="flex flex-row gap-2 items-center swipable" data-id={item.id}>
 							<Checkbox
 								bind:checked={item.checked}
 								on:change={saveNote}
 								disabled={!isOwner}
 								class="shrink-0"
 							/>
-							<ListInput placeholder='note.placeholders.content' readonly={!isOwner} bind:value={item.content} onkeyup={() => debounce(2 + i)} />
-							{#if isOwner}
-								<button
-									class="transition-all hover:text-red shrink-0"
-									onclick={() => {
-										note.items.splice(i, 1);
-										saveNote();
-									}}
-								>
-									<Icon name="trash" />
-								</button>
-							{/if}
+							<ListInput
+								placeholder="note.placeholders.content"
+								readonly={!isOwner}
+								bind:value={item.content}
+								onkeyup={() => debounce(2 + i)}
+							/>
 						</div>
 					{/if}
 				{/each}
@@ -269,20 +310,19 @@
 					</Hr>
 					{#each note.items as item, i (item.id)}
 						{#if item.checked}
-							<div class="flex flex-row gap-2 items-center">
-								<Checkbox bind:checked={item.checked} on:change={saveNote} disabled={!isOwner} class="shrink-0" />
-								<ListInput placeholder='note.placeholders.content' readonly={!isOwner} bind:value={item.content} onkeyup={() => debounce(2 + note.items.length + i)} />
-								{#if isOwner}
-									<button
-										class="transition-all hover:text-red shrink-0"
-										onclick={() => {
-											note.items.splice(i, 1);
-											saveNote();
-										}}
-									>
-										<Icon name="trash" />
-									</button>
-								{/if}
+							<div class="flex flex-row gap-2 items-center swipable" data-id={item.id}>
+								<Checkbox
+									bind:checked={item.checked}
+									on:change={saveNote}
+									disabled={!isOwner}
+									class="shrink-0"
+								/>
+								<ListInput
+									placeholder="note.placeholders.content"
+									readonly={!isOwner}
+									bind:value={item.content}
+									onkeyup={() => debounce(2 + note.items.length + i)}
+								/>
 							</div>
 						{/if}
 					{/each}
@@ -361,23 +401,21 @@
 <!-- Share note modal -->
 <Modal bind:open={shareModalOpen} title={$_('note.modals.share.title')}>
 	{#if note.public}
-		<p>{$_('note.modals.share.makeItPublicDisclaimer')}</p>
-	{:else}
 		<p>{$_('note.modals.share.makeItPrivateDisclaimer')}</p>
+	{:else}
+		<p>{$_('note.modals.share.makeItPublicDisclaimer')}</p>
 	{/if}
 	{#if note.public}
 		<Button center onclick={copyLink} class="my-4 w-full">
-			{#if "share" in navigator}
+			{#if 'share' in navigator}
 				<Icon name="share" />
 				{$_('note.modals.share.title')}
+			{:else if noteCopied}
+				<Icon name="check" />
+				{$_('note.modals.share.linkCopied')}
 			{:else}
-				{#if noteCopied}
-					<Icon name="check" />
-					{$_('note.modals.share.linkCopied')}
-				{:else}
-					<Icon name="clipboard" />
-					{$_('note.modals.share.copyLink')}
-				{/if}
+				<Icon name="clipboard" />
+				{$_('note.modals.share.copyLink')}
 			{/if}
 		</Button>
 	{/if}
@@ -391,10 +429,8 @@
 		>
 			{$_('note.modals.share.cancel')}
 		</Button>
-		<Button center onclick={changeNoteVisibility}>
-			{#if isChangingVisibility}
-				<Loader />
-			{:else if note.public}
+		<Button center loading={isChangingVisibility} onclick={changeNoteVisibility}>
+			{#if note.public}
 				{$_('note.modals.share.makeItPrivate')}
 			{:else}
 				{$_('note.modals.share.makeItPublic')}
@@ -417,12 +453,8 @@
 		>
 			{$_('note.modals.archive.cancel')}
 		</Button>
-		<Button center disabled={isArchivingNote} onclick={archiveNote}>
-			{#if isArchivingNote}
-				<Loader />
-			{:else}
-				{$_('note.modals.archive.confirm')}
-			{/if}
+		<Button center loading={isArchivingNote} disabled={isArchivingNote} onclick={archiveNote}>
+			{$_('note.modals.archive.confirm')}
 		</Button>
 	</div>
 </Modal>
@@ -456,12 +488,8 @@
 		>
 			{$_('note.modals.delete.cancel')}
 		</Button>
-		<Button center disabled={isDeletingNote} type="submit">
-			{#if isDeletingNote}
-				<Loader />
-			{:else}
-				{$_('note.modals.delete.confirm')}
-			{/if}
+		<Button center loading={isDeletingNote} disabled={isDeletingNote} type="submit">
+			{$_('note.modals.delete.confirm')}
 		</Button>
 	</form>
 </Modal>
@@ -553,12 +581,8 @@
 					};
 				}}
 			>
-				<Button disabled={isDuplicatingNote} class="w-full">
-					{#if isDuplicatingNote}
-						<Loader />
-					{:else}
-						<Icon name="duplicate" />
-					{/if}
+				<Button disabled={isDuplicatingNote} loading={isDuplicatingNote} class="w-full">
+					<Icon name="duplicate" />
 					{$_('note.modals.settings.duplicate')}
 				</Button>
 			</form>
@@ -576,10 +600,8 @@
 		</Button>
 
 		<!-- Pin/Unpin note -->
-		<Button onclick={togglePin}>
-			{#if isChangingPin}
-				<Loader />
-			{:else if note.pinned}
+		<Button loafing={isChangingPin} onclick={togglePin}>
+			{#if note.pinned}
 				<Icon name="pin-filled" />
 			{:else}
 				<Icon name="pin" />

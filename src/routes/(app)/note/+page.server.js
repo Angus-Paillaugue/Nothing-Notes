@@ -13,7 +13,7 @@ export async function load({ locals }) {
 		.sort({ lastModified: -1 })
 		.project({ _id: 0 })
 		.toArray();
-	console.log(notes);
+
 	return { notes };
 }
 

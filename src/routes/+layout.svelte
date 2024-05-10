@@ -23,7 +23,7 @@
 
 	<meta property="og:url" content={$page.url.href.split('#')[0]} />
 	<meta property="og:locale" content={$locale} />
-	<meta property="og:site_name" content="My fashion vault" />
+	<meta property="og:site_name" content="Nothing Notes" />
 
 	<title>{$_($seo.title)} - Notes</title>
 	<meta property="og:title" content={$_($seo.title) + ' - Notes'} />

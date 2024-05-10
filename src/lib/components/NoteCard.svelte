@@ -5,7 +5,9 @@
 	import { _ } from 'svelte-i18n';
 
 	const { note, inactive = false, class: className } = $props();
-	const items = note.items ? note.items.sort((a,b) => a.checked === b.checked ? 0 : (a.checked ? 1 : -1)).slice(0, 4) : undefined;
+	const items = note.items
+		? note.items.sort((a, b) => (a.checked === b.checked ? 0 : a.checked ? 1 : -1)).slice(0, 4)
+		: undefined;
 </script>
 
 <a
