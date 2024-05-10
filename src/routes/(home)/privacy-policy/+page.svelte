@@ -55,7 +55,6 @@
 		{$_('privacy-policy.contactUs.p1')}
 		<a href="mailto:angus@paillaugue.fr">angus@paillaugue.fr</a>.
 	</p>
-	>>
 </section>
 
 <p class="mt-4">

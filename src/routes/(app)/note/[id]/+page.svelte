@@ -48,7 +48,51 @@
 			const h = event.target.innerHeight;
 			windowHeight = h;
 		});
+
+		// Swipe
+		if (!isOwner) return;
+		const elements = document.getElementsByClassName('swipable');
+
+		for (const el of elements) {
+			listenToSwipe(el)
+		}
 	});
+
+	function listenToSwipe(el) {
+		const MOVE_THRESHOLD = window.innerWidth / 5 * 3;
+		let initialX;
+		let moveX = 0;
+
+		el.addEventListener('touchstart', (e) => {
+			initialX = e.touches[0].pageX;
+			el.style.transition = 'none';
+		});
+
+		el.addEventListener('touchmove', (e) => {
+			let currentX = e.touches[0].pageX;
+			moveX = currentX - initialX;
+
+			// Only allow left swipe if not already swiped to the left
+			if (moveX < 0 || parseFloat(el.style.transform) < 0) {
+				el.style.transform = `translateX(${moveX}px)`;
+			}
+		});
+
+		el.addEventListener('touchend', () => {
+			el.style.transition = 'transform 0.3s ease';
+
+			if (moveX < -MOVE_THRESHOLD) {
+				// Delete the item from the note
+				note.items = note.items.filter((item) => item.id !== el.dataset.id);
+				saveNote();
+			} else {
+				// Swipes back to the initial position and hides the delete button
+				el.style.transform = `translateX(0px)`;
+			}
+		});
+	}
+
+
 
 	afterNavigate(() => {
 		settingsModalOpen = false;
@@ -98,10 +142,12 @@
 	/**
 	 * Adds an item to the list.
 	 */
-	const addItemToList = () => {
+	const addItemToList = async () => {
 		if (!isOwner) return;
-		note.items.push({ content: '', checked: false, id: crypto.randomUUID() });
-		saveNote();
+		const id = crypto.randomUUID()
+		note.items.push({ content: '', checked: false, id });
+		await saveNote();
+		listenToSwipe(document.querySelector(`[data-id="${id}"]`));
 	};
 
 	/**
@@ -142,7 +188,11 @@
 		isChangingPin = false;
 	};
 
-	const changeNoteVisibility = async () => {
+	/**
+		 * Changes the visibility of the note.
+		 * @returns {Promise<void>}
+		 */
+		const changeNoteVisibility = async () => {
 		if (!isOwner) return;
 		isChangingVisibility = true;
 		note.public = !note.public;
@@ -225,7 +275,7 @@
 			<div class="grow flex flex-col gap-4 overflow-y-auto">
 				{#each note.items as item, i (item.id)}
 					{#if !item.checked}
-						<div class="flex flex-row gap-2 items-center">
+						<div class="flex flex-row gap-2 items-center swipable" data-id={item.id}>
 							<Checkbox
 								bind:checked={item.checked}
 								on:change={saveNote}
@@ -238,17 +288,6 @@
 								bind:value={item.content}
 								onkeyup={() => debounce(2 + i)}
 							/>
-							{#if isOwner}
-								<button
-									class="transition-all hover:text-red shrink-0"
-									onclick={() => {
-										note.items.splice(i, 1);
-										saveNote();
-									}}
-								>
-									<Icon name="trash" />
-								</button>
-							{/if}
 						</div>
 					{/if}
 				{/each}
@@ -271,7 +310,7 @@
 					</Hr>
 					{#each note.items as item, i (item.id)}
 						{#if item.checked}
-							<div class="flex flex-row gap-2 items-center">
+							<div class="flex flex-row gap-2 items-center swipable" data-id={item.id}>
 								<Checkbox
 									bind:checked={item.checked}
 									on:change={saveNote}
@@ -284,17 +323,6 @@
 									bind:value={item.content}
 									onkeyup={() => debounce(2 + note.items.length + i)}
 								/>
-								{#if isOwner}
-									<button
-										class="transition-all hover:text-red shrink-0"
-										onclick={() => {
-											note.items.splice(i, 1);
-											saveNote();
-										}}
-									>
-										<Icon name="trash" />
-									</button>
-								{/if}
 							</div>
 						{/if}
 					{/each}
@@ -373,9 +401,9 @@
 <!-- Share note modal -->
 <Modal bind:open={shareModalOpen} title={$_('note.modals.share.title')}>
 	{#if note.public}
-		<p>{$_('note.modals.share.makeItPublicDisclaimer')}</p>
-	{:else}
 		<p>{$_('note.modals.share.makeItPrivateDisclaimer')}</p>
+	{:else}
+		<p>{$_('note.modals.share.makeItPublicDisclaimer')}</p>
 	{/if}
 	{#if note.public}
 		<Button center onclick={copyLink} class="my-4 w-full">

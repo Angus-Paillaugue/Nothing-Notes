@@ -11,4 +11,5 @@
 - [ ] Add a loading state to the create note buttons
 - [ ] ~~Add a possibility to get started without an account (store notes in localStorage) with a disclaimer that notes will not be accessibles from others devices~~
 - [ ] Add SMTP and send mail functions
-- [ ] Change loading state for all of the buttons
+- [x] Change loading state for all of the buttons
+- [ ] Check if the TTL index works on the reset-password collection

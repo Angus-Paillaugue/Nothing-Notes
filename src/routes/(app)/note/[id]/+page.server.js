@@ -2,6 +2,8 @@ import { notesRef } from '$lib/server/db';
 import { error, redirect, fail } from '@sveltejs/kit';
 import { STATUS } from '$lib/constants';
 
+export const ssr = false;
+
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, locals }) {
 	const { id } = params;
