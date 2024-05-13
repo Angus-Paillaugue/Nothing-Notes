@@ -53,7 +53,7 @@
 	<h2>{$_('privacy-policy.contactUs.title')}</h2>
 	<p>
 		{$_('privacy-policy.contactUs.p1')}
-		<a href="mailto:angus@paillaugue.fr">angus@paillaugue.fr</a>.
+		<a href="mailto:support.nothing-notes@paillaugue.fr">support.nothing-notes@paillaugue.fr</a>.
 	</p>
 </section>
 

@@ -1,24 +1,27 @@
 <script>
-	import { Drawer } from 'vaul-svelte';
+	import { fade, fly } from 'svelte/transition';
+	import { Icon } from '$lib/components';
 
 	let { open = $bindable(), children, title } = $props();
 </script>
 
-<!-- Add shouldScaleBackground to the line below if she body should shrink when the modal is opened -->
-<Drawer.Root bind:open>
-	<Drawer.Portal>
-		<Drawer.Overlay class="fixed inset-0 bg-gray/80 z-50" />
-		<Drawer.Content
-			class="fixed bottom-0 left-0 right-0 flex h-fit flex-col bg-black rounded-t-xl p-4 z-[51]"
-		>
-			<!-- IOS like bar -->
-			<div class="mx-auto mb-8 h-1.5 w-12 flex-shrink-0 rounded-full bg-gray"></div>
-			<div class="mx-auto max-w-md w-full max-h-[80vh] overflow-auto">
-				{#if title}
-					<h2 class="mb-4">{title}</h2>
-				{/if}
-				{@render children()}
-			</div>
-		</Drawer.Content>
-	</Drawer.Portal>
-</Drawer.Root>
+{#if open}
+	<!-- Backdrop -->
+	<!-- svelte-ignore a11y_click_events_have_key_events -->
+	<!-- svelte-ignore a11y_no_static_element_interactions -->
+	<div class="fixed inset-0 bg-gray/70 z-50" in:fade out:fade onclick={() => (open = false)}></div>
+	<div class="fixed bottom-0 md:bottom-1/2 md:left-1/2 md:-translate-x-1/2 md:translate-y-1/2 max-w-screen-md w-full left-0 flex flex-col gap-2 z-50 rounded bg-black" in:fly={{ y:'100%' }} out:fly={{ y:'100%' }}>
+		<div class="flex flex-row items-center justify-between p-4">
+			{#if title}
+				<h2>{title}</h2>
+			{/if}
+
+			<button onclick={() => (open = false)} class={title ? "" : "ml-auto"}>
+				<Icon name="close" />
+			</button>
+		</div>
+		<div class="w-full max-h-[70vh] overflow-auto p-6 pt-0">
+			{@render children()}
+		</div>
+	</div>
+{/if}

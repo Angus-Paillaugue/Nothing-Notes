@@ -4,6 +4,7 @@
 	import { _, locale } from 'svelte-i18n';
 	import { page } from '$app/stores';
 	import { seo } from '$lib/stores';
+	import { CookieModal } from '$lib/components';
 
 	onMount(() => {
 		console.log(
@@ -15,6 +16,8 @@
 		document.documentElement.setAttribute('dir', $_('dir') === 'dir' ? 'ltr' : $_('dir'));
 	});
 </script>
+
+<CookieModal />
 
 <svelte:head>
 	<link rel="canonical" href={$page.url.href.split('#')[0]} />
