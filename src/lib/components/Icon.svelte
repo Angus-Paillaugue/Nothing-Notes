@@ -123,6 +123,11 @@
 			box: 24,
 			name: 'close',
 			svg: `<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />`
+		},
+		{
+			box: 24,
+			name: 'caret-down',
+			svg: `<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />`
 		}
 	];
 

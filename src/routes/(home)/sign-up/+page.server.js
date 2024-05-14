@@ -35,7 +35,7 @@ export const actions = {
 
 		cookies.set('token', generateAccessToken(email), {
 			path: '/',
-			maxAge: 60 * 60 * 24 * 10,
+			maxAge: 60 * 60 * 24,
 			secure: false
 		});
 

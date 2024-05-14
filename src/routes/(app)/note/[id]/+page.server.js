@@ -11,10 +11,10 @@ export async function load({ params, locals }) {
 
 	const note = await notesRef.findOne({ id }, { projection: { _id: 0 } });
 
-	if (!note) error(404, 'noteNotFound');
+	if (!note) error(404, 'note.errors.noteNotFound');
 
 	const isOwner = user?.username === note.owner;
-	if (!isOwner && !note.public) error(403, 'notePrivate');
+	if (!isOwner && !note.public) error(403, 'note.errors.notePrivate');
 
 	return { id, note, isOwner };
 }

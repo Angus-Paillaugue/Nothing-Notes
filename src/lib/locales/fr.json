@@ -1,255 +1,267 @@
 {
-  "pageTitles": {
-    "home": "Nothing Notes",
-    "logIn": "Se Connecter",
-    "signUp": "Créer un compte",
-    "notes": "Notes",
-    "forgotPassword": "Mot de passe oublié",
-    "resetPassword": "Réinitialiser le mot de passe"
-  },
-  "pageDescriptions": {
-    "home": "Une application de prise de notes minimaliste qui vous aide à vous concentrer sur ce qui compte.",
-    "logIn": "Se connecter sur votre compte Nothing Notes.",
-    "signUp": "Créer un compte Nothing Notes account.",
-    "notes": "Vos notes, organisées et accessibles de n'importe où.",
-    "note": "Une note sur votre compte Nothing Notes.",
-    "error": "Une erreur s'est produite !",
-    "forgotPassword": "Vous avez oublié votre mot de passe ? Réinitialisez-le ici.",
-    "resetPassword": "Vous avez oublié votre mot de passe ? Réinitialisez-le ici."
-  },
-  "homePage": {
-    "hero": {
-      "subtitle": "Une application de prise de notes minimaliste qui vous aide à vous concentrer sur ce qui compte.",
-      "cta": {
-        "title": "Commencer",
-        "logIn": "Se  Connecter",
-        "signUp": "Créer un compte"
-      }
-    },
-    "features": {
-      "items": {
-        "0": {
-          "title": "Créer des notes",
-          "description": "Notez facilement vos pensées, vos idées et vos rappels."
-        },
-        "1": {
-          "title": "Organiser les idées",
-          "description": "Gardez vos notes organisées et faciles à trouver."
-        },
-        "2": {
-          "title": "Synchronisez partout",
-          "description": "Accédez à vos notes depuis n’importe quel appareil, n’importe où."
-        }
-      }
-    }
-  },
-  "logIn": {
-    "title": "Se connecter",
-    "form": {
-      "email": "E-mail",
-      "password": "Mot de passe",
-      "submit": "Se connecter",
-      "cta": "Vous n'avez pas de compte ? En créer un",
-      "errors": {
-        "incorrectPassword": "Mot de passe incorrect !",
-        "userNotFound": "Aucun compte avec cette email !"
-      },
-      "username": "Nom d'utilisateur",
-      "forgotPassword": "Mot de passe oublié ?"
-    }
-  },
-  "signUp": {
-    "title": "S'inscrire",
-    "form": {
-      "email": "E-mail",
-      "username": "Nom d'utilisateur",
-      "password": "Mot de passe",
-      "submit": "S'inscrire",
-      "cta": "Vous avez déjà un compte? Se connecter",
-      "errors": {
-        "incorrectPassword": "Mot de passe incorrect !",
-        "accountAlreadyExists": "Déjà un compte associé à cet e-mail !",
-        "usernameTake": "Déjà un compte avec ce nom d'utilisateur !",
-        "invalidUsernameFormat": "Les noms d'utilisateur ne peuvent être composés que de lettres et de chiffres !"
-      }
-    }
-  },
-  "notes": {
-    "title": "Notes",
-    "pinned": "Épinglé",
-    "noNotes": "Vous n'avez pas de notes pour le moment. Cliquez sur le bouton ci-dessous pour en créer une !",
+  "account": {
+    "deleteAccount": "Supprimer le compte",
+    "logOut": "Se déconnecter",
     "modals": {
-      "archivedNotes": {
-        "title": "Notes archivées",
-        "restore": "Restaurer"
-      },
-      "newNote": {
-        "title": "Nouvelle note",
-        "noteTypes": {
-          "text": "Texte",
-          "list": "Liste"
-        }
-      }
-    }
-  },
-  "note": {
-    "addItem": "Ajouter un élément",
-    "statuses": {
-      "saved": "La note est sauvegardée",
-      "saving": "En cours de sauvegarde",
-      "error": "Une erreur s'est produite !"
-    },
-    "placeholders": {
-      "title": "Titre",
-      "content": "Contenu"
-    },
-    "checkedItems": "Cochées",
-    "modals": {
-      "settings": {
-        "title": "Paramètres",
-        "delete": "Supprimer",
-        "archive": "Archiver",
-        "duplicate": "Dupliquer",
-        "refresh": "Actualiser",
-        "pin": "Épingler",
-        "unpin": "Désépingler"
-      },
-      "archive": {
-        "title": "Archiver",
-        "message": "Etes-vous sûr de vouloir archiver cette note ?",
-        "confirm": "Archiver",
-        "cancel": "Annuler"
-      },
-      "delete": {
-        "title": "Supprimer",
-        "message": "Etes-vous sûr de vouloir supprimer cette note ?",
-        "confirm": "Supprime-la",
-        "cancel": "Annuler"
-      },
-      "share": {
-        "title": "Partager",
-        "makeItPublicDisclaimer": "Le partage de cette note la rendra accessible à toute personne disposant du lien. Etes-vous sûr de vouloir le partager ?",
-        "makeItPrivateDisclaimer": "Cette note est publique. La rendre privée la rendrais accessible que par vous. Voulez vous l;a rendre privée ?",
-        "cancel": "Annuler",
-        "share": "Partager",
-        "makeItPublic": "Passer en public",
-        "makeItPrivate": "Passer en privé",
-        "copyLink": "Copier le lien",
-        "linkCopied": "Copié"
-      },
-      "noteColor": {
-        "title": "Couleur de la note"
-      }
-    }
-  },
-  "navBar": {
-    "modals": {
-      "account": {
-        "title": "Compte",
-        "logOut": "Se déconnecter",
-        "deleteAccount": "Supprimer le compte"
-      },
       "logOutConfirm": {
-        "title": "Se déconnecter",
+        "cancel": "Non, annuler",
+        "confirm": "Oui, se déconnecter",
         "message": "Etes-vous sûr de vouloir vous déconnecter de votre compte ?",
-        "confirm": "Oui, se déconnectez",
-        "cancel": "Non, annuler"
+        "title": "Se déconnecter"
       }
-    }
+    },
+    "title": "Mon compte"
   },
-  "error": {
-    "boBack": "Retourner à l'accueil"
+  "cookieModal": {
+    "accept": "C'est noté",
+    "decline": "Refuser",
+    "description": "Chez Nothing Notes, nous utilisons uniquement les cookies strictement nécessaires dans votre application de prise de notes.",
+    "title": "Préférences en matière de cookies",
+    "moreInfo": "Ce site Web utilise un seul cookie pour stocker votre session de connexion. \nLes informations stockées dans ce cookie (votre jeton d'accès) sont cryptées de manière sécurisée et utilisées uniquement pour vous identifier lors de votre session. \nIl n’est utilisé à aucune autre fin.",
+    "learnMore": "Voir plus",
+    "learnLess": "Voir moins"
   },
-  "dir": "ltr",
   "deleteAccount": {
-    "title": "Supprimer le compte",
-    "message": "Etes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.",
-    "confirm": "Oui, Supprimer",
     "cancel": "Non, Annuler",
+    "confirm": "Oui, Supprimer",
+    "message": "Etes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible et toutes vos données seront perdues.",
     "notLoggedIn": {
+      "logIn": "Se connecter",
       "message": "Vous devez être connecté pour supprimer votre compte",
       "title": "Pas connecté"
-    }
+    },
+    "title": "Supprimer le compte"
   },
-  "privacy-policy": {
-    "title": "Politique de confidentialité",
-    "lastUpdated": "Dernière modification: {date}",
-    "description": "Politique de confidentialité de Nothing Notes",
-    "introduction": {
-      "title": "Introduction",
-      "p1": "Bienvenue dans notre politique de confidentialité. Cette politique décrit comment nous collectons, utilisons et protégeons les informations que vous fournissez lorsque vous utilisez notre application de prise de notes."
-    },
-    "dataSecurity": {
-      "title": "Sécurité des données",
-      "p1": "Nous prenons les mesures appropriées pour protéger vos informations personnelles contre tout accès, modification, divulgation ou destruction non autorisés."
-    },
-    "collectedInformation": {
-      "title": "Informations que nous collectons",
-      "p1": "Lorsque vous vous inscrivez à notre application, nous collectons les informations suivantes :",
-      "l1": {
-        "v1": "Adresse e-mail",
-        "v2": "Nom d'utilisateur",
-        "v3": "Mot de passe"
-      },
-      "p2": "Nous ne collectons aucune autre information personnelle."
-    },
-    "howInformationIsUsed": {
-      "title": "Comment nous utilisons vos informations",
-      "l1": {
-        "v3": "Communiquer avec vous sur les mises à jour ou les modifications de nos services",
-        "v2": "Donner accès à nos services de prise de notes",
-        "v1": "Authentifiez votre compte"
-      },
-      "p1": "Nous utilisons les informations que vous fournissez pour :"
-    },
-    "contactUs": {
-      "title": "Nous contacter",
-      "p1": "Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter à"
-    },
-    "informationSharing": {
-      "title": "Partage d'information",
-      "p1": "Nous ne partageons pas vos informations personnelles avec des tiers."
-    }
+  "dir": "ltr",
+  "error": {
+    "goBack": "Retourner à l'accueil"
   },
   "footer": {
     "privacyPolicy": "Politique de confidentialité"
   },
   "forgotPassword": {
-    "title": "Mot de passe oublié",
+    "errors": {
+      "incorrectCredentials": "Identifiants incorrects !",
+      "invalidEmail": "Email invalide !",
+      "sentEmail": "Un e-mail a été envoyé à l'adresse fournie avec des instructions pour réinitialiser votre mot de passe !"
+    },
     "form": {
       "email": "E-mail",
       "password": "Mot de passe",
-      "submit": "Réinitialiser",
-      "remember": "Vous vous souvenez de votre mot de passe ?"
+      "remember": "Vous vous souvenez de votre mot de passe ?",
+      "submit": "Réinitialiser"
+    },
+    "title": "Mot de passe oublié"
+  },
+  "homePage": {
+    "features": {
+      "items": {
+        "0": {
+          "description": "Notez facilement vos pensées, vos idées et vos rappels.",
+          "title": "Créer des notes"
+        },
+        "1": {
+          "description": "Gardez vos notes organisées et faciles à trouver.",
+          "title": "Organiser les idées"
+        },
+        "2": {
+          "description": "Accédez à vos notes depuis n’importe quel appareil, n’importe où.",
+          "title": "Synchronisez partout"
+        }
+      }
+    },
+    "hero": {
+      "cta": {
+        "logIn": "Se  Connecter",
+        "signUp": "Créer un compte",
+        "title": "Commencer"
+      },
+      "subtitle": "Une application de prise de notes minimaliste qui vous aide à vous concentrer sur ce qui compte."
+    }
+  },
+  "logIn": {
+    "form": {
+      "cta": "Vous n'avez pas de compte ? En créer un",
+      "email": "E-mail",
+      "errors": {
+        "incorrectPassword": "Mot de passe incorrect !",
+        "userNotFound": "Aucun compte avec cette email !"
+      },
+      "forgotPassword": "Mot de passe oublié ?",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "username": "Nom d'utilisateur"
+    },
+    "title": "Se connecter"
+  },
+  "note": {
+    "addItem": "Ajouter un élément",
+    "checkedItems": "Cochées",
+    "duplicate": {
+      "error": "Une erreur s'est produite lors de la duplication de la note !"
     },
     "errors": {
-      "sentEmail": "Un e-mail a été envoyé à l'adresse fournie avec des instructions pour réinitialiser votre mot de passe !",
-      "incorrectCredentials": "Identifiants incorrects !",
-      "invalidEmail": "Email invalide !"
+      "noteNotFound": "Note introuvable",
+      "notePrivate": "Cette note est privée"
+    },
+    "modals": {
+      "archive": {
+        "cancel": "Annuler",
+        "confirm": "Archiver",
+        "message": "Etes-vous sûr de vouloir archiver cette note ?",
+        "title": "Archiver"
+      },
+      "delete": {
+        "cancel": "Annuler",
+        "confirm": "Supprime-la",
+        "error": "Une erreur s'est produite lors de la suppression de la note !",
+        "message": "Etes-vous sûr de vouloir supprimer cette note ?",
+        "title": "Supprimer"
+      },
+      "noteColor": {
+        "title": "Couleur de la note"
+      },
+      "settings": {
+        "archive": "Archiver",
+        "delete": "Supprimer",
+        "duplicate": "Dupliquer",
+        "pin": "Épingler",
+        "refresh": "Actualiser",
+        "title": "Paramètres",
+        "unpin": "Désépingler"
+      },
+      "share": {
+        "cancel": "Annuler",
+        "copyLink": "Copier le lien",
+        "linkCopied": "Copié",
+        "makeItPrivate": "Passer en privé",
+        "makeItPrivateDisclaimer": "Cette note est publique. La rendre privée la rendrais accessible que par vous. Voulez vous l;a rendre privée ?",
+        "makeItPublic": "Passer en public",
+        "makeItPublicDisclaimer": "Le partage de cette note la rendra accessible à toute personne disposant du lien. Etes-vous sûr de vouloir le partager ?",
+        "share": "Partager",
+        "title": "Partager"
+      }
+    },
+    "placeholders": {
+      "content": "Contenu",
+      "title": "Titre"
+    },
+    "statuses": {
+      "error": "Une erreur s'est produite !",
+      "saved": "La note est sauvegardée",
+      "saving": "En cours de sauvegarde"
     }
+  },
+  "notes": {
+    "modals": {
+      "archivedNotes": {
+        "restore": "Restaurer",
+        "title": "Notes archivées"
+      },
+      "newNote": {
+        "noteTypes": {
+          "list": "Liste",
+          "text": "Texte"
+        },
+        "title": "Nouvelle note"
+      }
+    },
+    "noNotes": "Vous n'avez pas de notes pour le moment. Cliquez sur le bouton ci-dessous pour en créer une !",
+    "pinned": "Épinglé",
+    "title": "Notes"
+  },
+  "pageDescriptions": {
+    "error": "Une erreur s'est produite !",
+    "forgotPassword": "Vous avez oublié votre mot de passe ? Réinitialisez-le ici.",
+    "home": "Une application de prise de notes minimaliste qui vous aide à vous concentrer sur ce qui compte.",
+    "logIn": "Se connecter sur votre compte Nothing Notes.",
+    "note": "Une note sur votre compte Nothing Notes.",
+    "notes": "Vos notes, organisées et accessibles de n'importe où.",
+    "resetPassword": "Vous avez oublié votre mot de passe ? Réinitialisez-le ici.",
+    "signUp": "Créer un compte Nothing Notes account."
+  },
+  "pageTitles": {
+    "forgotPassword": "Mot de passe oublié",
+    "home": "Nothing Notes",
+    "logIn": "Se Connecter",
+    "notes": "Notes",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "signUp": "Créer un compte"
+  },
+  "privacy-policy": {
+    "collectedInformation": {
+      "l1": {
+        "v1": "Adresse e-mail",
+        "v2": "Nom d'utilisateur",
+        "v3": "Mot de passe"
+      },
+      "p1": "Lorsque vous vous inscrivez à notre application, nous collectons les informations suivantes :",
+      "p2": "Nous ne collectons aucune autre information personnelle.",
+      "title": "Informations que nous collectons"
+    },
+    "contactUs": {
+      "p1": "Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, veuillez nous contacter à",
+      "title": "Nous contacter"
+    },
+    "dataSecurity": {
+      "p1": "Nous prenons les mesures appropriées pour protéger vos informations personnelles contre tout accès, modification, divulgation ou destruction non autorisés.",
+      "title": "Sécurité des données"
+    },
+    "description": "Politique de confidentialité de Nothing Notes",
+    "howInformationIsUsed": {
+      "l1": {
+        "v1": "Authentifiez votre compte",
+        "v2": "Donner accès à nos services de prise de notes",
+        "v3": "Communiquer avec vous sur les mises à jour ou les modifications de nos services"
+      },
+      "p1": "Nous utilisons les informations que vous fournissez pour :",
+      "title": "Comment nous utilisons vos informations"
+    },
+    "informationSharing": {
+      "p1": "Nous ne partageons pas vos informations personnelles avec des tiers.",
+      "title": "Partage d'information"
+    },
+    "introduction": {
+      "p1": "Bienvenue dans notre politique de confidentialité. Cette politique décrit comment nous collectons, utilisons et protégeons les informations que vous fournissez lorsque vous utilisez notre application de prise de notes.",
+      "title": "Introduction"
+    },
+    "lastUpdated": "Dernière modification: {date}",
+    "title": "Politique de confidentialité"
   },
   "resetPassword": {
-    "title": "Reste le mot de passe",
-    "form": {
-      "username": "Nom d'utilisateur",
-      "password": "Nouveau mot de passe",
-      "email": "E-mail",
-      "submit": "Réinitialiser",
-      "confirmPassword": "Confirmer le nouveau mot de passe"
-    },
     "errors": {
-      "passwordsDontMatch": "Les mots de passe ne correspondent pas !",
-      "passwordTooShort": "Votre mot de passe doit contenir au moins 6 caractères !",
-      "success": "Votre mot de passe a été réinitialisé avec succès !",
+      "expiredToken": "Votre demande de réinitialisation de mot de passe a expiré",
       "generic": "Une erreur s'est produite !",
       "invalidToken": "Votre demande de réinitialisation de mot de passe a expiré",
-      "expiredToken": "Votre demande de réinitialisation de mot de passe a expiré"
-    }
+      "passwordsDontMatch": "Les mots de passe ne correspondent pas !",
+      "passwordTooShort": "Votre mot de passe doit contenir au moins 6 caractères !",
+      "success": "Votre mot de passe a été réinitialisé avec succès !"
+    },
+    "form": {
+      "confirmPassword": "Confirmer le nouveau mot de passe",
+      "email": "E-mail",
+      "password": "Nouveau mot de passe",
+      "submit": "Réinitialiser",
+      "username": "Nom d'utilisateur"
+    },
+    "title": "Reste le mot de passe"
   },
-  "cookieModal": {
-    "title": "Préférences en matière de cookies",
-    "description": "Chez Nothing Notes, nous utilisons des cookies pour personnaliser votre expérience sur le site Web/l'application.",
-    "decline": "Refuser",
-    "accept": "Accepter"
+  "signUp": {
+    "form": {
+      "cta": "Vous avez déjà un compte? Se connecter",
+      "email": "E-mail",
+      "errors": {
+        "accountAlreadyExists": "Déjà un compte associé à cet e-mail !",
+        "incorrectPassword": "Mot de passe incorrect !",
+        "invalidEmail": "Email invalide !",
+        "invalidUsernameFormat": "Les noms d'utilisateur ne peuvent être composés que de lettres et de chiffres !",
+        "passwordTooShort": "Votre mot de passe doit contenir au moins 6 caractères !",
+        "usernameTake": "Déjà un compte avec ce nom d'utilisateur !"
+      },
+      "password": "Mot de passe",
+      "submit": "S'inscrire",
+      "username": "Nom d'utilisateur"
+    },
+    "title": "S'inscrire"
   }
 }
