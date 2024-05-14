@@ -4,7 +4,7 @@
 	import { _, locale } from 'svelte-i18n';
 	import { page } from '$app/stores';
 	import { seo } from '$lib/stores';
-	import { CookieModal } from '$lib/components';
+	import { CookieModal, Analytics } from '$lib/components';
 
 	onMount(() => {
 		console.log(
@@ -17,6 +17,7 @@
 	});
 </script>
 
+<Analytics />
 <CookieModal />
 
 <svelte:head>

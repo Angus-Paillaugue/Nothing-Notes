@@ -16,7 +16,7 @@
 <section class="p-2 flex flex-col gap-4">
 	<h1>{$_('account.title')}</h1>
 
-	<div class="grid grid-cols-2 gap-2">
+	<div class="grid grid-cols-2 gap-2 max-w-[500px]">
 		<Button
 			onclick={() => {
 				logOutModalOpen = true;
