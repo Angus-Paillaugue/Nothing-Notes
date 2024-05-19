@@ -263,5 +263,9 @@
       "username": "Username"
     },
     "title": "Sign Up"
+  },
+  "noInternet": {
+    "title": "No internet",
+    "description": "You don't have any internet connexion. You can't do anything until you have an internet connexion back."
   }
 }

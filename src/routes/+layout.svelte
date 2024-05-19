@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { _, locale } from 'svelte-i18n';
 	import { page } from '$app/stores';
-	import { seo } from '$lib/stores';
+	import { seo, isOffline } from '$lib/stores';
 	import { CookieModal, Analytics } from '$lib/components';
 
 	onMount(() => {
@@ -14,7 +14,16 @@
 
 		// Set the document direction (ltr ot rtl) based on the `dir` value in the locale dictionary
 		document.documentElement.setAttribute('dir', $_('dir') === 'dir' ? 'ltr' : $_('dir'));
+		$isOffline = navigator.onLine === false;
+		window.addEventListener("offline", () => {
+			$isOffline = true;
+		});
+
+		window.addEventListener("online", () => {
+			$isOffline = false;
+		});
 	});
+
 </script>
 
 <Analytics />

@@ -1,6 +1,7 @@
 <script>
 	import { _ } from 'svelte-i18n';
 	import { Modal, Button, Icon } from '$lib/components';
+	import { isOffline } from '$lib/stores';
 
 	let logOutModalOpen = $state(false);
 </script>
@@ -22,6 +23,7 @@
 				logOutModalOpen = true;
 			}}
 			class="aspect-video"
+			disabled={$isOffline}
 			center>{$_('account.logOut')}</Button
 		>
 		<Button href="/delete-account" class="aspect-video bg-red" center
@@ -36,6 +38,7 @@
 	<div class="grid grid-cols-2 gap-2 w-full mt-2">
 		<Button
 			center
+			disabled={$isOffline}
 			onclick={() => {
 				logOutModalOpen = false;
 			}}

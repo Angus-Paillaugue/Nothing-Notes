@@ -42,3 +42,38 @@ export function isEmailValid(email) {
 	const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g;
 	return emailRegex.test(email);
 }
+
+/**
+ * Creates an accordion effect on the specified node.
+ * @param {HTMLElement} node - The HTML element to apply the accordion effect to.
+ * @param {boolean} isOpen - Specifies whether the accordion is initially open or closed.
+ * @returns {Object} - An object with an `update` method to control the accordion state.
+ */
+export function accordion(node, isOpen) {
+	let initialHeight = node.offsetHeight;
+	node.style.height = isOpen ? 'auto' : 0;
+	node.style.overflow = 'hidden';
+	return {
+		update(isOpen) {
+			let animation = node.animate(
+				[
+					{
+						height: initialHeight + 'px',
+						overflow: 'hidden'
+					},
+					{
+						height: 0,
+						overflow: 'hidden'
+					}
+				],
+				{ duration: 150, fill: 'both' }
+			);
+			animation.pause();
+			if (!isOpen) {
+				animation.play();
+			} else {
+				animation.reverse();
+			}
+		}
+	};
+}

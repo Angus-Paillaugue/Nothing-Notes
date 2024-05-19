@@ -263,5 +263,9 @@
       "username": "Nom d'utilisateur"
     },
     "title": "S'inscrire"
+  },
+  "noInternet": {
+    "title": "Pas d'internet",
+    "description": "Vous n'avez aucune connexion Internet. \nVous ne pouvez rien faire tant que vous n'avez pas rétabli une connexion Internet."
   }
 }

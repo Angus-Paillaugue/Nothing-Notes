@@ -7,11 +7,11 @@
 </script>
 
 <div
-	class={twMerge('p-4 rounded-full bg-black flex flex-row gap-4 items-center', className)}
+	class={twMerge('p-6 rounded-full bg-black flex flex-row gap-4 items-center', className)}
 	{...restProps}
 >
 	<div
-		class="rounded-full size-14 {success
+		class="rounded-full size-12 {success
 			? 'bg-green-800'
 			: 'bg-red'} flex flex-col items-center justify-center shrink-0"
 	>

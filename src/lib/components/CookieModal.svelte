@@ -3,6 +3,7 @@
 	import { _ } from "svelte-i18n";
 	import { fade, fly } from "svelte/transition";
   import { Button, Icon } from "$lib/components";
+	import { accordion } from "$lib/utils";
 
   let show = $state(false);
   let learnMoreOpen = $state(false);
@@ -15,35 +16,6 @@
     localStorage.setItem("cookie-consent", true);
     show = false;
   };
-
-  function accordion(node, isOpen) {
-		let initialHeight = node.offsetHeight;
-		node.style.height = isOpen ? 'auto' : 0;
-		node.style.overflow = "hidden";
-		return {
-			update(isOpen) {
-				let animation = node.animate(
-					[
-						{
-							height: initialHeight + 'px',
-							overflow: 'hidden'
-						},
-						{
-							height: 0,
-							overflow: 'hidden'
-						}
-					],
-					{ duration: 150, fill: 'both' }
-				);
-				animation.pause();
-				if (!isOpen) {
-					animation.play();
-				} else {
-					animation.reverse();
-				}
-			}
-		};
-	}
 </script>
 
 {#if show}

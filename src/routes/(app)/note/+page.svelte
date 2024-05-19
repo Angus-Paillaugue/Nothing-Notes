@@ -2,7 +2,7 @@
 	import { Modal, Hr, NoteCard, Loader, Button, Icon } from '$lib/components';
 	import { noteBorderColors } from '$lib/constants';
 	import { _ } from 'svelte-i18n';
-	import { seo } from '$lib/stores';
+	import { seo, isOffline } from '$lib/stores';
 	import { enhance } from '$app/forms';
 	// import { longPress } from './longPress';
 
@@ -105,7 +105,8 @@
 		onclick={() => {
 			newNoteModalOpen = true;
 		}}
-		class="rounded-full bg-red p-4 flex flex-col items-center justify-center"
+		class="rounded-full bg-red disabled:bg-gray p-4 flex flex-col items-center justify-center"
+		disabled={$isOffline}
 	>
 		<Icon name="plus" class="size-10" />
 	</button>
@@ -133,7 +134,7 @@
 							(el) => el.name === note.color
 						)?.class ?? 'ring-0'}"
 						onclick={() => unArchiveNote(note)}
-						disabled={unArchivingNote === note.id}
+						disabled={unArchivingNote === note.id || $isOffline}
 					>
 						{#if unArchivingNote === note.id}
 							<Loader />

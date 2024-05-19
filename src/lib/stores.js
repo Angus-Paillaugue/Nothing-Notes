@@ -5,3 +5,6 @@ import { writable } from 'svelte/store';
  * @type {import('svelte/store').Writable<{ title: string, description: string }>}
  */
 export const seo = writable({ title: '', description: '' });
+
+
+export const isOffline = writable(false);
