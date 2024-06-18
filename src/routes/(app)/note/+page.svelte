@@ -1,9 +1,10 @@
 <script>
-	import { Modal, Hr, NoteCard, Loader, Button, Icon } from '$lib/components';
+	import { Modal, Hr, NoteCard, Loader, Button, Icon, Input } from '$lib/components';
 	import { noteBorderColors } from '$lib/constants';
 	import { _ } from 'svelte-i18n';
 	import { seo, isOffline } from '$lib/stores';
 	import { enhance } from '$app/forms';
+	import Fuse from 'fuse.js';
 	// import { longPress } from './longPress';
 
 	const { data } = $props();
@@ -14,6 +15,8 @@
 	let unArchivingNote = $state(undefined);
 	let isCreatingTextNote = $state(false);
 	let isCreatingListNote = $state(false);
+	let searchNotesModalOpen = $state(false);
+	let searchNotesMatching = $state([]);
 
 	$seo.title = 'pageTitles.notes';
 	$seo.description = 'pageDescriptions.notes';
@@ -45,6 +48,29 @@
 		await saveNote(note);
 		unArchivingNote = undefined;
 	};
+
+	const fuseOptionsList = {
+		threshold:0.4,
+		keys: [
+			"title",
+			"items.content"
+		]
+	};
+	const fuseOptionsText = {
+		threshold:0.4,
+		keys: [
+			"title",
+			"content"
+		]
+	};
+
+	const fuseList = new Fuse(notes.filter(el => el.type === "list"), fuseOptionsList);
+	const fuseText = new Fuse(notes.filter(el => el.type === "text"), fuseOptionsText);
+	function searchNotes(e) {
+		const { value } = e.target;
+		if (!value) return (searchNotesMatching = []);
+		searchNotesMatching = [...fuseList.search(value), ...fuseText.search(value)].map((el) => el.item);
+	}
 </script>
 
 <svelte:head>
@@ -71,6 +97,15 @@
 
 {#if notes.filter((el) => !el.archived).length === 0}
 	<h2>{$_('notes.noNotes')}</h2>
+{:else}
+	<button
+		class="fixed bottom-4 right-4 rounded-full bg-gray p-2"
+		onclick={() => {
+			searchNotesModalOpen = true;
+		}}
+	>
+		<Icon name="search" />
+	</button>
 {/if}
 
 {#if notes.filter((el) => el.pinned && !el.archived).length > 0}
@@ -115,7 +150,7 @@
 <!-- Archived notes -->
 {#if notes.filter((note) => note.archived).length > 0}
 	<button
-		class="fixed bottom-4 right-4 rounded-full bg-gray p-2"
+		class="fixed bottom-4 left-4 rounded-full bg-gray p-2"
 		onclick={() => {
 			archivedNotesModalOpen = true;
 		}}
@@ -184,5 +219,15 @@
 				{$_('notes.modals.newNote.noteTypes.list')}
 			</Button>
 		</form>
+	</div>
+</Modal>
+
+<!-- New note modal -->
+<Modal bind:open={searchNotesModalOpen} title={$_('notes.modals.newNote.title')}>
+	<Input placeholder="Search for notes" onkeyup={searchNotes} />
+	<div class="grid gap-4 max-h-full overflow-y-auto p-1">
+		{#each searchNotesMatching as note (note.id)}
+			<NoteCard {note} />
+		{/each}
 	</div>
 </Modal>

@@ -16,8 +16,9 @@
 <div class="grow"></div>
 
 <footer
-	class="w-full p-2 grid grid-cols-2 rounded-t"
+	class="w-full p-2 grid grid-cols-2 rounded-t items-center"
 	style="border: 1px dashed white;border-bottom: 0;"
 >
-	<a href="/privacy-policy" class="text-sm">{$_('footer.privacyPolicy')}</a>
+	<p class="text-sm">{$_("footer.text", { values: { date: new Date().getFullYear() } })}</p>
+	<a href="/privacy-policy" class="text-sm ml-auto">{$_('footer.privacyPolicy')}</a>
 </footer>

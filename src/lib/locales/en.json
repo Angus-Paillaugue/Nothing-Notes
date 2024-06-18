@@ -37,6 +37,7 @@
     "goBack": "Go Back Home"
   },
   "footer": {
+    "text": "© {date} Nothing Notes. All rights reserved.",
     "privacyPolicy": "Privacy policy"
   },
   "forgotPassword": {
@@ -57,7 +58,7 @@
     "features": {
       "items": {
         "0": {
-          "description": "Jot down your thoughts, ideas, and reminders with ease.",
+          "description": "Jot down ideas, to-dos, and more with a simple, distraction-free interface.",
           "title": "Create Notes"
         },
         "1": {
@@ -65,8 +66,12 @@
           "title": "Organize Ideas"
         },
         "2": {
-          "description": "Access your notes from any device, anywhere.",
-          "title": "Sync Everywhere"
+          "description": "Access your notes from anywhere, on any device, with seamless cloud syncing.",
+          "title": "Cross-Device Sync"
+        },
+        "3": {
+          "description": "Find what you need quickly with advanced search capabilities.",
+          "title": "Powerful Search"
         }
       }
     },
