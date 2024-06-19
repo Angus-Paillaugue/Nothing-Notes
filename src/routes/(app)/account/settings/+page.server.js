@@ -24,7 +24,7 @@ export const actions = {
 					success: false
 				};
 			}
-			await usersRef.updateOne({ email:locals.user.email }, { $set:{ email } });
+			await usersRef.updateOne({ email: locals.user.email }, { $set: { email } });
 			return {
 				message: 'accountSettings.errors.emailChangeSuccess',
 				type: 'emailChange',

@@ -50,26 +50,28 @@
 	};
 
 	const fuseOptionsList = {
-		threshold:0.4,
-		keys: [
-			"title",
-			"items.content"
-		]
+		threshold: 0.4,
+		keys: ['title', 'items.content']
 	};
 	const fuseOptionsText = {
-		threshold:0.4,
-		keys: [
-			"title",
-			"content"
-		]
+		threshold: 0.4,
+		keys: ['title', 'content']
 	};
 
-	const fuseList = new Fuse(notes.filter(el => el.type === "list"), fuseOptionsList);
-	const fuseText = new Fuse(notes.filter(el => el.type === "text"), fuseOptionsText);
+	const fuseList = new Fuse(
+		notes.filter((el) => el.type === 'list'),
+		fuseOptionsList
+	);
+	const fuseText = new Fuse(
+		notes.filter((el) => el.type === 'text'),
+		fuseOptionsText
+	);
 	function searchNotes(e) {
 		const { value } = e.target;
 		if (!value) return (searchNotesMatching = []);
-		searchNotesMatching = [...fuseList.search(value), ...fuseText.search(value)].map((el) => el.item);
+		searchNotesMatching = [...fuseList.search(value), ...fuseText.search(value)].map(
+			(el) => el.item
+		);
 	}
 </script>
 

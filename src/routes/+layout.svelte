@@ -15,15 +15,14 @@
 		// Set the document direction (ltr ot rtl) based on the `dir` value in the locale dictionary
 		document.documentElement.setAttribute('dir', $_('dir') === 'dir' ? 'ltr' : $_('dir'));
 		$isOffline = navigator.onLine === false;
-		window.addEventListener("offline", () => {
+		window.addEventListener('offline', () => {
 			$isOffline = true;
 		});
 
-		window.addEventListener("online", () => {
+		window.addEventListener('online', () => {
 			$isOffline = false;
 		});
 	});
-
 </script>
 
 <Analytics />

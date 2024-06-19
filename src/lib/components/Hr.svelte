@@ -1,9 +1,9 @@
 <script>
-	import { twMerge } from "tailwind-merge";
+	import { twMerge } from 'tailwind-merge';
 
-	const { children, text, class:className, ...restProps } = $props();
+	const { children, text, class: className, ...restProps } = $props();
 
-	const spanClasses = twMerge("w-full border-b border-gray", className);
+	const spanClasses = twMerge('w-full border-b border-gray', className);
 </script>
 
 <div class="flex flex-row items-center my-4" {restProps}>

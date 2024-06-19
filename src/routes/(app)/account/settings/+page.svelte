@@ -14,7 +14,9 @@
 	$seo.description = 'pageDescriptions.accountSettings';
 </script>
 
-<section class="flex flex-col items-center justify-center p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10">
+<section
+	class="flex flex-col items-center justify-center p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10"
+>
 	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">
 		<h1>{$_('accountSettings.title')}</h1>
 		<form
@@ -29,8 +31,19 @@
 				};
 			}}
 		>
-			<Input value={user.username} readonly name="username" label={$_('accountSettings.form.username')} placeholder={$_('accountSettings.form.username')} />
-			<Input value={form?.email ?? user.email ?? ''} name="email" label={$_('accountSettings.form.email')} placeholder={$_('accountSettings.form.email')} />
+			<Input
+				value={user.username}
+				readonly
+				name="username"
+				label={$_('accountSettings.form.username')}
+				placeholder={$_('accountSettings.form.username')}
+			/>
+			<Input
+				value={form?.email ?? user.email ?? ''}
+				name="email"
+				label={$_('accountSettings.form.email')}
+				placeholder={$_('accountSettings.form.email')}
+			/>
 			{#if form?.type === 'emailChange'}
 				<Error success={form?.success} message={form?.raw ? form?.message : $_(form.message)} />
 			{/if}
@@ -45,14 +58,10 @@
 
 		<Hr class="border-red" text={$_('accountSettings.form.dangerZone')} />
 
-		<Button
-			href="/delete-account"
-			class="bg-red"
-			center
-		>
+		<Button href="/delete-account" class="bg-red" center>
 			{$_('account.deleteAccount')}
 		</Button>
-<!--
+		<!--
 
 		<form
 			class="flex flex-col gap-2"
@@ -82,16 +91,32 @@
 <style>
 	section::before {
 		mix-blend-mode: screen;
-		background: url("/homePage/noise.webp");
+		background: url('/homePage/noise.webp');
 		background-size: 100px;
-		-webkit-mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 50%, transparent 100%);
-		mask-image: radial-gradient(circle closest-side at 50% 30%, rgba(0, 0, 0, 0.30) 50%, transparent 100%);
+		-webkit-mask-image: radial-gradient(
+			circle closest-side at 50% 20%,
+			rgba(0, 0, 0, 0.3) 50%,
+			transparent 100%
+		);
+		mask-image: radial-gradient(
+			circle closest-side at 50% 30%,
+			rgba(0, 0, 0, 0.3) 50%,
+			transparent 100%
+		);
 	}
 
 	@media not all and (min-width: 768px) {
 		section::before {
-			-webkit-mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 20%, transparent 100%);
-			mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 40%, transparent 100%);
+			-webkit-mask-image: radial-gradient(
+				circle closest-side at 50% 20%,
+				rgba(0, 0, 0, 0.3) 20%,
+				transparent 100%
+			);
+			mask-image: radial-gradient(
+				circle closest-side at 50% 20%,
+				rgba(0, 0, 0, 0.3) 40%,
+				transparent 100%
+			);
 		}
 	}
 </style>

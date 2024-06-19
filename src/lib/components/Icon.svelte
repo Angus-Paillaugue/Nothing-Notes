@@ -149,7 +149,7 @@
 <svg
 	class={twMerge('size-6 text-white', className)}
 	xmlns="http://www.w3.org/2000/svg"
-	fill={displayIcon.fill ?? "none"}
+	fill={displayIcon.fill ?? 'none'}
 	stroke-width={displayIcon.strokeWidth ?? 1.5}
 	stroke="currentColor"
 	viewBox="0 0 {displayIcon.box}{typeof displayIcon.box === 'number' ? ' ' + displayIcon.box : ''}"

@@ -1,6 +1,6 @@
 <script>
-  import Features from './Features.svelte';
-  import Hero from './Hero.svelte';
+	import Features from './Features.svelte';
+	import Hero from './Hero.svelte';
 	import { _ } from 'svelte-i18n';
 	import { seo } from '$lib/stores';
 	import { Button, Modal } from '$lib/components';
@@ -11,10 +11,9 @@
 	let getStartedModalOpen = $state(false);
 </script>
 
-<Hero bind:getStartedModalOpen={getStartedModalOpen} />
+<Hero bind:getStartedModalOpen />
 
-<Features bind:getStartedModalOpen={getStartedModalOpen} />
-
+<Features bind:getStartedModalOpen />
 
 <Modal bind:open={getStartedModalOpen} title={$_('homePage.hero.cta.title')}>
 	<Button center href="/log-in">{$_('homePage.hero.cta.logIn')}</Button>

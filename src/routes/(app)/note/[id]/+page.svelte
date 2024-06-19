@@ -43,12 +43,12 @@
 		const elements = document.getElementsByClassName('swipable');
 
 		for (const el of elements) {
-			listenToSwipe(el)
+			listenToSwipe(el);
 		}
 	});
 
 	function listenToSwipe(el) {
-		const MOVE_THRESHOLD = window.innerWidth / 5 * 3;
+		const MOVE_THRESHOLD = (window.innerWidth / 5) * 3;
 		let initialX;
 		let moveX = 0;
 
@@ -80,8 +80,6 @@
 			}
 		});
 	}
-
-
 
 	afterNavigate(() => {
 		settingsModalOpen = false;
@@ -133,7 +131,7 @@
 	 */
 	const addItemToList = async () => {
 		if (!isOwner) return;
-		const id = crypto.randomUUID()
+		const id = crypto.randomUUID();
 		note.items.push({ content: '', checked: false, id });
 		await saveNote();
 		const newItem = document.querySelector(`[data-id="${id}"]`);
@@ -280,16 +278,16 @@
 								onkeyup={() => debounce(2 + i)}
 							/>
 							{#if isOwner}
-									<button
-										class="transition-all hover:text-red shrink-0 hidden md:block"
-										onclick={() => {
-											note.items.splice(i, 1);
-											saveNote();
-										}}
-									>
-										<Icon name="trash" />
-									</button>
-								{/if}
+								<button
+									class="transition-all hover:text-red shrink-0 hidden md:block"
+									onclick={() => {
+										note.items.splice(i, 1);
+										saveNote();
+									}}
+								>
+									<Icon name="trash" />
+								</button>
+							{/if}
 						</div>
 					{/if}
 				{/each}

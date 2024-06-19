@@ -12,7 +12,9 @@
 	$seo.description = 'pageDescriptions.error';
 </script>
 
-<section class="flex flex-col items-center justify-center grow p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10">
+<section
+	class="flex flex-col items-center justify-center grow p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10"
+>
 	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">
 		<h1>{$_('signUp.title')}</h1>
 		<form
@@ -26,13 +28,17 @@
 				};
 			}}
 		>
-			<Input value={form?.username ?? ''} name="username" placeholder={$_('logIn.form.username')} />
-			<Input value={form?.email ?? ''} name="email" placeholder={$_('logIn.form.email')} />
+			<Input
+				value={form?.username ?? ''}
+				name="username"
+				placeholder={$_('signUp.form.username')}
+			/>
+			<Input value={form?.email ?? ''} name="email" placeholder={$_('signUp.form.email')} />
 			<Input
 				value={form?.password ?? ''}
 				type="password"
 				name="password"
-				placeholder={$_('logIn.form.password')}
+				placeholder={$_('signUp.form.password')}
 			/>
 			<Button center loading={isSigningIn} type="submit" class="w-full bg-black mt-2">
 				{$_('signUp.form.submit')}
@@ -48,16 +54,32 @@
 <style>
 	section::before {
 		mix-blend-mode: screen;
-		background: url("/homePage/noise.webp");
+		background: url('/homePage/noise.webp');
 		background-size: 100px;
-		-webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, rgba(0, 0, 0, 0.30) 50%, transparent 100%);
-		mask-image: radial-gradient(circle closest-side at 50% 50%, rgba(0, 0, 0, 0.30) 50%, transparent 100%);
+		-webkit-mask-image: radial-gradient(
+			circle closest-side at 50% 50%,
+			rgba(0, 0, 0, 0.3) 50%,
+			transparent 100%
+		);
+		mask-image: radial-gradient(
+			circle closest-side at 50% 50%,
+			rgba(0, 0, 0, 0.3) 50%,
+			transparent 100%
+		);
 	}
 
 	@media not all and (min-width: 768px) {
 		section::before {
-			-webkit-mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 20%, transparent 100%);
-			mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 20%, transparent 100%);
+			-webkit-mask-image: radial-gradient(
+				circle closest-side at 50% 20%,
+				rgba(0, 0, 0, 0.3) 20%,
+				transparent 100%
+			);
+			mask-image: radial-gradient(
+				circle closest-side at 50% 20%,
+				rgba(0, 0, 0, 0.3) 20%,
+				transparent 100%
+			);
 		}
 	}
 </style>

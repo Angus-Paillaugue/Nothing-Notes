@@ -17,7 +17,6 @@
 	/>
 {/snippet}
 
-
 {#if label}
 	<span class="flex flex-col justify-center">
 		<span class="text-base font-semibold">{label}</span>

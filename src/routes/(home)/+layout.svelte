@@ -19,6 +19,6 @@
 	class="w-full p-2 flex flex-row items-center justify-between rounded-t h-12"
 	style="border: 1px dashed white;border-bottom: 0;"
 >
-	<p class="text-sm">{$_("footer.text", { values: { date: new Date().getFullYear() } })}</p>
+	<p class="text-sm">{$_('footer.text', { values: { date: new Date().getFullYear() } })}</p>
 	<a href="/privacy-policy" class="text-sm">{$_('footer.privacyPolicy')}</a>
 </footer>
