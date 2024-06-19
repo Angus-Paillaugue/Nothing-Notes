@@ -25,9 +25,10 @@
 </nav>
 
 <section class="flex flex-col items-center justify-center p-2 mt-36">
+	<!-- ! Hard coded red hex value -->
 	<div
 		class="max-w-sm w-full border rounded p-2 flex flex-col gap-4"
-		style="border: 1px dashed white;"
+		style="border: 1px dashed #d71921;"
 	>
 		{#if !user}
 			<h1>{$_('deleteAccount.notLoggedIn.title')}</h1>

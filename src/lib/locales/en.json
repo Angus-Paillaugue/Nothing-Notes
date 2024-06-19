@@ -10,7 +10,8 @@
         "title": "Log Out"
       }
     },
-    "title": "My account"
+    "title": "My account",
+    "settings": "Settings"
   },
   "cookieModal": {
     "accept": "That's alright",
@@ -56,6 +57,7 @@
   },
   "homePage": {
     "features": {
+      "pillButton": "Key Features",
       "items": {
         "0": {
           "description": "Jot down ideas, to-dos, and more with a simple, distraction-free interface.",
@@ -272,5 +274,33 @@
   "noInternet": {
     "title": "No internet",
     "description": "You don't have any internet connexion. You can't do anything until you have an internet connexion back."
+  },
+  "homepage": {
+    "hero": {
+      "features": {
+        "title": "Streamline Your Note-Taking",
+        "description": "Nothing Notes offers a range of features to help you stay organized and focused, from quick note-taking to cross-device syncing."
+      }
+    }
+  },
+  "accountSettings": {
+    "title": "Settings",
+    "form": {
+      "email": "E-mail",
+      "password": "Password",
+      "saveChanges": "Save",
+      "confirmPassword": "Confirm password",
+      "username": "Username",
+      "change": "Change",
+      "deleteAccount": "Delete account",
+      "dangerZone": "Danger zone"
+    },
+    "errors": {
+      "invalidEmail": "Invalid e-mail !",
+      "emailChangeSuccess": "Your e-mail has been successfully changed !",
+      "passwordTooShort": "Password must be at least 6 characters long !",
+      "usernameTake": "Already an account with this username !",
+      "emailTaken": "Already an account associated with this e-mail !"
+    }
   }
 }

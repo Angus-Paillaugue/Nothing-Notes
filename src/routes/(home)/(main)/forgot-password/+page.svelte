@@ -12,7 +12,7 @@
 	$seo.description = 'pageDescriptions.forgotPassword';
 </script>
 
-<section class="flex flex-col items-center justify-center grow p-2">
+<section class="flex flex-col items-center justify-center grow p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10">
 	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">
 		<h1>{$_('forgotPassword.title')}</h1>
 		<form
@@ -38,3 +38,20 @@
 		<a href="/log-in" class="text-sm">{$_('forgotPassword.form.remember')}</a>
 	</div>
 </section>
+
+<style>
+	section::before {
+		mix-blend-mode: screen;
+		background: url("/homePage/noise.webp");
+		background-size: 100px;
+		-webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, rgba(0, 0, 0, 0.30) 50%, transparent 100%);
+		mask-image: radial-gradient(circle closest-side at 50% 50%, rgba(0, 0, 0, 0.30) 50%, transparent 100%);
+	}
+
+	@media not all and (min-width: 768px) {
+		section::before {
+			-webkit-mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 20%, transparent 100%);
+			mask-image: radial-gradient(circle closest-side at 50% 20%, rgba(0, 0, 0, 0.30) 20%, transparent 100%);
+		}
+	}
+</style>

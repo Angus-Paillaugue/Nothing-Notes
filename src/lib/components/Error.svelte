@@ -21,6 +21,8 @@
 		{#if message}
 			{$_(message)}
 		{/if}
-		{@render children()}
+		{#if children}
+			{@render children()}
+		{/if}
 	</p>
 </div>

@@ -5,8 +5,6 @@
 	import { fly } from 'svelte/transition';
 	import { accordion } from "$lib/utils";
 
-	$inspect($isOffline)
-
 	let isOfflineDetailsShown = $state(false);
 </script>
 
@@ -29,4 +27,6 @@
 	<meta name="googlebot-news" content="none" />
 </svelte:head>
 
-<slot />
+<div class="max-w-screen-lg mx-auto relative min-h-screen flex flex-col">
+	<slot />
+</div>

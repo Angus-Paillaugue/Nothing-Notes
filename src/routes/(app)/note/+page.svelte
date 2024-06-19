@@ -99,7 +99,7 @@
 	<h2>{$_('notes.noNotes')}</h2>
 {:else}
 	<button
-		class="fixed bottom-4 right-4 rounded-full bg-gray p-2"
+		class="fixed bottom-4 right-4 rounded-full bg-gray p-2 z-30"
 		onclick={() => {
 			searchNotesModalOpen = true;
 		}}
@@ -135,7 +135,7 @@
 </div>
 
 <!-- Big red button -->
-<div class="fixed bottom-4 left-1/2 -translate-x-1/2">
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30">
 	<button
 		onclick={() => {
 			newNoteModalOpen = true;
@@ -150,7 +150,7 @@
 <!-- Archived notes -->
 {#if notes.filter((note) => note.archived).length > 0}
 	<button
-		class="fixed bottom-4 left-4 rounded-full bg-gray p-2"
+		class="fixed bottom-4 left-4 rounded-full bg-gray p-2 z-30"
 		onclick={() => {
 			archivedNotesModalOpen = true;
 		}}

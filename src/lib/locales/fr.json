@@ -10,7 +10,8 @@
         "title": "Se déconnecter"
       }
     },
-    "title": "Mon compte"
+    "title": "Mon compte",
+    "settings": "Paramètres"
   },
   "cookieModal": {
     "accept": "C'est noté",
@@ -267,5 +268,18 @@
   "noInternet": {
     "title": "Pas d'internet",
     "description": "Vous n'avez aucune connexion Internet. \nVous ne pouvez rien faire tant que vous n'avez pas rétabli une connexion Internet."
+  },
+  "accountSettings": {
+    "title": "Paramètres",
+    "form": {
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "saveChanges": "Sauvegarder",
+      "confirmPassword": "Confirmez le mot de passe",
+      "username": "Nom d'utilisateur",
+      "change": "Changer",
+      "deleteAccount": "Supprimer le compte",
+      "dangerZone": "Zone dangereuse"
+    }
   }
 }
