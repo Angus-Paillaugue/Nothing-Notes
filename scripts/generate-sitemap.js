@@ -1,12 +1,12 @@
 import dirTree from 'directory-tree';
 import { writeFileSync, existsSync } from 'fs';
 
-const domain = 'https://notes.paillaugue.fr';
+const domain = 'https://my-fashion-vault.paillaugue.fr';
 const baseRoute = '/';
-const date = new Date().toISOString().split('T')[0];
 let routes = new Set(baseRoute);
+let date = new Date().toISOString().split('T')[0];
 
-function getSitemapXML(routes) {
+function getSitemapXML(domain, routes) {
 	let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
 	sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 	routes.forEach((route, index) => {
@@ -27,9 +27,9 @@ function getEndpoints(tree, route) {
 		if (
 			child.children != undefined &&
 			child.children.length != 0 &&
-			!(route + child.name).startsWith('/(app)')
+			(route + child.name).startsWith('/(home)')
 		) {
-			const childRoute = (route + child.name)
+			let childRoute = (route + child.name)
 				.replace(/\(.*?\)/g, '')
 				.replace(/(^\/{2,})|(^\/)/, '/')
 				.replace(/\/{2,}/g, '/')
@@ -47,7 +47,7 @@ const tree = dirTree('./src/routes');
 
 getEndpoints(tree, baseRoute);
 
-const sitemap = getSitemapXML(Array.from(routes));
+const sitemap = getSitemapXML(domain, Array.from(routes));
 
 // If you use the script in postbuild mode use
 // For vercel deployment use:

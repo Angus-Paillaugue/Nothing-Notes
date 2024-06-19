@@ -25,16 +25,17 @@
 		"prettier-plugin-svelte": "^3.1.2",
 		"svelte": "^5.0.0-next.1",
 		"tailwindcss": "^3.4.3",
-		"vite": "^5.0.3"
+		"vite": "^5.0.3",
+		"workbox-precaching": "^7.1.0"
 	},
 	"type": "module",
 	"dependencies": {
 		"bcrypt": "^5.1.1",
 		"directory-tree": "^3.5.1",
+		"fuse.js": "^7.0.0",
 		"jsonwebtoken": "^9.0.2",
 		"mongodb": "^6.5.0",
 		"svelte-i18n": "^4.0.0",
-		"tailwind-merge": "^2.3.0",
-		"vaul-svelte": "^0.3.0"
+		"tailwind-merge": "^2.3.0"
 	}
 }

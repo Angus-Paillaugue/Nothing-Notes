@@ -3,8 +3,8 @@
 	import { onMount } from 'svelte';
 	import { _, locale } from 'svelte-i18n';
 	import { page } from '$app/stores';
-	import { seo } from '$lib/stores';
-	import { CookieModal } from '$lib/components';
+	import { seo, isOffline } from '$lib/stores';
+	import { CookieModal, Analytics } from '$lib/components';
 
 	onMount(() => {
 		console.log(
@@ -14,9 +14,19 @@
 
 		// Set the document direction (ltr ot rtl) based on the `dir` value in the locale dictionary
 		document.documentElement.setAttribute('dir', $_('dir') === 'dir' ? 'ltr' : $_('dir'));
+		$isOffline = navigator.onLine === false;
+		window.addEventListener("offline", () => {
+			$isOffline = true;
+		});
+
+		window.addEventListener("online", () => {
+			$isOffline = false;
+		});
 	});
+
 </script>
 
+<Analytics />
 <CookieModal />
 
 <svelte:head>
@@ -37,6 +47,4 @@
 	<meta property="twitter:description" content={$_($seo.description)} />
 </svelte:head>
 
-<div class="max-w-screen-lg mx-auto relative min-h-screen flex flex-col">
-	<slot />
-</div>
+<slot />

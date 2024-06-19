@@ -1,264 +1,306 @@
 {
-  "pageTitles": {
-    "home": "Nothing Notes",
-    "logIn": "Log In",
-    "signUp": "Sign Up",
-    "notes": "Notes",
-    "forgotPassword": "Forgot password",
-    "resetPassword": "Reset password"
-  },
-  "pageDescriptions": {
-    "home": "A minimalist note-taking app that helps you focus on what matters.",
-    "logIn": "Log in to your Nothing Notes account.",
-    "signUp": "Sign up for a Nothing Notes account.",
-    "notes": "Your notes, organized and accessible from anywhere.",
-    "note": "A note in your Nothing Notes account.",
-    "error": "An error occurred.",
-    "forgotPassword": "You forgot your password ? Don't worry, we'll help you reset it.",
-    "resetPassword": "You forgot your password ? Don't worry, we'll help you reset it."
-  },
-  "homePage": {
-    "hero": {
-      "subtitle": "A minimalist note-taking app that helps you focus on what matters.",
-      "cta": {
-        "title": "Get Started",
-        "logIn": "Log In",
-        "signUp": "Sign Up"
+  "account": {
+    "deleteAccount": "Delete account",
+    "logOut": "Log Out",
+    "modals": {
+      "logOutConfirm": {
+        "cancel": "No, Cancel",
+        "confirm": "Yes, Log Out",
+        "message": "Are you sure you want to log out of your account ?",
+        "title": "Log Out"
       }
     },
-    "features": {
-      "items": {
-        "0": {
-          "title": "Create Notes",
-          "description": "Jot down your thoughts, ideas, and reminders with ease."
-        },
-        "1": {
-          "title": "Organize Ideas",
-          "description": "Keep your notes organized and easy to find."
-        },
-        "2": {
-          "title": "Sync Everywhere",
-          "description": "Access your notes from any device, anywhere."
-        }
-      }
-    }
+    "title": "My account",
+    "settings": "Settings"
   },
-  "logIn": {
-    "title": "Log In",
+  "cookieModal": {
+    "accept": "That's alright",
+    "decline": "Decline",
+    "description": "Here at Nothing Notes we only use strictly necessary cookies in your note-taking app.",
+    "title": "Cookie Preferences",
+    "moreInfo": "This website uses a single cookie to store your login session. The information stored in this cookie (your access token) is securely encrypted and only used to identify you during your session. It is not used for any other purposes.",
+    "learnMore": "Learn more",
+    "learnLess": "Learn less"
+  },
+  "deleteAccount": {
+    "cancel": "No, cancel",
+    "confirm": "Yes, delete",
+    "message": "Are you sure you want to delete your account ? This operation is irreversible and all your notes will be lost.",
+    "notLoggedIn": {
+      "logIn": "Log-in",
+      "message": "You need to be logged-in in order to delete your account",
+      "title": "Not logged-in"
+    },
+    "title": "Delete account"
+  },
+  "dir": "ltr",
+  "error": {
+    "goBack": "Go Back Home"
+  },
+  "footer": {
+    "text": "© {date} Nothing Notes. All rights reserved.",
+    "privacyPolicy": "Privacy policy"
+  },
+  "forgotPassword": {
+    "errors": {
+      "incorrectCredentials": "Incorrect credentials !",
+      "invalidEmail": "Invalid email !",
+      "sentEmail": "An email has been sent to you with a link to reset your password"
+    },
     "form": {
       "email": "Email",
       "password": "Password",
-      "submit": "Log In",
+      "remember": "Remember password ?",
+      "submit": "Reset password"
+    },
+    "title": "Forgot password"
+  },
+  "homePage": {
+    "features": {
+      "pillButton": "Key Features",
+      "items": {
+        "0": {
+          "description": "Jot down ideas, to-dos, and more with a simple, distraction-free interface.",
+          "title": "Create Notes"
+        },
+        "1": {
+          "description": "Keep your notes organized and easy to find.",
+          "title": "Organize Ideas"
+        },
+        "2": {
+          "description": "Access your notes from anywhere, on any device, with seamless cloud syncing.",
+          "title": "Cross-Device Sync"
+        },
+        "3": {
+          "description": "Find what you need quickly with advanced search capabilities.",
+          "title": "Powerful Search"
+        }
+      }
+    },
+    "hero": {
+      "cta": {
+        "logIn": "Log In",
+        "signUp": "Sign Up",
+        "title": "Get Started"
+      },
+      "subtitle": "A minimalist note-taking app that helps you focus on what matters."
+    }
+  },
+  "logIn": {
+    "form": {
       "cta": "Don't have an account? Sign up",
+      "email": "Email",
       "errors": {
         "incorrectPassword": "Incorrect password !",
         "userNotFound": "No account with this e-mail !"
       },
-      "username": "Username",
-      "forgotPassword": "Forgot password ?"
-    }
-  },
-  "signUp": {
-    "title": "Sign Up",
-    "form": {
-      "email": "Email",
-      "username": "Username",
+      "forgotPassword": "Forgot password ?",
       "password": "Password",
-      "submit": "Sign Up",
-      "cta": "Already have an account? Log in",
-      "errors": {
-        "incorrectPassword": "Incorrect password !",
-        "accountAlreadyExists": "Already an account associated with this e-mail !",
-        "usernameTake": "Already an account with this username !",
-        "invalidUsernameFormat": "Usernames can only be composed of letters and numbers !",
-        "passwordTooShort": "Password must be at least 6 characters long !",
-        "invalidEmail": "Invalid email !"
-      }
-    }
-  },
-  "notes": {
-    "title": "Notes",
-    "pinned": "Pinned",
-    "noNotes": "You have no notes at the moment. Click the big red button below to create one!",
-    "modals": {
-      "archivedNotes": {
-        "title": "Archived Notes",
-        "restore": "Restore"
-      },
-      "newNote": {
-        "title": "New Note",
-        "noteTypes": {
-          "text": "Text",
-          "list": "List"
-        }
-      }
-    }
+      "submit": "Log In",
+      "username": "Username"
+    },
+    "title": "Log In"
   },
   "note": {
     "addItem": "Add item",
     "checkedItems": "Checked",
-    "placeholders": {
-      "title": "Title",
-      "content": "Content"
+    "duplicate": {
+      "error": "An error occurred while duplicating the note !"
     },
-    "statuses": {
-      "saved": "Note is saved",
-      "saving": "Saving",
-      "error": "An error occurred !"
+    "errors": {
+      "noteNotFound": "Note not found",
+      "notePrivate": "Note is private"
     },
     "modals": {
-      "settings": {
-        "title": "Note Settings",
-        "delete": "Delete",
-        "archive": "Archive",
-        "duplicate": "Duplicate",
-        "refresh": "Refresh",
-        "pin": "Pin",
-        "unpin": "Unpin"
-      },
       "archive": {
-        "title": "Archive Note",
-        "message": "Are you sure you want to archive this note ?",
+        "cancel": "Cancel",
         "confirm": "Archive it",
-        "cancel": "Cancel"
+        "message": "Are you sure you want to archive this note ?",
+        "title": "Archive Note"
       },
       "delete": {
-        "title": "Delete Note",
-        "message": "Are you sure you want to delete this note ?",
+        "cancel": "Cancel",
         "confirm": "Delete it",
-        "cancel": "Cancel",
-        "error": "An error occurred while deleting the note !"
-      },
-      "share": {
-        "title": "Share",
-        "makeItPublicDisclaimer": "Sharing this note will make it accessible by anyone with the link. Are you sure you want to share it ?",
-        "makeItPrivateDisclaimer": "This note is public. Making it private will make it accessible only by you. Are you sure you want to make it private ?",
-        "cancel": "Cancel",
-        "share": "Share",
-        "makeItPublic": "Make it public",
-        "makeItPrivate": "Make it private",
-        "copyLink": "Copy Link",
-        "linkCopied": "Copied"
+        "error": "An error occurred while deleting the note !",
+        "message": "Are you sure you want to delete this note ?",
+        "title": "Delete Note"
       },
       "noteColor": {
         "title": "Note Color"
+      },
+      "settings": {
+        "archive": "Archive",
+        "delete": "Delete",
+        "duplicate": "Duplicate",
+        "pin": "Pin",
+        "refresh": "Refresh",
+        "title": "Note Settings",
+        "unpin": "Unpin"
+      },
+      "share": {
+        "cancel": "Cancel",
+        "copyLink": "Copy Link",
+        "linkCopied": "Copied",
+        "makeItPrivate": "Make it private",
+        "makeItPrivateDisclaimer": "This note is public. Making it private will make it accessible only by you. Are you sure you want to make it private ?",
+        "makeItPublic": "Make it public",
+        "makeItPublicDisclaimer": "Sharing this note will make it accessible by anyone with the link. Are you sure you want to share it ?",
+        "share": "Share",
+        "title": "Share"
       }
     },
-    "duplicate": {
-      "error": "An error occurred while duplicating the note !"
+    "placeholders": {
+      "content": "Content",
+      "title": "Title"
+    },
+    "statuses": {
+      "error": "An error occurred !",
+      "saved": "Note is saved",
+      "saving": "Saving"
     }
   },
-  "account": {
-    "title": "My account",
-    "logOut": "Log Out",
-    "deleteAccount": "Delete account",
+  "notes": {
     "modals": {
-      "logOutConfirm": {
-        "title": "Log Out",
-        "message": "Are you sure you want to log out of your account ?",
-        "confirm": "Yes, Log Out",
-        "cancel": "No, Cancel"
+      "archivedNotes": {
+        "restore": "Restore",
+        "title": "Archived Notes"
+      },
+      "newNote": {
+        "noteTypes": {
+          "list": "List",
+          "text": "Text"
+        },
+        "title": "New Note"
       }
-    }
+    },
+    "noNotes": "You have no notes at the moment. Click the big red button below to create one!",
+    "pinned": "Pinned",
+    "title": "Notes"
   },
-  "error": {
-    "goBack": "Go Back Home",
-    "messages": {
-      "notePrivate": "Note is private",
-      "noteNotFound": "Note not found"
-    }
+  "pageDescriptions": {
+    "error": "An error occurred.",
+    "forgotPassword": "You forgot your password ? Don't worry, we'll help you reset it.",
+    "home": "A minimalist note-taking app that helps you focus on what matters.",
+    "logIn": "Log in to your Nothing Notes account.",
+    "note": "A note in your Nothing Notes account.",
+    "notes": "Your notes, organized and accessible from anywhere.",
+    "resetPassword": "You forgot your password ? Don't worry, we'll help you reset it.",
+    "signUp": "Sign up for a Nothing Notes account."
   },
-  "dir": "ltr",
-  "deleteAccount": {
-    "title": "Delete account",
-    "message": "Are you sure you want to delete your account ? This operation is irreversible and all your notes will be lost.",
-    "confirm": "Yes, delete",
-    "cancel": "No, cancel",
-    "notLoggedIn": {
-      "message": "You need to be logged-in in order to delete your account",
-      "title": "Not logged-in",
-      "logIn": "Log-in"
-    }
+  "pageTitles": {
+    "forgotPassword": "Forgot password",
+    "home": "Nothing Notes",
+    "logIn": "Log In",
+    "notes": "Notes",
+    "resetPassword": "Reset password",
+    "signUp": "Sign Up"
   },
   "privacy-policy": {
-    "title": "Privacy Policy",
-    "description": "The Nothing Notes Privacy Policy",
-    "introduction": {
-      "title": "Introduction",
-      "p1": "Welcome to our Privacy Policy. This policy describes how we collect, use, and protect the information you provide when you use our note-taking app."
-    },
     "collectedInformation": {
-      "title": "Information We Collect",
-      "p1": "When you register for our app, we collect the following information:",
       "l1": {
         "v1": "Email address",
         "v2": "Username",
         "v3": "Password"
       },
-      "p2": "We do not collect any other personal information."
+      "p1": "When you register for our app, we collect the following information:",
+      "p2": "We do not collect any other personal information.",
+      "title": "Information We Collect"
     },
+    "contactUs": {
+      "p1": "If you have any questions or concerns about our Privacy Policy, please contact us at",
+      "title": "Contact Us"
+    },
+    "dataSecurity": {
+      "p1": "We take appropriate measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction.",
+      "title": "Data Security"
+    },
+    "description": "The Nothing Notes Privacy Policy",
     "howInformationIsUsed": {
-      "title": "How We Use Your Information",
-      "p1": "We use the information you provide to:",
       "l1": {
         "v1": "Authenticate your account",
         "v2": "Provide access to our note-taking services",
         "v3": "Communicate with you about updates or changes to our services"
-      }
+      },
+      "p1": "We use the information you provide to:",
+      "title": "How We Use Your Information"
     },
     "informationSharing": {
-      "title": "Information Sharing",
-      "p1": "We do not share your personal information with any third parties."
+      "p1": "We do not share your personal information with any third parties.",
+      "title": "Information Sharing"
     },
-    "dataSecurity": {
-      "title": "Data Security",
-      "p1": "We take appropriate measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction."
+    "introduction": {
+      "p1": "Welcome to our Privacy Policy. This policy describes how we collect, use, and protect the information you provide when you use our note-taking app.",
+      "title": "Introduction"
     },
-    "contactUs": {
-      "title": "Contact Us",
-      "p1": "If you have any questions or concerns about our Privacy Policy, please contact us at"
-    },
-    "lastUpdated": "Last updated: {date}"
-  },
-  "footer": {
-    "privacyPolicy": "Privacy policy"
-  },
-  "forgotPassword": {
-    "title": "Forgot password",
-    "form": {
-      "email": "Email",
-      "password": "Password",
-      "submit": "Reset password",
-      "remember": "Remember password ?"
-    },
-    "errors": {
-      "sentEmail": "An email has been sent to you with a link to reset your password",
-      "incorrectCredentials": "Incorrect credentials !",
-      "invalidEmail": "Invalid email !"
-    }
+    "lastUpdated": "Last updated: {date}",
+    "title": "Privacy Policy"
   },
   "resetPassword": {
     "errors": {
-      "passwordsDontMatch": "Passwords don't match !",
-      "passwordTooShort": "Password must be at least 6 characters long !",
-      "success": "Password successfully reset !",
+      "expiredToken": "Your password reset request has expired",
       "generic": "An error occurred !",
       "invalidToken": "Your password reset request has expired",
-      "expiredToken": "Your password reset request has expired"
+      "passwordsDontMatch": "Passwords don't match !",
+      "passwordTooShort": "Password must be at least 6 characters long !",
+      "success": "Password successfully reset !"
     },
-    "title": "Rest password",
     "form": {
-      "username": "Username",
-      "password": "New password",
+      "confirmPassword": "Confirm new password",
       "email": "E-mail",
+      "password": "New password",
       "submit": "Reset",
-      "confirmPassword": "Confirm new password"
+      "username": "Username"
+    },
+    "title": "Rest password"
+  },
+  "signUp": {
+    "form": {
+      "cta": "Already have an account? Log in",
+      "email": "Email",
+      "errors": {
+        "accountAlreadyExists": "Already an account associated with this e-mail !",
+        "incorrectPassword": "Incorrect password !",
+        "invalidEmail": "Invalid email !",
+        "invalidUsernameFormat": "Usernames can only be composed of letters and numbers !",
+        "passwordTooShort": "Password must be at least 6 characters long !",
+        "usernameTake": "Already an account with this username !"
+      },
+      "password": "Password",
+      "submit": "Sign Up",
+      "username": "Username"
+    },
+    "title": "Sign Up"
+  },
+  "noInternet": {
+    "title": "No internet",
+    "description": "You don't have any internet connexion. You can't do anything until you have an internet connexion back."
+  },
+  "homepage": {
+    "hero": {
+      "features": {
+        "title": "Streamline Your Note-Taking",
+        "description": "Nothing Notes offers a range of features to help you stay organized and focused, from quick note-taking to cross-device syncing."
+      }
     }
   },
-  "cookieModal": {
-    "title": "Cookie Preferences",
-    "description": "Here at Nothing Notes we use cookies to tailor your experience on the website/app.",
-    "decline": "Decline",
-    "accept": "Agree"
+  "accountSettings": {
+    "title": "Settings",
+    "form": {
+      "email": "E-mail",
+      "password": "Password",
+      "saveChanges": "Save",
+      "confirmPassword": "Confirm password",
+      "username": "Username",
+      "change": "Change",
+      "deleteAccount": "Delete account",
+      "dangerZone": "Danger zone"
+    },
+    "errors": {
+      "invalidEmail": "Invalid e-mail !",
+      "emailChangeSuccess": "Your e-mail has been successfully changed !",
+      "passwordTooShort": "Password must be at least 6 characters long !",
+      "usernameTake": "Already an account with this username !",
+      "emailTaken": "Already an account associated with this e-mail !"
+    }
   }
 }

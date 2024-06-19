@@ -10,3 +10,5 @@ export { default as Error } from './Error.svelte';
 export { default as Input } from './Input.svelte';
 export { default as ListInput } from './ListInput.svelte';
 export { default as CookieModal } from './CookieModal.svelte';
+export { default as Analytics } from './Analytics.svelte';
+export { default as Tooltip } from './Tooltip.svelte';
