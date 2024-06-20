@@ -20,7 +20,7 @@
 			{$_('noInternet.title')}
 			<Icon
 				name="caret-down"
-				class="size-4 transition-all ml-auto {isOfflineDetailsShown && 'rotate-90'}"
+				class="size-4 transition-all ml-auto {isOfflineDetailsShown && 'rotate-180'}"
 			/>
 		</div>
 		<p use:accordion={isOfflineDetailsShown}>

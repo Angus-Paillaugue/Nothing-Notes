@@ -32,6 +32,7 @@ export const actions = {
 			color: 'black',
 			archived: false,
 			pinned: false,
+			tags: [],
 			lastModified: new Date()
 		});
 
@@ -56,6 +57,7 @@ export const actions = {
 			color: 'black',
 			archived: false,
 			pinned: false,
+			tags: [],
 			lastModified: new Date()
 		});
 

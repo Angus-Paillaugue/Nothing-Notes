@@ -1,5 +1,5 @@
 <script>
-	import { Checkbox } from '$lib/components';
+	import { Checkbox, Tag } from '$lib/components';
 	import { twMerge } from 'tailwind-merge';
 	import { noteBorderColors } from '$lib/constants';
 	import { _ } from 'svelte-i18n';
@@ -32,4 +32,11 @@
 	{:else if note.content}
 		<p class="line-clamp-5 text-sm whitespace-pre">{@html note.content}</p>
 	{/if}
+
+	<!-- Tags (overflowing, need to fix it) -->
+	<!-- <div class="flex flex-row overflow-hidden absolute gap-2 top-1 items-center justify-end right-1 w-[30%]">
+		{#each note.tags as tag}
+			<Tag name={tag} />
+		{/each}
+	</div> -->
 </a>

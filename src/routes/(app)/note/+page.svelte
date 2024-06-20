@@ -51,19 +51,21 @@
 
 	const fuseOptionsList = {
 		threshold: 0.4,
-		keys: ['title', 'items.content']
+		ignoreLocation: true,
+		keys: ['title', 'items.content', 'tags']
 	};
 	const fuseOptionsText = {
 		threshold: 0.4,
-		keys: ['title', 'content']
+		ignoreLocation: true,
+		keys: ['title', 'content', 'tags']
 	};
 
 	const fuseList = new Fuse(
-		notes.filter((el) => el.type === 'list'),
+		notes.filter((el) => el.type === 'list' && !el.archived),
 		fuseOptionsList
 	);
 	const fuseText = new Fuse(
-		notes.filter((el) => el.type === 'text'),
+		notes.filter((el) => el.type === 'text' && !el.archived),
 		fuseOptionsText
 	);
 	function searchNotes(e) {
@@ -73,6 +75,13 @@
 			(el) => el.item
 		);
 	}
+
+	$effect(() => {
+		if(searchNotesModalOpen) {
+			searchNotesMatching = [];
+			document.getElementById('search').focus();
+		}
+	});
 </script>
 
 <svelte:head>
@@ -224,10 +233,10 @@
 	</div>
 </Modal>
 
-<!-- New note modal -->
-<Modal bind:open={searchNotesModalOpen} title={$_('notes.modals.newNote.title')}>
-	<Input placeholder="Search for notes" onkeyup={searchNotes} />
-	<div class="grid gap-4 max-h-full overflow-y-auto p-1">
+<!-- Search modal -->
+<Modal bind:open={searchNotesModalOpen} title={$_('notes.modals.search.title')}>
+	<Input placeholder="Search for notes" id="search" autocomplete="off" class="mt-[2px]" onkeyup={searchNotes} />
+	<div class="grid gap-4 max-h-full overflow-y-auto p-1 mt-2">
 		{#each searchNotesMatching as note (note.id)}
 			<NoteCard {note} />
 		{/each}

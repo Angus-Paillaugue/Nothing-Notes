@@ -1,12 +1,14 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Checkbox, Modal, Hr, Button, Icon, Error, ListInput, Tooltip } from '$lib/components';
+	import { Checkbox, Modal, Hr, Button, Icon, Error, ListInput, Tooltip, Tag, Input } from '$lib/components';
 	import { formatDate } from '$lib/utils';
 	import { noteBgColors } from '$lib/constants';
 	import { _, locale } from 'svelte-i18n';
 	import { enhance } from '$app/forms';
 	import { afterNavigate } from '$app/navigation';
 	import { seo } from '$lib/stores';
+	import { scale } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
 
 	const { data, form } = $props();
 	const { id, note, isOwner } = data;
@@ -27,6 +29,7 @@
 	let archiveNoteModalOpen = $state(false);
 	let deleteNoteModalOpen = $state(false);
 	let shareModalOpen = $state(false);
+	let tagsModalOpen = $state(false);
 
 	$seo.description = 'pageDescriptions.note';
 
@@ -81,6 +84,7 @@
 		});
 	}
 
+	// Hides all the modals
 	afterNavigate(() => {
 		settingsModalOpen = false;
 		changeNoteColorModalOpen = false;
@@ -209,6 +213,33 @@
 			noteCopied = false;
 		}, 2000);
 	};
+
+	/**
+	 * Handles the input event for adding a tag.
+	 *
+	 * @param {Event} e - The input event object.
+	*/
+	function addTagInputHandler(e) {
+		const value = e.target.value.trim();
+		const keyCodePressed = e.code;
+		if((keyCodePressed === 'Enter' || keyCodePressed === 'Space') && value !== '' && !note.tags.includes(value)) {
+			note.tags.push(value);
+			e.target.value = '';
+			e.preventDefault();
+			saveNote();
+		}
+	}
+
+	/**
+	 * Handles the event when a tag is deleted.
+	 *
+	 * @param {Object} detail - The event detail object.
+	 * @param {string} detail.name - The name of the deleted tag.
+	*/
+	function tagDeleted({ detail:{ name } }) {
+		note.tags = note.tags.filter(tag => tag !== name);
+		saveNote();
+	}
 </script>
 
 <main class="flex flex-col" style="height: 100vh;">
@@ -521,29 +552,50 @@
 	</div>
 </Modal>
 
+<!-- Archive note modal -->
+<Modal bind:open={tagsModalOpen} title={$_('note.modals.tags.title')}>
+	{#if note.tags.length > 0}
+		<div class="flex flex-row gap-2 flex-wrap mb-2">
+			{#each note.tags as tag (tag)}
+				<div transition:scale={{ duration: 300, opacity: 0.5, start: 0.5, easing: quintOut }}>
+					<Tag name={tag} removable={true} on:delete={tagDeleted} />
+				</div>
+			{/each}
+		</div>
+	{/if}
+
+	<Input name="tagsInput" autocomplete="off" placeholder="Add tags" onkeydown={addTagInputHandler} />
+</Modal>
+
 <!-- Settings modal -->
 <Modal bind:open={settingsModalOpen} title={$_('note.modals.settings.title')}>
 	<div class="flex flex-col w-full gap-2">
-		<!-- delete note button -->
-		<Button
-			onclick={() => {
-				settingsModalOpen = false;
-				deleteNoteModalOpen = true;
-			}}
-		>
-			<Icon name="trash" class="size-5" />
-			{$_('note.modals.settings.delete')}
+
+		<!-- Pin/Unpin note -->
+		<Button loading={isChangingPin} onclick={togglePin}>
+			{#if note.pinned}
+				<Icon name="pin-filled" />
+			{:else}
+				<Icon name="pin" />
+			{/if}
+			{note.pinned ? $_('note.modals.settings.unpin') : $_('note.modals.settings.pin')}
 		</Button>
 
-		<!-- Archive note button -->
+		<!-- Pin/Unpin note -->
+		<Button onclick={() => {settingsModalOpen = false;tagsModalOpen = true}}>
+			<Icon name="tag" />
+			{$_('note.modals.tags.title')}
+		</Button>
+
+		<!-- Share note -->
 		<Button
 			onclick={() => {
+				shareModalOpen = true;
 				settingsModalOpen = false;
-				archiveNoteModalOpen = true;
 			}}
 		>
-			<Icon name="archive-add" />
-			{$_('note.modals.settings.archive')}
+			<Icon name="share" />
+			{$_('note.modals.share.share')}
 		</Button>
 
 		<!-- Duplicate note button -->
@@ -579,25 +631,26 @@
 			</form>
 		{/if}
 
-		<!-- Share note -->
+		<!-- Archive note button -->
 		<Button
 			onclick={() => {
-				shareModalOpen = true;
 				settingsModalOpen = false;
+				archiveNoteModalOpen = true;
 			}}
 		>
-			<Icon name="share" />
-			{$_('note.modals.share.share')}
+			<Icon name="archive-add" />
+			{$_('note.modals.settings.archive')}
 		</Button>
 
-		<!-- Pin/Unpin note -->
-		<Button loafing={isChangingPin} onclick={togglePin}>
-			{#if note.pinned}
-				<Icon name="pin-filled" />
-			{:else}
-				<Icon name="pin" />
-			{/if}
-			{note.pinned ? $_('note.modals.settings.unpin') : $_('note.modals.settings.pin')}
+		<!-- delete note button -->
+		<Button
+			onclick={() => {
+				settingsModalOpen = false;
+				deleteNoteModalOpen = true;
+			}}
+		>
+			<Icon name="trash" class="size-5" />
+			{$_('note.modals.settings.delete')}
 		</Button>
 	</div>
 </Modal>

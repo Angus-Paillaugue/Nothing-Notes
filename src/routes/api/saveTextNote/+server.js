@@ -4,7 +4,7 @@ import { STATUS } from '$lib/constants';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {
-	const { id, content, title, color, archived, pinned, public: isPublic } = await request.json();
+	const { id, content, title, color, archived, pinned, tags, public: isPublic } = await request.json();
 	const token = cookies.get('token');
 
 	if (!id) return new Response('Missing ID', { status: STATUS.CLIENT_ERROR });
@@ -20,6 +20,7 @@ export async function POST({ request, cookies }) {
 		if (archived !== undefined) setObj.archived = archived;
 		if (pinned !== undefined) setObj.pinned = pinned;
 		if (isPublic !== undefined) setObj.public = isPublic;
+		if (tags !== undefined) setObj.tags = tags;
 
 		await notesRef.updateOne(
 			{ id, owner: user.username },
