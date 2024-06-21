@@ -5,7 +5,7 @@
 	import { _ } from 'svelte-i18n';
 
 	const { note, inactive = false, class: className, ...restProps } = $props();
-	const items = note.items
+	const items = note?.items
 		? note.items.sort((a, b) => (a.checked === b.checked ? 0 : a.checked ? 1 : -1)).slice(0, 4)
 		: undefined;
 </script>
@@ -19,7 +19,17 @@
 	)}
 	{...restProps}
 >
-	<h2>{note.title || $_('note.placeholders.title')}</h2>
+	<h2 class="leading-6 line-clamp-2">{note.title || $_('note.placeholders.title')}</h2>
+
+	<!-- Tags -->
+	{#if note.tags.length > 0}
+		<div class="flex flex-row gap-2 items-center justify-start">
+			{#each note.tags as tag}
+				<Tag size="sm" name={tag} />
+			{/each}
+		</div>
+	{/if}
+
 	{#if note.type === 'list' && note.items.length > 0}
 		<ul>
 			{#each items as item}
@@ -33,10 +43,4 @@
 		<p class="line-clamp-5 text-sm whitespace-pre">{@html note.content}</p>
 	{/if}
 
-	<!-- Tags (overflowing, need to fix it) -->
-	<!-- <div class="flex flex-row overflow-hidden absolute gap-2 top-1 items-center justify-end right-1 w-[30%]">
-		{#each note.tags as tag}
-			<Tag name={tag} />
-		{/each}
-	</div> -->
 </a>

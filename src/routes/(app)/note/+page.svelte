@@ -108,15 +108,6 @@
 
 {#if notes.filter((el) => !el.archived).length === 0}
 	<h2>{$_('notes.noNotes')}</h2>
-{:else}
-	<button
-		class="fixed bottom-4 right-4 rounded-full bg-gray p-2 z-30"
-		onclick={() => {
-			searchNotesModalOpen = true;
-		}}
-	>
-		<Icon name="search" />
-	</button>
 {/if}
 
 {#if notes.filter((el) => el.pinned && !el.archived).length > 0}
@@ -136,6 +127,7 @@
 	<Hr />
 {/if}
 
+<!-- Normal notes -->
 <div
 	class="grid gap-4 w-full px-2 pb-[6.5rem]"
 	style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"
@@ -145,30 +137,46 @@
 	{/each}
 </div>
 
-<!-- Big red button -->
-<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-30">
-	<button
-		onclick={() => {
-			newNoteModalOpen = true;
-		}}
-		class="rounded-full bg-red disabled:bg-gray p-4 flex flex-col items-center justify-center"
-		disabled={$isOffline}
-	>
-		<Icon name="plus" class="size-10" />
-	</button>
+
+<!-- Bottom fixed bar -->
+<div class="fixed bottom-4 w-full max-w-screen-lg left-1/2 -translate-x-1/2 flex flex-row items-end justify-between z-30 px-4">
+
+	{#if notes.filter((note) => note.archived).length > 0}
+		<button
+			class="rounded-full bg-gray p-2 z-30"
+			onclick={() => {
+				archivedNotesModalOpen = true;
+			}}
+		>
+			<Icon name="archive" />
+		</button>
+	{:else}
+		<span></span>
+	{/if}
+	<!-- Big red button -->
+		<button
+			onclick={() => {
+				newNoteModalOpen = true;
+			}}
+			class="rounded-full bg-red disabled:bg-gray p-4 flex flex-col items-center justify-center"
+			disabled={$isOffline}
+		>
+			<Icon name="plus" class="size-10" />
+		</button>
+
+	{#if notes.filter((el) => !el.archived).length > 0}
+		<button
+			class="rounded-full bg-gray p-2 z-30"
+			onclick={() => {
+				searchNotesModalOpen = true;
+			}}
+		>
+			<Icon name="search" />
+		</button>
+	{/if}
 </div>
 
-<!-- Archived notes -->
-{#if notes.filter((note) => note.archived).length > 0}
-	<button
-		class="fixed bottom-4 left-4 rounded-full bg-gray p-2 z-30"
-		onclick={() => {
-			archivedNotesModalOpen = true;
-		}}
-	>
-		<Icon name="archive" />
-	</button>
-
+{#if notes.filter((el) => !el.archived).length > 0}
 	<!-- Archived notes modal -->
 	<Modal bind:open={archivedNotesModalOpen} title={$_('notes.modals.archivedNotes.title')}>
 		<div class="flex flex-col gap-6 p-1">

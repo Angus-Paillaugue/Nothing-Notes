@@ -30,6 +30,7 @@
 	let deleteNoteModalOpen = $state(false);
 	let shareModalOpen = $state(false);
 	let tagsModalOpen = $state(false);
+	let canVibrate = $state(false);
 
 	$seo.description = 'pageDescriptions.note';
 
@@ -41,6 +42,9 @@
 			document.querySelector('input[name="title"]').focus();
 		}
 
+		// Vibration
+		canVibrate = window.navigator.vibrate;
+
 		// Swipe
 		if (!isOwner) return;
 		const elements = document.getElementsByClassName('swipable');
@@ -50,7 +54,23 @@
 		}
 	});
 
+	$effect(() => {
+		if(!note.items) return;
+		// ! Do not remove this console.log or else the dependency will not be detected by Svelte
+		console.log(note.items)
+		for(const item of note.items) {
+			const el = document.querySelector(`[data-id="${item.id}"]`);
+			listenToSwipe(el);
+		}
+	});
+
+	/**
+	 * Listens to swipe events on the specified element.
+	 *
+	 * @param {HTMLElement} el - The element to listen for swipe events on.
+	*/
 	function listenToSwipe(el) {
+		if(el.classList.contains('listener')) return;
 		const MOVE_THRESHOLD = (window.innerWidth / 5) * 3;
 		let initialX;
 		let moveX = 0;
@@ -77,20 +97,31 @@
 				// Delete the item from the note
 				note.items = note.items.filter((item) => item.id !== el.dataset.id);
 				saveNote();
+				if(canVibrate)
+					navigator.vibrate(200);
 			} else {
 				// Swipes back to the initial position and hides the delete button
 				el.style.transform = `translateX(0px)`;
 			}
 		});
+
+		el.classList.add('listener');
 	}
 
-	// Hides all the modals
-	afterNavigate(() => {
+	/**
+	 * Function to hide all modals.
+	 */
+	const hideAllModals = () => {
 		settingsModalOpen = false;
 		changeNoteColorModalOpen = false;
 		archiveNoteModalOpen = false;
 		deleteNoteModalOpen = false;
-	});
+		shareModalOpen = false;
+		tagsModalOpen = false;
+	};
+
+	// Hides all the modals
+	afterNavigate(hideAllModals);
 
 	/**
 	 * Saves the note asynchronously.
@@ -260,23 +291,21 @@
 			>
 				<Icon name="Settings" />
 			</button>
-		{:else}
-			<div></div>
 		{/if}
 	</nav>
 
 	<!-- Main note elements -->
 	<div class="p-2 flex flex-col gap-4 grow overflow-y-auto">
 		<!-- Note title input -->
-		<input
+		<textarea
 			type="text"
 			name="title"
 			bind:value={note.title}
 			onkeyup={() => debounce(0)}
-			class="bg-black text-3xl w-full placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot"
+			class="bg-black text-3xl w-full placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot break-words"
 			placeholder={$_('note.placeholders.title')}
 			readonly={!isOwner}
-		/>
+		></textarea>
 
 		<!-- Text note content -->
 		{#if note.type === 'text'}
@@ -445,7 +474,7 @@
 		<Button
 			center
 			onclick={() => {
-				shareModalOpen = false;
+				hideAllModals();
 				settingsModalOpen = true;
 			}}
 		>
@@ -469,7 +498,7 @@
 			center
 			disabled={isArchivingNote}
 			onclick={() => {
-				archiveNoteModalOpen = false;
+				hideAllModals();
 				settingsModalOpen = true;
 			}}
 		>
@@ -504,7 +533,7 @@
 			disabled={isDeletingNote}
 			type="button"
 			onclick={() => {
-				deleteNoteModalOpen = false;
+				hideAllModals();
 				settingsModalOpen = true;
 			}}
 		>
@@ -582,7 +611,7 @@
 		</Button>
 
 		<!-- Pin/Unpin note -->
-		<Button onclick={() => {settingsModalOpen = false;tagsModalOpen = true}}>
+		<Button onclick={() => {modal;tagsModalOpen = true}}>
 			<Icon name="tag" />
 			{$_('note.modals.tags.title')}
 		</Button>
@@ -590,8 +619,8 @@
 		<!-- Share note -->
 		<Button
 			onclick={() => {
+				hideAllModals();
 				shareModalOpen = true;
-				settingsModalOpen = false;
 			}}
 		>
 			<Icon name="share" />
@@ -634,7 +663,7 @@
 		<!-- Archive note button -->
 		<Button
 			onclick={() => {
-				settingsModalOpen = false;
+				hideAllModals();
 				archiveNoteModalOpen = true;
 			}}
 		>
@@ -645,7 +674,7 @@
 		<!-- delete note button -->
 		<Button
 			onclick={() => {
-				settingsModalOpen = false;
+				hideAllModals();
 				deleteNoteModalOpen = true;
 			}}
 		>
