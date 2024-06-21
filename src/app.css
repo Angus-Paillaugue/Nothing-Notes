@@ -19,19 +19,19 @@
 }
 
 html {
-	@apply transition-all relative;
+	@apply relative transition-all;
 }
 
 body {
-	@apply bg-black font-base text-white;
+	@apply bg-white font-base text-black dark:bg-black dark:text-white;
 }
 
 h1 {
-	@apply text-3xl font-dot;
+	@apply font-dot text-3xl;
 }
 
 h2 {
-	@apply text-2xl font-base;
+	@apply font-base text-2xl;
 }
 
 p {

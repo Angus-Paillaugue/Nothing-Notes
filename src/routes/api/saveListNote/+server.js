@@ -4,7 +4,16 @@ import { STATUS } from '$lib/constants';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies }) {
-	const { id, items, title, color, archived, pinned, tags, public: isPublic } = await request.json();
+	const {
+		id,
+		items,
+		title,
+		color,
+		archived,
+		pinned,
+		tags,
+		public: isPublic
+	} = await request.json();
 	const token = cookies.get('token');
 
 	try {

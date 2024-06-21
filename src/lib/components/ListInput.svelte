@@ -15,11 +15,10 @@
 	bind:value
 	bind:this={textarea}
 	class={twMerge(
-		'bg-black px-2 py-1 text-base tracking-tight grow rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot resize-none',
+		'grow resize-none rounded bg-white px-2 py-1 font-base text-base tracking-tight placeholder:text-gray placeholder-shown:font-dot focus:outline-none dark:border-white dark:bg-black dark:placeholder:text-white border border-dashed border-black',
 		className
 	)}
 	placeholder={$_(placeholder)}
-	style="border: 1px dashed white;"
 	rows="1"
 	{...restProps}
 	oninput={(e) => {

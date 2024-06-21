@@ -17,3 +17,4 @@
 - [x] Add tags to notes
 - [x] Add tags category to home page
 - [ ] Add vibration when deleting note items
+- [x] Make a light theme

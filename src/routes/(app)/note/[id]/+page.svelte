@@ -1,6 +1,17 @@
 <script>
 	import { onMount } from 'svelte';
-	import { Checkbox, Modal, Hr, Button, Icon, Error, ListInput, Tooltip, Tag, Input } from '$lib/components';
+	import {
+		Checkbox,
+		Modal,
+		Hr,
+		Button,
+		Icon,
+		Error,
+		ListInput,
+		Tooltip,
+		Tag,
+		Input
+	} from '$lib/components';
 	import { formatDate } from '$lib/utils';
 	import { noteBgColors } from '$lib/constants';
 	import { _, locale } from 'svelte-i18n';
@@ -55,10 +66,10 @@
 	});
 
 	$effect(() => {
-		if(!note.items) return;
+		if (!note.items) return;
 		// ! Do not remove this console.log or else the dependency will not be detected by Svelte
-		console.log(note.items)
-		for(const item of note.items) {
+		console.log(note.items);
+		for (const item of note.items) {
 			const el = document.querySelector(`[data-id="${item.id}"]`);
 			listenToSwipe(el);
 		}
@@ -68,9 +79,9 @@
 	 * Listens to swipe events on the specified element.
 	 *
 	 * @param {HTMLElement} el - The element to listen for swipe events on.
-	*/
+	 */
 	function listenToSwipe(el) {
-		if(el.classList.contains('listener')) return;
+		if (el.classList.contains('listener')) return;
 		const MOVE_THRESHOLD = (window.innerWidth / 5) * 3;
 		let initialX;
 		let moveX = 0;
@@ -97,8 +108,7 @@
 				// Delete the item from the note
 				note.items = note.items.filter((item) => item.id !== el.dataset.id);
 				saveNote();
-				if(canVibrate)
-					navigator.vibrate(200);
+				if (canVibrate) navigator.vibrate(200);
 			} else {
 				// Swipes back to the initial position and hides the delete button
 				el.style.transform = `translateX(0px)`;
@@ -249,11 +259,15 @@
 	 * Handles the input event for adding a tag.
 	 *
 	 * @param {Event} e - The input event object.
-	*/
+	 */
 	function addTagInputHandler(e) {
 		const value = e.target.value.trim();
 		const keyCodePressed = e.code;
-		if((keyCodePressed === 'Enter' || keyCodePressed === 'Space') && value !== '' && !note.tags.includes(value)) {
+		if (
+			(keyCodePressed === 'Enter' || keyCodePressed === 'Space') &&
+			value !== '' &&
+			!note.tags.includes(value)
+		) {
 			note.tags.push(value);
 			e.target.value = '';
 			e.preventDefault();
@@ -266,16 +280,16 @@
 	 *
 	 * @param {Object} detail - The event detail object.
 	 * @param {string} detail.name - The name of the deleted tag.
-	*/
-	function tagDeleted({ detail:{ name } }) {
-		note.tags = note.tags.filter(tag => tag !== name);
+	 */
+	function tagDeleted({ detail: { name } }) {
+		note.tags = note.tags.filter((tag) => tag !== name);
 		saveNote();
 	}
 </script>
 
 <main class="flex flex-col" style="height: 100vh;">
 	<!-- Navbar -->
-	<nav class="bg-black h-14 flex flex-row gap-2 items-center justify-between mb-6">
+	<nav class="mb-6 flex h-14 flex-row items-center justify-between gap-2 bg-white dark:bg-black">
 		<!-- Go back button -->
 		<a href="/note" class="p-2">
 			<Icon name="back" />
@@ -295,14 +309,14 @@
 	</nav>
 
 	<!-- Main note elements -->
-	<div class="p-2 flex flex-col gap-4 grow overflow-y-auto">
+	<div class="flex grow flex-col gap-4 overflow-y-auto p-2">
 		<!-- Note title input -->
 		<textarea
 			type="text"
 			name="title"
 			bind:value={note.title}
 			onkeyup={() => debounce(0)}
-			class="bg-black text-3xl w-full placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot break-words"
+			class="w-full resize-none break-words bg-white font-base text-3xl placeholder:text-gray placeholder-shown:font-dot focus:outline-none dark:bg-black dark:placeholder:text-white"
 			placeholder={$_('note.placeholders.title')}
 			readonly={!isOwner}
 		></textarea>
@@ -315,16 +329,16 @@
 				bind:value={note.content}
 				bind:this={textarea}
 				onkeyup={() => debounce(1)}
-				class="bg-black text-base tracking-normal w-full rounded resize-none placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot grow"
+				class="w-full grow resize-none rounded bg-white font-base text-base tracking-normal placeholder:text-gray placeholder-shown:font-dot focus:outline-none dark:bg-black dark:placeholder:text-white"
 				placeholder={$_('note.placeholders.content')}
 				readonly={!isOwner}
 			></textarea>
 		{:else}
 			<!-- List note unchecked items -->
-			<div class="grow flex flex-col gap-4 overflow-y-auto">
+			<div class="flex grow flex-col gap-4 overflow-y-auto">
 				{#each note.items as item, i (item.id)}
 					{#if !item.checked}
-						<div class="flex flex-row gap-2 items-center swipable" data-id={item.id}>
+						<div class="swipable flex flex-row items-center gap-2" data-id={item.id}>
 							<Checkbox
 								bind:checked={item.checked}
 								on:change={saveNote}
@@ -339,7 +353,7 @@
 							/>
 							{#if isOwner}
 								<button
-									class="transition-all hover:text-red shrink-0 hidden md:block"
+									class="hidden shrink-0 transition-all hover:text-red md:block"
 									onclick={() => {
 										note.items.splice(i, 1);
 										saveNote();
@@ -355,7 +369,7 @@
 				<!-- Add line to list note -->
 				<button
 					onclick={addItemToList}
-					class="flex flex-row gap-2 p-2 rounded hover:bg-gray transition-all"
+					class="flex flex-row gap-2 rounded p-2 transition-all hover:bg-gray"
 				>
 					<Icon name="plus" />
 					{$_('note.addItem')}
@@ -370,7 +384,7 @@
 					</Hr>
 					{#each note.items as item, i (item.id)}
 						{#if item.checked}
-							<div class="flex flex-row gap-2 items-center swipable" data-id={item.id}>
+							<div class="swipable flex flex-row items-center gap-2" data-id={item.id}>
 								<Checkbox
 									bind:checked={item.checked}
 									on:change={saveNote}
@@ -385,7 +399,7 @@
 								/>
 								{#if isOwner}
 									<button
-										class="transition-all hover:text-red shrink-0 hidden md:block"
+										class="hidden shrink-0 transition-all hover:text-red md:block"
 										onclick={() => {
 											note.items.splice(i, 1);
 											saveNote();
@@ -404,9 +418,9 @@
 
 	<!-- Bottom bar -->
 	<div
-		class="flex flex-row gap-2 items-center {isOwner
+		class="flex flex-row items-center gap-2 {isOwner
 			? 'justify-between'
-			: 'justify-center'} h-14 px-2 bg-black"
+			: 'justify-center'} h-14 bg-white px-2 dark:bg-black"
 	>
 		<!-- Note owner username -->
 		{#if !isOwner}
@@ -416,12 +430,19 @@
 		<!-- Change note color button -->
 		{#if isOwner}
 			<button
-				class="p-2 rounded-full {noteBgColors.find((el) => el.name === note.color)?.class ?? ''}"
+				class="rounded-full p-2 {noteBgColors.find((el) => el.name === note.color)?.class ?? ''}"
 				onclick={() => {
 					changeNoteColorModalOpen = true;
 				}}
 			>
-				<Icon name="palette" class={note.color === 'white' && 'text-gray'} />
+				<Icon
+					name="palette"
+					class={note.color === 'white'
+						? 'dark:text-gray'
+						: note.color === 'black'
+							? 'text-white dark:text-inherit'
+							: ''}
+				/>
 			</button>
 		{:else}
 			<div></div>
@@ -429,8 +450,8 @@
 
 		<!-- Last saved tile and date -->
 		{#if isOwner}
-			<div class="grow flex flex-row h-full items-center justify-center">
-				<p class="text-base font-dot">{formatDate(note.lastModified, { locale: $locale })}</p>
+			<div class="flex h-full grow flex-row items-center justify-center">
+				<p class="font-dot text-base">{formatDate(note.lastModified, { locale: $locale })}</p>
 			</div>
 		{/if}
 
@@ -470,7 +491,7 @@
 			{/if}
 		</Button>
 	{/if}
-	<div class="grid grid-cols-2 gap-2 w-full mt-2">
+	<div class="mt-2 grid w-full grid-cols-2 gap-2">
 		<Button
 			center
 			onclick={() => {
@@ -493,7 +514,7 @@
 <!-- Archive note modal -->
 <Modal bind:open={archiveNoteModalOpen} title={$_('note.modals.archive.title')}>
 	<p>{$_('note.modals.archive.message')}</p>
-	<div class="grid grid-cols-2 gap-2 w-full mt-2">
+	<div class="mt-2 grid w-full grid-cols-2 gap-2">
 		<Button
 			center
 			disabled={isArchivingNote}
@@ -519,7 +540,7 @@
 	<form
 		action="?/deleteNote"
 		method="POST"
-		class="grid grid-cols-2 gap-2 w-full mt-2"
+		class="mt-2 grid w-full grid-cols-2 gap-2"
 		use:enhance={() => {
 			isDeletingNote = true;
 			return async ({ update }) => {
@@ -547,33 +568,35 @@
 
 <!-- Change note color modal -->
 <Modal bind:open={changeNoteColorModalOpen} title={$_('note.modals.noteColor.title')}>
-	<div class="flex flex-row gap-4 w-full mt-2">
+	<div class="mt-2 flex w-full flex-row gap-4">
 		<button
-			class="rounded-full size-10 ring-4 bg-black {note.color === 'black'
-				? 'ring-white'
-				: 'ring-gray'}"
+			class="size-10 rounded-full bg-black ring-4 {note.color === 'black'
+				? 'ring-gray dark:ring-gray-light'
+				: 'ring-gray-light dark:ring-gray'}"
 			onclick={() => {
 				changeNoteColor('black');
 			}}
 		></button>
 		<button
-			class="rounded-full size-10 ring-4 bg-red {note.color === 'red' ? 'ring-white' : 'ring-gray'}"
+			class="size-10 rounded-full bg-red ring-4 {note.color === 'red'
+				? 'ring-gray dark:ring-gray-light'
+				: 'ring-gray-light dark:ring-gray'}"
 			onclick={() => {
 				changeNoteColor('red');
 			}}
 		></button>
 		<button
-			class="rounded-full size-10 ring-4 bg-white {note.color === 'white'
-				? 'ring-black'
-				: 'ring-gray'}"
+			class="size-10 rounded-full bg-white ring-4 {note.color === 'white'
+				? 'ring-gray dark:ring-gray-light'
+				: 'ring-gray-light dark:ring-gray'}"
 			onclick={() => {
 				changeNoteColor('white');
 			}}
 		></button>
 		<button
-			class="rounded-full size-10 ring-4 bg-blue {note.color === 'blue'
-				? 'ring-white'
-				: 'ring-gray'}"
+			class="size-10 rounded-full bg-blue ring-4 {note.color === 'blue'
+				? 'ring-gray dark:ring-gray-light'
+				: 'ring-gray-light dark:ring-gray'}"
 			onclick={() => {
 				changeNoteColor('blue');
 			}}
@@ -584,7 +607,7 @@
 <!-- Archive note modal -->
 <Modal bind:open={tagsModalOpen} title={$_('note.modals.tags.title')}>
 	{#if note.tags.length > 0}
-		<div class="flex flex-row gap-2 flex-wrap mb-2">
+		<div class="mb-2 flex flex-row flex-wrap gap-2">
 			{#each note.tags as tag (tag)}
 				<div transition:scale={{ duration: 300, opacity: 0.5, start: 0.5, easing: quintOut }}>
 					<Tag name={tag} removable={true} on:delete={tagDeleted} />
@@ -593,13 +616,17 @@
 		</div>
 	{/if}
 
-	<Input name="tagsInput" autocomplete="off" placeholder="Add tags" onkeydown={addTagInputHandler} />
+	<Input
+		name="tagsInput"
+		autocomplete="off"
+		placeholder="Add tags"
+		onkeydown={addTagInputHandler}
+	/>
 </Modal>
 
 <!-- Settings modal -->
 <Modal bind:open={settingsModalOpen} title={$_('note.modals.settings.title')}>
-	<div class="flex flex-col w-full gap-2">
-
+	<div class="flex w-full flex-col gap-2">
 		<!-- Pin/Unpin note -->
 		<Button loading={isChangingPin} onclick={togglePin}>
 			{#if note.pinned}
@@ -611,7 +638,12 @@
 		</Button>
 
 		<!-- Pin/Unpin note -->
-		<Button onclick={() => {modal;tagsModalOpen = true}}>
+		<Button
+			onclick={() => {
+				hideAllModals();
+				tagsModalOpen = true;
+			}}
+		>
 			<Icon name="tag" />
 			{$_('note.modals.tags.title')}
 		</Button>
@@ -635,7 +667,7 @@
 						location.reload();
 					}}
 					center
-					class="bg-black w-full"
+					class="w-full bg-black"
 				>
 					{$_('note.modals.settings.refresh')}
 				</Button>

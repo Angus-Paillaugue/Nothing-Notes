@@ -11,7 +11,7 @@
 
 <!-- Navbar -->
 <nav
-	class="fixed top-0 left-0 right-0 z-40 max-w-screen-lg mx-auto bg-black flex flex-row gap-2 items-center justify-between h-14"
+	class="fixed left-0 right-0 top-0 z-40 mx-auto flex h-14 max-w-screen-lg flex-row items-center justify-between gap-2 bg-white dark:bg-black"
 >
 	<div class="p-2">
 		<div class="size-6"></div>
@@ -24,10 +24,10 @@
 	</div>
 </nav>
 
-<section class="flex flex-col items-center justify-center p-2 mt-36">
+<section class="mt-36 flex flex-col items-center justify-center p-2">
 	<!-- ! Hard coded red hex value -->
 	<div
-		class="max-w-sm w-full border rounded p-2 flex flex-col gap-4"
+		class="flex w-full max-w-sm flex-col gap-4 rounded border p-2"
 		style="border: 1px dashed #d71921;"
 	>
 		{#if !user}
@@ -37,7 +37,7 @@
 		{:else}
 			<h1>{$_('deleteAccount.title')}</h1>
 			<p>{$_('deleteAccount.message')}</p>
-			<div class="grid grid-cols-2 w-full gap-4">
+			<div class="grid w-full grid-cols-2 gap-4">
 				<Button
 					center
 					onclick={() => {

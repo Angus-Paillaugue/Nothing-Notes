@@ -5,6 +5,7 @@
 	import { seo, isOffline } from '$lib/stores';
 	import { enhance } from '$app/forms';
 	import Fuse from 'fuse.js';
+	import Navbar from '../Navbar.svelte';
 	// import { longPress } from './longPress';
 
 	const { data } = $props();
@@ -77,7 +78,7 @@
 	}
 
 	$effect(() => {
-		if(searchNotesModalOpen) {
+		if (searchNotesModalOpen) {
 			searchNotesMatching = [];
 			document.getElementById('search').focus();
 		}
@@ -89,22 +90,7 @@
 </svelte:head>
 
 <!-- Navbar -->
-<nav
-	class="fixed top-0 left-0 right-0 z-40 max-w-screen-lg mx-auto bg-black flex flex-row gap-2 items-center justify-between h-14"
->
-	<div class="p-2">
-		<div class="size-6"></div>
-	</div>
-	<a href="/note">
-		<h1>Notes</h1>
-	</a>
-	<a class="p-2" href="/account">
-		<Icon name="account" />
-	</a>
-</nav>
-
-<!-- Spacer -->
-<div class="h-24"></div>
+<Navbar text={$_('notes.title')} account={true} />
 
 {#if notes.filter((el) => !el.archived).length === 0}
 	<h2>{$_('notes.noNotes')}</h2>
@@ -116,7 +102,7 @@
 		{$_('notes.pinned')}
 	</Hr>
 	<div
-		class="grid gap-4 w-full px-2"
+		class="grid w-full gap-4 px-2"
 		style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"
 	>
 		{#each notes.filter((el) => el.pinned && !el.archived) as note (note.id)}
@@ -129,7 +115,7 @@
 
 <!-- Normal notes -->
 <div
-	class="grid gap-4 w-full px-2 pb-[6.5rem]"
+	class="grid w-full gap-4 px-2 pb-[6.5rem]"
 	style="grid-template-rows: min-content;grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));"
 >
 	{#each notes.filter((el) => !el.archived && !el.pinned) as note (note.id)}
@@ -137,13 +123,13 @@
 	{/each}
 </div>
 
-
 <!-- Bottom fixed bar -->
-<div class="fixed bottom-4 w-full max-w-screen-lg left-1/2 -translate-x-1/2 flex flex-row items-end justify-between z-30 px-4">
-
+<div
+	class="fixed bottom-4 left-1/2 z-30 flex w-full max-w-screen-lg -translate-x-1/2 flex-row items-end justify-between px-4"
+>
 	{#if notes.filter((note) => note.archived).length > 0}
 		<button
-			class="rounded-full bg-gray p-2 z-30"
+			class="z-30 rounded-full bg-gray-light p-2 dark:bg-gray"
 			onclick={() => {
 				archivedNotesModalOpen = true;
 			}}
@@ -154,19 +140,19 @@
 		<span></span>
 	{/if}
 	<!-- Big red button -->
-		<button
-			onclick={() => {
-				newNoteModalOpen = true;
-			}}
-			class="rounded-full bg-red disabled:bg-gray p-4 flex flex-col items-center justify-center"
-			disabled={$isOffline}
-		>
-			<Icon name="plus" class="size-10" />
-		</button>
+	<button
+		onclick={() => {
+			newNoteModalOpen = true;
+		}}
+		class="flex flex-col items-center justify-center rounded-full bg-red p-4 disabled:bg-gray"
+		disabled={$isOffline}
+	>
+		<Icon name="plus" class="size-10 text-white dark:text-white" />
+	</button>
 
 	{#if notes.filter((el) => !el.archived).length > 0}
 		<button
-			class="rounded-full bg-gray p-2 z-30"
+			class="z-30 rounded-full bg-gray-light p-2 dark:bg-gray"
 			onclick={() => {
 				searchNotesModalOpen = true;
 			}}
@@ -184,7 +170,7 @@
 				<div class="flex flex-col">
 					<NoteCard {note} inactive={true} class="rounded-b-none" />
 					<button
-						class="rounded-b ring-2 flex flex-row gap-2 px-4 py-2 bg-black -mt-[2x] {noteBorderColors.find(
+						class="flex flex-row gap-2 rounded-b bg-white px-4 py-2 ring-2 dark:bg-black {noteBorderColors.find(
 							(el) => el.name === note.color
 						)?.class ?? 'ring-0'}"
 						onclick={() => unArchiveNote(note)}
@@ -243,8 +229,14 @@
 
 <!-- Search modal -->
 <Modal bind:open={searchNotesModalOpen} title={$_('notes.modals.search.title')}>
-	<Input placeholder="Search for notes" id="search" autocomplete="off" class="mt-[2px]" onkeyup={searchNotes} />
-	<div class="grid gap-4 max-h-full overflow-y-auto p-1 mt-2">
+	<Input
+		placeholder="Search for notes"
+		id="search"
+		autocomplete="off"
+		class="mt-[2px]"
+		onkeyup={searchNotes}
+	/>
+	<div class="mt-2 grid max-h-full gap-4 overflow-y-auto p-1">
 		{#each searchNotesMatching as note (note.id)}
 			<NoteCard {note} />
 		{/each}

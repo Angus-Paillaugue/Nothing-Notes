@@ -7,13 +7,16 @@
 </script>
 
 <div
-	class={twMerge('p-6 rounded-full bg-black flex flex-row gap-4 items-center', className)}
+	class={twMerge(
+		'flex flex-row items-center gap-4 rounded-full bg-white p-6 dark:bg-black',
+		className
+	)}
 	{...restProps}
 >
 	<div
-		class="rounded-full size-12 {success
-			? 'bg-green-800'
-			: 'bg-red'} flex flex-col items-center justify-center shrink-0"
+		class="size-12 rounded-full {success
+			? 'bg-green-600 dark:bg-green-800'
+			: 'bg-red-600 dark:bg-red'} flex shrink-0 flex-col items-center justify-center"
 	>
 		<Icon name={success ? 'check' : 'warning'} />
 	</div>

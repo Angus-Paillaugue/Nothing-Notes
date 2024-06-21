@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import { seo, isOffline } from '$lib/stores';
 	import { CookieModal, Analytics } from '$lib/components';
+	import { ModeWatcher, mode } from 'mode-watcher';
 
 	onMount(() => {
 		console.log(
@@ -22,11 +23,22 @@
 		window.addEventListener('online', () => {
 			$isOffline = false;
 		});
+
+		$mode === 'dark'
+			? document.documentElement.classList.add('dark')
+			: document.documentElement.classList.remove('dark');
+	});
+
+	$effect(() => {
+		$mode === 'dark'
+			? document.documentElement.classList.add('dark')
+			: document.documentElement.classList.remove('dark');
 	});
 </script>
 
 <Analytics />
 <CookieModal />
+<ModeWatcher defaultMode={'dark'} />
 
 <svelte:head>
 	<link rel="canonical" href={$page.url.href.split('#')[0]} />

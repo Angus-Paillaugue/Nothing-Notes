@@ -16,8 +16,7 @@
 <div class="grow"></div>
 
 <footer
-	class="w-full p-2 flex flex-row items-center justify-between rounded-t h-12"
-	style="border: 1px dashed white;border-bottom: 0;"
+	class="flex h-12 w-full flex-row items-center justify-between rounded-t border border-b-0 border-dashed border-black p-2 dark:border-white"
 >
 	<p class="text-sm">{$_('footer.text', { values: { date: new Date().getFullYear() } })}</p>
 	<a href="/privacy-policy" class="text-sm">{$_('footer.privacyPolicy')}</a>

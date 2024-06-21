@@ -5,11 +5,11 @@ export const noteBorderColors = [
 	},
 	{
 		name: 'black',
-		class: 'ring-gray'
+		class: 'dark:ring-gray ring-black'
 	},
 	{
 		name: 'white',
-		class: 'ring-white'
+		class: 'dark:ring-white ring-gray-light'
 	},
 	{
 		name: 'blue',
@@ -28,7 +28,7 @@ export const noteBgColors = [
 	},
 	{
 		name: 'white',
-		class: 'bg-white text-black'
+		class: 'dark:bg-white bg-gray-light text-black'
 	},
 	{
 		name: 'blue',

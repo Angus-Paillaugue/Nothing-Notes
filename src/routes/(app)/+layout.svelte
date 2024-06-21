@@ -10,17 +10,17 @@
 
 {#if $isOffline}
 	<button
-		class="fixed top-2 left-1/2 -translate-x-1/2 transition-all w-[90%] max-w-[500px] z-[60] bg-gray min-h-[3.5rem] rounded-[2rem] p-2 button"
+		class="button fixed left-1/2 top-2 z-[60] min-h-[3.5rem] w-[90%] max-w-[500px] -translate-x-1/2 rounded-[2rem] bg-gray-light p-2 transition-all dark:bg-gray"
 		in:fly={{ y: '-100%' }}
 		out:fly={{ y: '-100%' }}
 		onclick={() => (isOfflineDetailsShown = !isOfflineDetailsShown)}
 	>
-		<div class="flex flex-row gap-2 my-1 items-center px-4 h-[3rem]">
+		<div class="my-1 flex h-[3rem] flex-row items-center gap-2 px-4">
 			<Icon name="no-internet" />
 			{$_('noInternet.title')}
 			<Icon
 				name="caret-down"
-				class="size-4 transition-all ml-auto {isOfflineDetailsShown && 'rotate-180'}"
+				class="ml-auto size-4 transition-all {isOfflineDetailsShown && 'rotate-180'}"
 			/>
 		</div>
 		<p use:accordion={isOfflineDetailsShown}>
@@ -35,6 +35,6 @@
 	<meta name="googlebot-news" content="none" />
 </svelte:head>
 
-<div class="max-w-screen-lg mx-auto relative min-h-screen flex flex-col">
+<div class="relative mx-auto flex min-h-screen max-w-screen-lg flex-col">
 	<slot />
 </div>

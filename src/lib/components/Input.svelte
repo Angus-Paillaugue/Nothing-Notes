@@ -8,10 +8,9 @@
 	<input
 		{type}
 		class={twMerge(
-			'bg-black px-2 py-1 text-sm tracking-tight w-full rounded placeholder:text-white focus:outline-none font-base placeholder-shown:font-dot',
+			'w-full rounded border border-dashed border-black bg-white px-2 py-1 font-base text-sm tracking-tight placeholder:text-gray placeholder-shown:font-dot focus:outline-none dark:border-white dark:bg-black dark:placeholder:text-white',
 			className
 		)}
-		style="border: 1px dashed white;"
 		bind:value
 		{...restProps}
 	/>

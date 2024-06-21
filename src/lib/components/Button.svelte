@@ -4,7 +4,7 @@
 
 	const { children, class: className, href, center, loading, ...restProps } = $props();
 
-	const baseClasses = `py-2 px-3 bg-gray transition-all rounded flex flex-row items-center gap-2 text-center button ${center && 'justify-center'}`;
+	const baseClasses = `py-2 px-3 dark:bg-gray bg-gray-light text-black dark:text-white transition-all rounded flex flex-row items-center gap-2 text-center button ${center && 'justify-center'}`;
 </script>
 
 {#if href}

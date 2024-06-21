@@ -13,9 +13,9 @@
 </script>
 
 <section
-	class="flex flex-col items-center justify-center grow p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10"
+	class="flex grow flex-col items-center justify-center p-2 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:content-['']"
 >
-	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">
+	<div class="flex w-full max-w-[500px] flex-col gap-4 rounded bg-gray-light p-4 dark:bg-gray">
 		<h1>{$_('logIn.title')}</h1>
 		<form
 			class="flex flex-col gap-2"
@@ -35,7 +35,7 @@
 				name="password"
 				placeholder={$_('logIn.form.password')}
 			/>
-			<Button center loading={isLoggingIn} type="submit" class="w-full bg-black mt-2">
+			<Button center loading={isLoggingIn} type="submit" class="mt-2 w-full bg-white dark:bg-black">
 				{$_('logIn.form.submit')}
 			</Button>
 		</form>

@@ -1,3 +1,3 @@
-<div class="max-w-screen-lg mx-auto relative min-h-[calc(100dvh-56px-48px)] flex flex-col">
+<div class="relative mx-auto flex min-h-[calc(100dvh-56px-48px)] max-w-screen-lg flex-col">
 	<slot />
 </div>

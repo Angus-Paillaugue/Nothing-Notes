@@ -4,18 +4,18 @@
 	const { children, content, class: className, ...restProps } = $props();
 </script>
 
-<div class={twMerge('relative group', className)} {...restProps}>
+<div class={twMerge('group relative', className)} {...restProps}>
 	{@render children()}
 
 	<div
-		class="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 group-hover:visible invisible z-30 transition-all max-w-[200px] w-max"
+		class="invisible absolute bottom-full right-0 z-30 mb-2 w-max max-w-[200px] opacity-0 transition-all group-hover:visible group-hover:opacity-100"
 	>
-		<div class="relative p-2 rounded bg-gray">
+		<div class="relative rounded bg-gray-light p-2 dark:bg-gray">
 			{@html content}
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="currentColor"
-				class="size-6 absolute top-[calc(100%-0.5rem)] right-2 fill-gray"
+				class="absolute right-2 top-[calc(100%-0.5rem)] size-6 fill-gray-light dark:fill-gray"
 				viewBox="0 0 16 16"
 			>
 				<path

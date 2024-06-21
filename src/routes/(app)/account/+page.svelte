@@ -1,27 +1,30 @@
 <script>
 	import { _ } from 'svelte-i18n';
 	import { Modal, Button } from '$lib/components';
+	import Navbar from '../Navbar.svelte';
 
 	let logOutModalOpen = $state(false);
 </script>
 
+<Navbar text={$_('account.title')} back={true} />
+
 <section
-	class="flex flex-col items-center justify-center p-2 before:absolute before:content-[''] before:inset-0 before:pointer-events-none before:-z-10"
+	class="flex flex-col items-center justify-center p-2 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:content-['']"
 >
-	<div class="p-4 rounded flex flex-col gap-4 bg-gray w-full max-w-[500px]">
+	<div class="flex w-full max-w-[500px] flex-col gap-4 rounded bg-gray-light p-4 dark:bg-gray">
 		<h1>{$_('account.title')}</h1>
 
-		<div class="grid grid-cols-2 gap-2 max-w-[500px]">
+		<div class="grid max-w-[500px] grid-cols-2 gap-2">
 			<Button
 				onclick={() => {
 					logOutModalOpen = true;
 				}}
-				class="aspect-video bg-black"
+				class="aspect-video bg-white dark:bg-black"
 				center
 			>
 				{$_('account.logOut')}
 			</Button>
-			<Button href="/account/settings" class="aspect-video bg-black" center>
+			<Button href="/account/settings" class="aspect-video bg-white dark:bg-black" center>
 				{$_('account.settings')}
 			</Button>
 		</div>
@@ -31,7 +34,7 @@
 <!-- Log-out confirm modal -->
 <Modal bind:open={logOutModalOpen} title={$_('account.modals.logOutConfirm.title')}>
 	<p>{$_('account.modals.logOutConfirm.message')}</p>
-	<div class="grid grid-cols-2 gap-2 w-full mt-2">
+	<div class="mt-2 grid w-full grid-cols-2 gap-2">
 		<Button
 			center
 			onclick={() => {

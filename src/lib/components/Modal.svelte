@@ -9,9 +9,9 @@
 	<!-- Backdrop -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<div class="fixed inset-0 bg-gray/70 z-50" in:fade out:fade onclick={() => (open = false)}></div>
+	<div class="fixed inset-0 z-50 bg-gray/70" in:fade out:fade onclick={() => (open = false)}></div>
 	<div
-		class="fixed bottom-0 md:bottom-1/2 md:left-1/2 md:-translate-x-1/2 md:translate-y-1/2 max-w-screen-md w-full left-0 flex flex-col gap-2 z-50 rounded bg-black"
+		class="fixed bottom-0 left-0 z-50 flex w-full max-w-screen-md flex-col gap-2 rounded-t-xl md:rounded-b-xl bg-white dark:bg-black md:bottom-1/2 md:left-1/2 md:-translate-x-1/2 md:translate-y-1/2"
 		in:fly={{ y: '100%' }}
 		out:fly={{ y: '100%' }}
 	>
@@ -24,7 +24,7 @@
 				<Icon name="close" />
 			</button>
 		</div>
-		<div class="w-full max-h-[70vh] overflow-auto p-6 pt-0">
+		<div class="max-h-[70vh] w-full overflow-auto p-6 pt-0">
 			{@render children()}
 		</div>
 	</div>

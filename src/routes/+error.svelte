@@ -8,8 +8,8 @@
 	$seo.description = 'pageDescriptions.error';
 </script>
 
-<section class="h-screen flex flex-col items-center justify-center gap-4">
-	<span class="text-8xl font-dot">{$page.status}</span>
+<section class="flex h-screen flex-col items-center justify-center gap-4">
+	<span class="font-dot text-8xl">{$page.status}</span>
 	<span class="text-lg">{$_($page.error.message)}</span>
 	<Button href="/">{$_('error.goBack')}</Button>
 </section>

@@ -37,7 +37,7 @@
 		<div class="flex flex-col items-center justify-center space-y-4 text-center">
 			<div class="space-y-2">
 				<div
-					class="rounded-full border text-center px-3 py-1 text-sm font-bold inline-block italic text-white border-red bg-red/20 mb-4"
+					class="mb-4 inline-block rounded-full border border-red bg-red/40 px-3 py-1 text-center text-sm font-bold italic text-black dark:bg-red/20 dark:text-white"
 				>
 					{$_('homePage.features.pillButton')}
 				</div>
@@ -49,22 +49,22 @@
 				</p>
 			</div>
 		</div>
-		<div class="flex flex-col lg:flex-row gap-10 items-center">
-			<div class="mx-auto grid items-center gap-6 pt-6 lg:py-12 lg:grid-cols-2 lg:gap-12">
+		<div class="flex flex-col items-center gap-10 lg:flex-row">
+			<div class="mx-auto grid items-center gap-6 pt-6 lg:grid-cols-2 lg:gap-12 lg:py-12">
 				<!-- All features -->
 				{#each features as feature}
 					<div
-						class="relative rounded-[2.5rem] w-full h-full p-4 md:p-8 bg-gray overflow-hidden border-neutral-700 border-opacity-50 border flex flex-col gap-4 transition-all hover:border-opacity-100 cursor-default"
+						class="relative flex h-full w-full cursor-default flex-col gap-4 overflow-hidden rounded-[2.5rem] border border-neutral-400 border-opacity-50 bg-gray-light p-4 transition-all hover:border-opacity-100 dark:border-neutral-700 dark:bg-gray md:p-8"
 					>
 						<div
-							class="absolute inset-0 opacity-15 pointer-events-none"
+							class="pointer-events-none absolute inset-0 opacity-15"
 							style="background: #000000 url(/homePage/noise.webp) repeat; background-size: 150px, 100%; background-blend-mode: screen;"
 						></div>
 						<div class="flex flex-row items-center gap-2">
 							<Icon name={feature.icon} class="size-6 text-red" />
 							<h3 class="text-xl font-bold">{feature.title}</h3>
 						</div>
-						<p class="text-neutral-400">
+						<p class="text-gray dark:text-gray-light">
 							{feature.description}
 						</p>
 					</div>
@@ -72,11 +72,15 @@
 			</div>
 			<button
 				onclick={() => (getStartedModalOpen = true)}
-				class="rounded-[2.5rem] size-48 lg:size-64 bg-gray overflow-hidden transition-all duration-1000 ease-in-out hover:scale-110 shrink-0"
+				class="relative size-48 shrink-0 overflow-hidden rounded-[2.5rem] bg-gray-light transition-all duration-1000 ease-in-out hover:scale-110 dark:bg-gray lg:size-64"
 			>
+				<div
+					class="pointer-events-none absolute inset-0 opacity-15"
+					style="background: #000000 url(/homePage/noise.webp) repeat; background-size: 150px, 100%; background-blend-mode: screen;"
+				></div>
 				<img
 					src="/logos/logo_transparent.webp"
-					class="w-full h-full object-contain object-center transition-all duration-1000 ease-in-out cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,.7)]"
+					class="h-full w-full cursor-pointer object-contain object-center transition-all duration-1000 ease-in-out hover:drop-shadow-[0_0_10px_rgba(0,0,0,.7)] dark:hover:drop-shadow-[0_0_10px_rgba(255,255,255,.7)]"
 					alt=""
 				/>
 			</button>
