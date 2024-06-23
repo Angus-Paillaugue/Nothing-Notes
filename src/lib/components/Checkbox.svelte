@@ -11,7 +11,7 @@
 <div class={twMerge('relative flex size-6 flex-col items-center justify-center ', className)}>
 	<input
 		type="checkbox"
-		class="peer h-full w-full appearance-none rounded-md transition-all border-2 bg-white dark:bg-black border-black dark:border-white"
+		class="peer h-full w-full appearance-none rounded-md border-2 border-black bg-white transition-all dark:border-white dark:bg-black"
 		bind:checked
 		onchange={() => {
 			dispatch('change', { checked });

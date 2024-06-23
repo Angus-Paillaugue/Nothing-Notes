@@ -15,7 +15,7 @@
 	bind:value
 	bind:this={textarea}
 	class={twMerge(
-		'grow resize-none rounded bg-white px-2 py-1 font-base text-base tracking-tight placeholder:text-gray placeholder-shown:font-dot focus:outline-none dark:border-white dark:bg-black dark:placeholder:text-white border border-dashed border-black',
+		'grow resize-none rounded border border-dashed border-black bg-white px-2 py-1 font-base text-base tracking-tight placeholder:text-gray placeholder-shown:font-dot focus:outline-none dark:border-white dark:bg-black dark:placeholder:text-white',
 		className
 	)}
 	placeholder={$_(placeholder)}

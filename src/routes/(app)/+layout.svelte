@@ -35,6 +35,6 @@
 	<meta name="googlebot-news" content="none" />
 </svelte:head>
 
-<div class="relative mx-auto flex min-h-screen max-w-screen-lg flex-col">
+<div class="relative mx-auto flex min-h-screen max-w-screen-xl flex-col">
 	<slot />
 </div>

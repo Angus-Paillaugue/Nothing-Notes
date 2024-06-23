@@ -11,7 +11,7 @@
 
 <!-- Navbar -->
 <nav
-	class="fixed left-0 right-0 top-0 z-40 mx-auto flex h-14 max-w-screen-lg flex-row items-center justify-between gap-2 bg-white dark:bg-black"
+	class="fixed left-0 right-0 top-0 z-40 mx-auto flex h-14 max-w-screen-xl flex-row items-center justify-between gap-2 bg-white dark:bg-black"
 >
 	<div class="p-2">
 		<div class="size-6"></div>

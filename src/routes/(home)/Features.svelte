@@ -54,7 +54,7 @@
 				<!-- All features -->
 				{#each features as feature}
 					<div
-						class="relative flex h-full w-full cursor-default flex-col gap-4 overflow-hidden rounded-[2.5rem] border border-neutral-400 border-opacity-50 bg-gray-light p-4 transition-all hover:border-opacity-100 dark:border-neutral-700 dark:bg-gray md:p-8"
+						class="relative flex h-full w-full cursor-default flex-col gap-4 overflow-hidden rounded-[2.5rem] border border-neutral-400 border-opacity-50 bg-gray-light p-4 transition-all hover:border-opacity-100 dark:border-neutral-700 dark:border-opacity-50 dark:bg-gray dark:hover:border-opacity-100 md:p-8"
 					>
 						<div
 							class="pointer-events-none absolute inset-0 opacity-15"

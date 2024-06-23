@@ -125,7 +125,7 @@
 
 <!-- Bottom fixed bar -->
 <div
-	class="fixed bottom-4 left-1/2 z-30 flex w-full max-w-screen-lg -translate-x-1/2 flex-row items-end justify-between px-4"
+	class="fixed bottom-4 left-1/2 z-30 flex w-full max-w-screen-xl -translate-x-1/2 flex-row items-end justify-between px-4"
 >
 	{#if notes.filter((note) => note.archived).length > 0}
 		<button

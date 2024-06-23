@@ -14,10 +14,12 @@
 </script>
 
 <section class="relative flex min-h-screen w-full flex-col justify-center py-12 md:py-24 lg:py-32">
+	<!-- Background gradient -->
 	<div
-		class="absolute inset-0 -z-10 opacity-30"
+		class="absolute inset-0 -z-10 dark:brightness-[30%]"
 		style="background: url(/homePage/noise.webp), radial-gradient(circle farthest-corner at 0 0, #000 30%, #D71921 65%, #f0f2f2 80%, #249688 110%) no-repeat, radial-gradient(closest-side at 60% 50%, #f0f2f2 20%, #000 100%) no-repeat; mix-blend-mode: screen; background-size: 140px, 100%, cover; background-blend-mode: overlay;"
 	></div>
+
 	<div class="mx-auto max-w-screen-lg px-4 md:px-6">
 		<div class="flex flex-col gap-10">
 			<div class="flex flex-col justify-center space-y-4 max-lg:text-center">

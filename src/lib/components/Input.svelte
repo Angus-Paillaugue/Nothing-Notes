@@ -1,8 +1,10 @@
 <script>
 	import { twMerge } from 'tailwind-merge';
+	import { Icon, tooltip } from '$lib/components';
 
-	let { value = $bindable(), type = 'text', label, class: className, ...restProps } = $props();
+	let { value = $bindable(), type = 'text', label, labelIcon, labelIconTooltip, class: className, ...restProps } = $props();
 </script>
+
 
 {#snippet input()}
 	<input
@@ -18,7 +20,18 @@
 
 {#if label}
 	<span class="flex flex-col justify-center">
-		<span class="text-base font-semibold">{label}</span>
+		<span class="text-base font-semibold flex flex-row items-center gap-4">
+			{label}
+			{#if labelIcon}
+				{#if labelIconTooltip}
+					<span use:tooltip={{ content: labelIconTooltip }}>
+						<Icon name={labelIcon} class="size-4" />
+					</span>
+				{:else}
+					<Icon name={labelIcon} class="size-4" />
+				{/if}
+			{/if}
+		</span>
 		{@render input()}
 	</span>
 {:else}

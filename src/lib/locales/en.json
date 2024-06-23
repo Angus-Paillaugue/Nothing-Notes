@@ -190,7 +190,8 @@
 		"note": "A note in your Nothing Notes account.",
 		"notes": "Your notes, organized and accessible from anywhere.",
 		"resetPassword": "You forgot your password ? Don't worry, we'll help you reset it.",
-		"signUp": "Sign up for a Nothing Notes account."
+		"signUp": "Sign up for a Nothing Notes account.",
+		"settings": "Your account settings."
 	},
 	"pageTitles": {
 		"forgotPassword": "Forgot password",
@@ -198,7 +199,8 @@
 		"logIn": "Log In",
 		"notes": "Notes",
 		"resetPassword": "Reset password",
-		"signUp": "Sign Up"
+		"signUp": "Sign Up",
+		"settings": "Settings"
 	},
 	"privacy-policy": {
 		"collectedInformation": {
@@ -298,7 +300,8 @@
 			"username": "Username",
 			"change": "Change",
 			"deleteAccount": "Delete account",
-			"dangerZone": "Danger zone"
+			"dangerZone": "Danger zone",
+			"usernameTooltip": "You cannot change your username"
 		},
 		"errors": {
 			"invalidEmail": "Invalid e-mail !",

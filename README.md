@@ -1,4 +1,31 @@
-# TODO
+# Nothing notes
+
+Brief description of what this project does and who it's for. Mention the main features, target audience, and the problem it solves.
+
+## Features
+
+- Home page with a clean and intuitive design.
+- Internationalization support for English and French.
+- Duplicate note functionality for easy note management.
+- Constant redirect and error statuses throughout the app, leveraging [`$lib/constants.js`](src/lib/constants.js).
+- Share note functionality to enhance collaboration.
+- Loading state indicators for create note buttons, improving user experience.
+- SMTP and send mail functions for notifications or password resets.
+- Fuzzy search functionality to easily find notes.
+- Organize notes with tags and view them by category on the home page.
+- Light theme option for user preference.
+
+## Built With
+
+- SvelteKit - The web framework used
+- Tailwind CSS - For styling
+- Vite - Build tool
+
+## Authors
+
+[Angus Paillaugue](https://github.com/Angus-Paillaugue)
+
+# Todo list
 
 - [ ] Add flip transitions to checklists
 - [x] Make icons match
@@ -18,3 +45,5 @@
 - [x] Add tags category to home page
 - [ ] Add vibration when deleting note items
 - [x] Make a light theme
+- [x] Make better tooltips
+- [ ] Fix the Nothing Notes logo color in the [feature section](<src/routes/(home)/Features.svelte>)

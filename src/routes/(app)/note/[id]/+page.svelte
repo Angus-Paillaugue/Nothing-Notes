@@ -8,7 +8,7 @@
 		Icon,
 		Error,
 		ListInput,
-		Tooltip,
+		tooltip,
 		Tag,
 		Input
 	} from '$lib/components';
@@ -50,7 +50,9 @@
 
 		// Note title focus if note is empty
 		if (note.title === '' && (note.content === '' || note.items.length === 0) && isOwner) {
-			document.querySelector('input[name="title"]').focus();
+			setTimeout(() => {
+				document.querySelector('textarea[name="title"]').focus();
+			}, 100);
 		}
 
 		// Vibration
@@ -289,24 +291,26 @@
 
 <main class="flex flex-col" style="height: 100vh;">
 	<!-- Navbar -->
-	<nav class="mb-6 flex h-14 flex-row items-center justify-between gap-2 bg-white dark:bg-black">
-		<!-- Go back button -->
-		<a href="/note" class="p-2">
-			<Icon name="back" />
-		</a>
+	 {#if isOwner}
+		<nav class="mb-6 flex h-14 flex-row items-center justify-between gap-2 bg-white dark:bg-black">
+			<!-- Go back button -->
+			<a href="/note" class="p-2">
+				<Icon name="back" />
+			</a>
 
-		<!-- Open settings button -->
-		{#if isOwner}
-			<button
-				class="rounded-full p-2"
-				onclick={() => {
-					settingsModalOpen = true;
-				}}
-			>
-				<Icon name="Settings" />
-			</button>
-		{/if}
-	</nav>
+			<!-- Open settings button -->
+			{#if isOwner}
+				<button
+					class="rounded-full p-2"
+					onclick={() => {
+						settingsModalOpen = true;
+					}}
+				>
+					<Icon name="Settings" />
+				</button>
+			{/if}
+		</nav>
+	 {/if}
 
 	<!-- Main note elements -->
 	<div class="flex grow flex-col gap-4 overflow-y-auto p-2">
@@ -457,7 +461,7 @@
 
 		<!-- Save status -->
 		{#if isOwner}
-			<Tooltip content={$_(`note.statuses.${noteStatus}`)}>
+			<span use:tooltip={{ content:$_(`note.statuses.${noteStatus}`) }}>
 				{#if noteStatus === 'saved'}
 					<Icon name="cloud" />
 				{:else if noteStatus === 'saving'}
@@ -465,7 +469,7 @@
 				{:else}
 					<Icon name="warning" />
 				{/if}
-			</Tooltip>
+			</span>
 		{/if}
 	</div>
 </main>

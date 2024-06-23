@@ -37,3 +37,23 @@ h2 {
 p {
 	@apply text-base;
 }
+
+.tippy-box[data-theme~='nothing'] {
+	@apply dark:bg-black bg-white dark:text-white text-black border border-black dark:border-white
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='top']>.tippy-arrow::before {
+	@apply border border-white
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='bottom']>.tippy-arrow::before {
+	border-bottom-color: tomato;
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='left']>.tippy-arrow::before {
+	border-left-color: tomato;
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='right']>.tippy-arrow::before {
+	border-right-color: tomato;
+}

@@ -1,6 +1,6 @@
 <script>
 	import { seo } from '$lib/stores';
-	import { Input, Button, Hr, Loader, Error, Icon } from '$lib/components';
+	import { Input, Button, Hr, Error, Icon } from '$lib/components';
 	import { _ } from 'svelte-i18n';
 	import { enhance } from '$app/forms';
 	import { mode, toggleMode } from 'mode-watcher';
@@ -41,6 +41,8 @@
 				readonly
 				name="username"
 				label={$_('accountSettings.form.username')}
+				labelIcon="help"
+				labelIconTooltip={$_('accountSettings.form.usernameTooltip')}
 				placeholder={$_('accountSettings.form.username')}
 			/>
 			<Input
@@ -52,12 +54,8 @@
 			{#if form?.type === 'emailChange'}
 				<Error success={form?.success} message={form?.raw ? form?.message : $_(form.message)} />
 			{/if}
-			<Button center type="submit" class="mt-2 w-full bg-white dark:bg-black">
-				{#if isSaving}
-					<Loader />
-				{:else}
-					{$_('accountSettings.form.saveChanges')}
-				{/if}
+			<Button center loading={isSaving} type="submit" class="mt-2 w-full bg-white dark:bg-black">
+				{$_('accountSettings.form.saveChanges')}
 			</Button>
 		</form>
 

@@ -9,7 +9,7 @@
 	class="fixed left-0 right-0 top-0 z-40 h-14 border-b border-gray-light bg-white dark:border-0 dark:bg-black"
 >
 	<div
-		class="mx-auto flex max-w-screen-lg flex-row items-center justify-between px-2 py-2 text-center"
+		class="mx-auto flex max-w-screen-xl flex-row items-center justify-between px-2 py-2 text-center"
 	>
 		<span class="size-8 md:size-10"></span>
 		<a href="/">
