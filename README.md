@@ -17,7 +17,7 @@ Brief description of what this project does and who it's for. Mention the main f
 
 ## Built With
 
-- SvelteKit - The web framework used
+- SvelteKit - Javascript framework
 - Tailwind CSS - For styling
 - Vite - Build tool
 

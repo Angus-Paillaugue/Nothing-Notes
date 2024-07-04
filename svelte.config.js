@@ -4,7 +4,14 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		csp: {
+			mode: 'hash',
+			directives: { 'script-src': ['self'] }
+		},
+		csrf: {
+			checkOrigin: true
+		}
 	},
 	preprocess: vitePreprocess()
 };

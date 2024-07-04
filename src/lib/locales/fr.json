@@ -175,7 +175,8 @@
         "title": "Nouvelle note"
       },
       "search": {
-        "title": "Recherche"
+        "title": "Recherche",
+        "placeholder": "Rechercher des notes"
       }
     },
     "noNotes": "Vous n'avez pas de notes pour le moment. Cliquez sur le bouton ci-dessous pour en créer une !",

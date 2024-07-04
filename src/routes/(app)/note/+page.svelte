@@ -6,7 +6,6 @@
 	import { enhance } from '$app/forms';
 	import Fuse from 'fuse.js';
 	import Navbar from '../Navbar.svelte';
-	// import { longPress } from './longPress';
 
 	const { data } = $props();
 
@@ -69,6 +68,13 @@
 		notes.filter((el) => el.type === 'text' && !el.archived),
 		fuseOptionsText
 	);
+
+
+	/**
+	 * Performs a search for notes.
+	 *
+	 * @param {Event} e - The event object.
+	*/
 	function searchNotes(e) {
 		const { value } = e.target;
 		if (!value) return (searchNotesMatching = []);
@@ -230,7 +236,7 @@
 <!-- Search modal -->
 <Modal bind:open={searchNotesModalOpen} title={$_('notes.modals.search.title')}>
 	<Input
-		placeholder="Search for notes"
+		placeholder={$_('notes.modals.search.placeholder')}
 		id="search"
 		autocomplete="off"
 		class="mt-[2px]"
