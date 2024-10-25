@@ -35,7 +35,7 @@ Brief description of what this project does and who it's for. Mention the main f
 - [x] Make redirect and error statuses constants throughout the app (with the help of `$lib/constants.js`)
 - [x] Add share note functionality
 - [x] Add a loading state to the create note buttons
-- [ ] ~~Add a possibility to get started without an account (store notes in localStorage) with a disclaimer that notes will not be accessibles from others devices~~
+- [ ] ~~Add a possibility to get started without an account (store notes in localStorage) with a disclaimer that notes will not be accessible from others devices~~
 - [x] Add SMTP and send mail functions
 - [x] Change loading state for all of the buttons
 - [x] Check if the TTL index works on the reset-password collection
